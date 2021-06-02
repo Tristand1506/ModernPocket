@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".LandingPage">
 
     <ImageButton
@@ -28,22 +29,25 @@
 
     <ImageView
         android:id="@+id/lp_text_img"
-        android:layout_width="339dp"
-        android:layout_height="133dp"
-        app:layout_constraintBottom_toTopOf="@+id/lp_login_btn"
+        android:layout_width="372dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lp_signup_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.968"
+        app:layout_constraintVertical_bias="0.709"
         app:srcCompat="@drawable/lp_text" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/lp_bgimage"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="46dp" />
+        app:layout_constraintBottom_toTopOf="@+id/lp_text_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lp_bgimage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

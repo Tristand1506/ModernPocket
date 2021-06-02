@@ -5,8 +5,21 @@ import android.location.Location;
 import java.util.Date;
 
 public abstract class Collectible {
+
+    // generic constructor
+    public Collectible(String name, String description, boolean isFavourite, boolean isOwned,
+                       Date acquisitionDate, Location acquisitionLoc ) {
+        this.name = name;
+        this.description = description;
+        this.isFavourite = isFavourite;
+        this.isOwned = isOwned;
+        setAcquisitionDate(acquisitionDate);
+        setAcquisitionLoc(acquisitionLoc);
+    }
+
+
     String name;
-    String descrioption;
+    String description;
     boolean isFavourite;
 
     boolean isOwned;
@@ -47,13 +60,13 @@ public abstract class Collectible {
     private String borrowedTo;
     private Date expectedReturn;
 
+    ///////////////////////
+    // Loaner Gets and Sets
+    ///////////////////////
     public boolean isLent() {
         return isLent;
     }
 
-    ///////////////////////
-    // Loaner Gets and Sets
-    ///////////////////////
     public void setLent(boolean lent) {
         if (!isOwned){
             this.isLent = false;

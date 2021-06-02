@@ -6,4 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".LandingPage">
 
+    <ImageView
+        android:id="@+id/landing_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/landing" />
+
+    <ImageButton
+        android:id="@+id/lp_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/landing_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/landing_bg"
+        app:layout_constraintVertical_bias="0.891"
+        app:srcCompat="@drawable/login_btn" />
+
+    <ImageButton
+        android:id="@+id/lp_signup_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/landing_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/landing_bg"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/signup_btn" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

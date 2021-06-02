@@ -9,6 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ModernPocket">
+        <activity android:name=".Items"></activity>
+        <activity android:name=".CreateItem" />
+        <activity android:name=".CreateItemType" />
+        <activity android:name=".LentItems" />
+        <activity android:name=".Settings" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".Favourites" />
+        <activity android:name=".CollectionsMain" />
+        <activity android:name=".CreateCollection" />
+        <activity android:name=".CreateObjective" />
+        <activity android:name=".Objectives" />
+        <activity android:name=".TasksMain" />
+        <activity android:name=".ObjectLens" />
+        <activity android:name=".LandingPage" />
+        <activity android:name=".Login" />
+        <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

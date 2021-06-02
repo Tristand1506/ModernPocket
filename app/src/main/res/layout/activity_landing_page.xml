@@ -27,16 +27,6 @@
         app:srcCompat="@drawable/signup_btn" />
 
     <ImageView
-        android:id="@+id/lp_bgimage"
-        android:layout_width="412dp"
-        android:layout_height="430dp"
-        app:layout_constraintBottom_toTopOf="@+id/lp_text_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/lp_image" />
-
-    <ImageView
         android:id="@+id/lp_text_img"
         android:layout_width="339dp"
         android:layout_height="133dp"
@@ -44,8 +34,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.968"
         app:srcCompat="@drawable/lp_text" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lp_bgimage"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="46dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

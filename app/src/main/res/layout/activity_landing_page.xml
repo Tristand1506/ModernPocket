@@ -36,16 +36,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/lp_image" />
 
     <ImageView
         android:id="@+id/lp_text_img"
         android:layout_width="339dp"
         android:layout_height="133dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/lp_login_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/lp_text"
-        tools:layout_editor_absoluteY="435dp" />
+        app:srcCompat="@drawable/lp_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

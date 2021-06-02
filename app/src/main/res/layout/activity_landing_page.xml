@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F9F9F9"
     tools:context=".LandingPage">
 
     <ImageButton
         android:id="@+id/lp_login_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#F9F9F9"
         app:layout_constraintBottom_toTopOf="@+id/lp_signup_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/lp_signup_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#F9F9F9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,8 @@
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="399dp"
+        android:layout_height="356dp"
         app:layout_constraintBottom_toTopOf="@+id/lp_text_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,7 +19,7 @@
             android:id="@+id/login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#F9F9F9"
+            android:background="@null"
             app:layout_constraintBottom_toTopOf="@+id/pocket_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

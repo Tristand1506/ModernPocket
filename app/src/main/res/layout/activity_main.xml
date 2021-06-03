@@ -25,29 +25,32 @@
         app:srcCompat="@drawable/ribbon" />
 
     <LinearLayout
-        android:layout_width="557dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="460dp"
+        android:layout_height="559dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ribbon_img">
 
         <ImageButton
-            android:id="@+id/objectlens_btn"
-            android:layout_width="544dp"
+            android:id="@+id/collections_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
             android:layout_weight="1"
             android:background="@null"
             android:backgroundTint="#F9F9F9"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/objectlens_btn" />
+            android:scaleX="1"
+            app:srcCompat="@drawable/collections_btn" />
 
         <ImageButton
             android:id="@+id/tasks_btn"
-            android:layout_width="544dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
@@ -56,17 +59,14 @@
             app:srcCompat="@drawable/tasks_btn" />
 
         <ImageButton
-            android:id="@+id/collections_btn"
-            android:layout_width="544dp"
+            android:id="@+id/objectlens_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0"
-            android:layout_marginTop="0"
             android:layout_weight="1"
             android:background="@null"
             android:backgroundTint="#F9F9F9"
             android:scaleType="fitCenter"
-            android:scaleX="1"
-            app:srcCompat="@drawable/collections_btn" />
+            app:srcCompat="@drawable/objectlens_btn" />
 
     </LinearLayout>
 

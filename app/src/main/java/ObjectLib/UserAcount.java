@@ -21,8 +21,16 @@ public class UserAcount {
     }
 
     String username;
+    public String Username(){
+        return username;
+    }
+
     String email;
+    public String Email(){
+        return email;
+    }
     String password;
+
 
     public boolean ValidateAcount (String password){
         return password.equals(this.password);

@@ -39,6 +39,8 @@ public class LandingPage extends AppCompatActivity {
         });
     }
 
+
+
     //method to open activity using intent
     public void openSignUpScreen()
     {

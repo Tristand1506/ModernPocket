@@ -7,47 +7,6 @@
     android:background="#F9F9F9"
     tools:context=".MainActivity">
 
-    <ImageButton
-        android:id="@+id/tasks_btn"
-        android:layout_width="544dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="28dp"
-        android:background="@null"
-        android:backgroundTint="#F9F9F9"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/objectlens_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/tasks_btn" />
-
-    <ImageButton
-        android:id="@+id/collections_btn"
-        android:layout_width="544dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
-        android:background="@null"
-        android:backgroundTint="#F9F9F9"
-        android:scaleType="centerCrop"
-        android:scaleX="1"
-        app:layout_constraintBottom_toTopOf="@+id/tasks_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar_img"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/collections_btn" />
-
-    <ImageButton
-        android:id="@+id/objectlens_btn"
-        android:layout_width="544dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="28dp"
-        android:background="@null"
-        android:backgroundTint="#F9F9F9"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/objectlens_btn" />
-
     <ImageView
         android:id="@+id/bar_img"
         android:layout_width="wrap_content"
@@ -64,5 +23,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ribbon" />
+
+    <LinearLayout
+        android:layout_width="557dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ribbon_img">
+
+        <ImageButton
+            android:id="@+id/objectlens_btn"
+            android:layout_width="544dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="#F9F9F9"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/objectlens_btn" />
+
+        <ImageButton
+            android:id="@+id/tasks_btn"
+            android:layout_width="544dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="#F9F9F9"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/tasks_btn" />
+
+        <ImageButton
+            android:id="@+id/collections_btn"
+            android:layout_width="544dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0"
+            android:layout_marginTop="0"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="#F9F9F9"
+            android:scaleType="fitCenter"
+            android:scaleX="1"
+            app:srcCompat="@drawable/collections_btn" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

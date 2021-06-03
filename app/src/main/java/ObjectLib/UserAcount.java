@@ -31,7 +31,6 @@ public class UserAcount {
     }
     String password;
 
-
     public boolean ValidateAcount (String password){
         return password.equals(this.password);
     }

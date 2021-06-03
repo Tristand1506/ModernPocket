@@ -15,47 +15,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
 
-        <EditText
-            android:id="@+id/passwords_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="@+id/password_img"
-            app:layout_constraintEnd_toEndOf="@+id/password_img"
-            app:layout_constraintHorizontal_bias="0.338"
-            app:layout_constraintStart_toStartOf="@+id/password_img"
-            app:layout_constraintTop_toBottomOf="@+id/email_img"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/user_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/username_img"
-            app:layout_constraintEnd_toEndOf="@+id/username_img"
-            app:layout_constraintHorizontal_bias="0.297"
-            app:layout_constraintStart_toStartOf="@+id/username_img"
-            app:layout_constraintTop_toTopOf="@+id/username_img"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/email_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="@+id/email_img"
-            app:layout_constraintEnd_toEndOf="@+id/email_img"
-            app:layout_constraintHorizontal_bias="0.353"
-            app:layout_constraintStart_toStartOf="@+id/email_img"
-            app:layout_constraintTop_toTopOf="@+id/email_img"
-            app:layout_constraintVertical_bias="0.647" />
-
         <ImageButton
             android:id="@+id/login_btn"
             android:layout_width="wrap_content"
@@ -130,6 +89,46 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/password_field" />
+
+        <EditText
+            android:id="@+id/user_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="@+id/username_img"
+            app:layout_constraintEnd_toEndOf="@+id/username_img"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="@+id/username_img"
+            app:layout_constraintTop_toTopOf="@+id/username_img"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/passwords_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/password_img"
+            app:layout_constraintEnd_toEndOf="@+id/password_img"
+            app:layout_constraintHorizontal_bias="0.338"
+            app:layout_constraintStart_toStartOf="@+id/password_img"
+            app:layout_constraintTop_toBottomOf="@+id/email_img"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/email_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="@+id/email_img"
+            app:layout_constraintEnd_toEndOf="@+id/email_img"
+            app:layout_constraintHorizontal_bias="0.353"
+            app:layout_constraintStart_toStartOf="@+id/email_img"
+            app:layout_constraintTop_toTopOf="@+id/email_img"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

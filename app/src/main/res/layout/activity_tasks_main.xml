@@ -4,6 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".TasksMain">
+
+    <ImageButton
+        android:id="@+id/create_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:backgroundTint="#F9F9F9"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/create" />
+
+    <ImageView
+        android:id="@+id/topbar_img2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_sidebar" />
+
+    <ImageButton
+        android:id="@+id/burger_bar_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_img2"
+        app:layout_constraintEnd_toEndOf="@+id/topbar_img2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/burger_bar" />
+
+    <ImageView
+        android:id="@+id/collections_txt_img2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_img2"
+        app:layout_constraintStart_toEndOf="@+id/coll_ribbon_img2"
+        app:layout_constraintTop_toTopOf="@+id/topbar_img2"
+        app:layout_constraintVertical_bias="0.472"
+        app:srcCompat="@drawable/taskstxt" />
+
+    <ImageButton
+        android:id="@+id/filter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_img2"
+        app:layout_constraintEnd_toStartOf="@+id/burger_bar_btn2"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toEndOf="@+id/collections_txt_img2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/filter" />
+
+    <ImageView
+        android:id="@+id/coll_ribbon_img2"
+        android:layout_width="82dp"
+        android:layout_height="140dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/tasks_ribbon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

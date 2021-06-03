@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import UtilLib.LoginManager;
 
 public class SignUp extends AppCompatActivity {
-    private ImageButton mainScreen;
+    private ImageButton btnSignUp;
     private EditText username;
     private EditText email;
     private EditText password;
@@ -26,8 +26,8 @@ public class SignUp extends AppCompatActivity {
         email    = (EditText) findViewById(R.id.email_txt);
         password    = (EditText) findViewById(R.id.passwords_txt);
         //button listener
-        mainScreen = (ImageButton) findViewById(R.id.login_btn);
-        mainScreen.setOnClickListener(new View.OnClickListener()
+        btnSignUp = (ImageButton) findViewById(R.id.login_btn);
+        btnSignUp.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)

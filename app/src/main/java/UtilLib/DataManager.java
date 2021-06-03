@@ -22,9 +22,6 @@ public  class DataManager {
         // TODO Load Data
     }
 
-
-
-
     public void AddTask(Task task){
         tasks.add(task);
     }

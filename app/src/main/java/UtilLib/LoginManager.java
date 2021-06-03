@@ -56,13 +56,24 @@ public class LoginManager {
             }
         }
         accounts.add(new UserAcount(username, email,password));
-        AccDebug();
+        //AccDebug();
         return true;
+    }
+
+    public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
+        for (UserAcount acc : accounts) {
+            if (userIn.equals(acc.Username())||userIn.equals(acc.Email())){
+
+                return acc.ValidateAcount(passwordIn);
+            }
+        }
+        Toast.makeText(activity, "Incorrect Username or password.", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     public void AccDebug(){
         for (UserAcount acc : accounts) {
-            System.out.printf(" NEXT ACCOUNT... ");
+            System.out.println(" NEXT ACCOUNT... \n");
             System.out.println("Username: " +acc.Username());
             System.out.println("Email: " +acc.Email());
             System.out.println("\n");

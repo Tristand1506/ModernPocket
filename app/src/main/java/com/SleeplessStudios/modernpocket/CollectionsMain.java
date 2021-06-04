@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 
 public class CollectionsMain extends AppCompatActivity {
     private ImageButton createCollection;
+    private ImageButton filterCollections;
+    private ImageButton sidebar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,9 @@ public class CollectionsMain extends AppCompatActivity {
                 openCreateCollection();
             }
         });
+
+        filterCollections = (ImageButton) findViewById(R.id.filter_coll_btn);
+        sidebar = (ImageButton) findViewById(R.id.burgerbar_coll_btn);
     }
 
     //method to open activity using intent

@@ -11,11 +11,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton collections;
     private ImageButton tasks;
     private ImageButton googleLens;
+    private ImageButton sidebar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sidebar = (ImageButton) findViewById(R.id.burger_bar_main_btn);
 
         //button listener
         collections = (ImageButton) findViewById(R.id.collections_btn);

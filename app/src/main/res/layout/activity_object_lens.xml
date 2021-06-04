@@ -7,7 +7,7 @@
     tools:context=".ObjectLens">
 
     <ImageView
-        android:id="@+id/topbar_img3"
+        android:id="@+id/topbar_lens_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/top_sidebar" />
 
     <ImageView
-        android:id="@+id/coll_ribbon_img3"
+        android:id="@+id/lens_ribbon_img"
         android:layout_width="82dp"
         android:layout_height="140dp"
         android:scaleType="fitStart"
@@ -28,27 +28,27 @@
         app:srcCompat="@drawable/lens_ribbon" />
 
     <ImageView
-        android:id="@+id/collections_txt_img3"
+        android:id="@+id/lens_txt_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_img3"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/coll_ribbon_img3"
-        app:layout_constraintTop_toTopOf="@+id/topbar_img3"
+        app:layout_constraintStart_toEndOf="@+id/lens_ribbon_img"
+        app:layout_constraintTop_toTopOf="@+id/topbar_lens_img"
         app:layout_constraintVertical_bias="0.444"
         app:srcCompat="@drawable/lenstxt" />
 
     <ImageButton
-        android:id="@+id/burger_bar_btn"
+        android:id="@+id/burgerbar_lens_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_img3"
-        app:layout_constraintEnd_toEndOf="@+id/topbar_img3"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
+        app:layout_constraintEnd_toEndOf="@+id/topbar_lens_img"
         app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toEndOf="@+id/collections_txt_img3"
+        app:layout_constraintStart_toEndOf="@+id/lens_txt_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.487"
         app:srcCompat="@drawable/burger_bar" />

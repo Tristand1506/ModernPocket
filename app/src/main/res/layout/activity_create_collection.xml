@@ -8,6 +8,19 @@
     android:backgroundTint="#F9F9F9"
     tools:context=".CreateCollection">
 
+    <ImageButton
+        android:id="@+id/coll_icon_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/description_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintVertical_bias="0.617"
+        app:srcCompat="@drawable/collection_avatar" />
+
     <ImageView
         android:id="@+id/topbar"
         android:layout_width="wrap_content"
@@ -27,12 +40,70 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/collections_txt" />
 
-    <ImageButton
-        android:id="@+id/check_btn"
+    <ImageView
+        android:id="@+id/cube_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintVertical_bias="0.574"
+        app:srcCompat="@drawable/cube_icon" />
+
+    <ImageView
+        android:id="@+id/spinnerline_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cube_img"
+        app:layout_constraintTop_toBottomOf="@+id/chooseitemtype_spinner"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="@drawable/line" />
+
+    <ImageView
+        android:id="@+id/descriptionbox_img"
         android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/chooseitemtype_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/box" />
+
+    <Spinner
+        android:id="@+id/chooseitemtype_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/create_coll_type_btn"
+        app:layout_constraintStart_toEndOf="@+id/cube_img"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <TextView
+        android:id="@+id/description_txt"
+        android:layout_width="107dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="8dp"
+        android:text="Description"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionbox_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/check_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/topbar"
         app:layout_constraintStart_toStartOf="@+id/topbar"
         app:layout_constraintTop_toTopOf="@+id/topbar"
@@ -40,68 +111,53 @@
 
     <ImageButton
         android:id="@+id/x_txt"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/topbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topbar"
         app:srcCompat="@drawable/cross_mark" />
 
-    <ImageView
-        android:id="@+id/imageView5"
+    <ImageButton
+        android:id="@+id/create_coll_type_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#F9F9F9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar"
-        app:srcCompat="@drawable/collection_avatar" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar"
-        app:srcCompat="@drawable/cube_icon" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/spinnerline_img"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionbox_img"
         app:srcCompat="@drawable/small_create" />
 
-    <Spinner
-        android:id="@+id/chooseitemtype_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+    <EditText
+        android:id="@+id/coll_name_txt"
+        android:layout_width="274dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="@color/text_grey"
+        app:layout_constraintBottom_toTopOf="@+id/description_txt"
+        app:layout_constraintEnd_toStartOf="@+id/coll_icon_btn"
+        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topbar"
-        app:layout_constraintVertical_bias="0.493" />
+        app:layout_constraintVertical_bias="0.596" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.354"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/chooseitemtype_spinner"
-        app:layout_constraintVertical_bias="0.024"
-        app:srcCompat="@drawable/line" />
+    <EditText
+        android:id="@+id/coll_desc_txt"
+        android:layout_width="373dp"
+        android:layout_height="98dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:boxBackgroundMode="none"
+        app:layout_constraintBottom_toBottomOf="@+id/descriptionbox_img"
+        app:layout_constraintEnd_toEndOf="@+id/descriptionbox_img"
+        app:layout_constraintStart_toStartOf="@+id/descriptionbox_img"
+        app:layout_constraintTop_toTopOf="@+id/descriptionbox_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

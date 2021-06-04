@@ -9,6 +9,11 @@ public class UserAcount {
         setPassword(password);
         setUsername(username);
     }
+    public UserAcount(String username, String email, String password) {
+        setEmail(email);
+        setPassword(password);
+        setUsername(username);
+    }
 
     public void setID(int id) {
         this.accountID = id;

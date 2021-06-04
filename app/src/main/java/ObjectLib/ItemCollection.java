@@ -5,7 +5,7 @@ import java.util.List;
 public class ItemCollection {
     String collectionName;
     String description;
-    List<Collectible> collectibles;
+    public List<Collectible> collectibles;
 
     public float Compleation(){
     float percCompleation;

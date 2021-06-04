@@ -3,7 +3,6 @@ package UtilLib;
 import android.app.Activity;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +42,13 @@ public class LoginManager {
         // repetition check
         for (UserAcount acc : accounts) {
 
-            if (username.equals(acc.Username())){
+            if (username.equals(acc.getUsername())){
                 Toast.makeText(currentActivity, "Username already taken.", Toast.LENGTH_SHORT).show();
                 System.out.println("invalid account : username taken");
                 return false;
             }
 
-            if (email.equals(acc.Email())){
+            if (email.equals(acc.getEmail())){
                 Toast.makeText(currentActivity, "Account already exists, try logging in.", Toast.LENGTH_LONG).show();
                 System.out.println("invalid account : Email in use");
                 return false;
@@ -62,23 +61,25 @@ public class LoginManager {
 
     public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
         for (UserAcount acc : accounts) {
-            if (userIn.equals(acc.Username())||userIn.equals(acc.Email())){
+            if (userIn.equals(acc.getUsername())||userIn.equals(acc.getEmail())){
 
                 return acc.ValidateAcount(passwordIn);
             }
         }
-        Toast.makeText(activity, "Incorrect Username or password.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
         return false;
     }
 
     public void AccDebug(){
         for (UserAcount acc : accounts) {
             System.out.println(" NEXT ACCOUNT... \n");
-            System.out.println("Username: " +acc.Username());
-            System.out.println("Email: " +acc.Email());
+            System.out.println("Username: " +acc.getUsername());
+            System.out.println("Email: " +acc.getEmail());
             System.out.println("\n");
 
         }
     }
+
+
 
 }

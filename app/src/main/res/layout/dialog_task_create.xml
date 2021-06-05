@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg_dialog_img"
+        android:layout_width="269dp"
+        android:layout_height="255dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/screen_background_light" />
+
+    <Button
+        android:id="@+id/confirm_create_task_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:text="CREATE"
+        android:textColor="@color/red_bar"
+        app:iconTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_dialog_img"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
+        app:layout_constraintTop_toBottomOf="@+id/editable_due_date_txt"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/cancel_task_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:text="CANCEL"
+        android:textColor="@color/red_bar"
+        app:iconTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_dialog_img"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
+        app:layout_constraintHorizontal_bias="0.824"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
+        app:layout_constraintTop_toBottomOf="@+id/editable_due_date_txt"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editable_task_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Task Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
+        app:layout_constraintTop_toBottomOf="@+id/create_task_prompt" />
+
+    <EditText
+        android:id="@+id/editable_due_date_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="DD/MM/YY"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
+        app:layout_constraintTop_toBottomOf="@+id/editable_task_name_txt" />
+
+    <TextView
+        android:id="@+id/create_task_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Enter Name and Due Date"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
+        app:layout_constraintTop_toTopOf="@+id/bg_dialog_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

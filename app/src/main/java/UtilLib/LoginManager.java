@@ -15,6 +15,11 @@ public class LoginManager {
     private static final LoginManager Manage = new LoginManager();
     public static LoginManager getInstance() {return Manage;}
 
+    private UserAcount activeUser;
+    public UserAcount getActiveUser(){
+    return activeUser;
+    }
+
     //private List<UserAcount> accounts = new ArrayList<>();
 
 
@@ -61,20 +66,23 @@ public class LoginManager {
 
     public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
         UserAcount acc = SQLiteDBHelper.getDataBase(activity).findAccountUserName(userIn);
+        boolean isValid = false;
         if (acc == null){
             acc = SQLiteDBHelper.getDataBase(activity).findAccountEmail(userIn);
         }
         if (acc != null){
-            return acc.ValidateAcount(passwordIn);
+            isValid = acc.ValidateAcount(passwordIn);
+        }
+        if (isValid){
+            activeUser = acc;
+            return isValid;
         }
         Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
-        return false;
+        return isValid;
     }
 
     public void AccDebug(Activity activity){
         System.out.println( SQLiteDBHelper.getDataBase(activity).loadAccounts() );
     }
-
-
 
 }

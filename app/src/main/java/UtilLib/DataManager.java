@@ -1,5 +1,8 @@
 package UtilLib;
 
+import android.graphics.Bitmap;
+
+import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.List;
 

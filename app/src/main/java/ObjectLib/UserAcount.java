@@ -16,7 +16,10 @@ public class UserAcount {
     }
 
     public void setID(int id) {
-        this.accountID = id;
+        if (_id == null){
+            _id = id;
+        }
+
     }
 
     public void setUsername(String username) {
@@ -31,9 +34,9 @@ public class UserAcount {
         this.password = password;
     }
 
-    private int accountID;
-    public int getAccountID(){
-        return accountID;
+    private Integer _id;
+    public int getID(){
+        return _id;
     }
 
     String username;

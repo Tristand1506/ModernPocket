@@ -1,5 +1,7 @@
 package UtilLib;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.io.ByteArrayOutputStream;
@@ -52,13 +54,22 @@ public  class DataManager {
         tasks.remove(task);
     }
 
-    public void AddCollection(ItemCollection collection){
-        collections.add(collection);
+    public void AddOrUpdateCollection(ItemCollection collection, Context context){
+        if (activeCollection == null) {
+            SQLiteDBHelper.getDataBase(context).addCollection(collection, LoginManager.getInstance().getActiveUser());
+        }
+        else{
+            SQLiteDBHelper.getDataBase(context).updateCollection(activeCollection.getID(),collection);
+        }
+
     }
     public void RemoveCollection(ItemCollection collection){
         collections.remove(collection);
     }
 
+    private void RefreshCollection(){
+
+    }
 
 
 }

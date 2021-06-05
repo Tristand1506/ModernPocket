@@ -13,7 +13,15 @@ public class ItemCollection {
     public Bitmap image;
     public List<Collectible> collectibles;
 
-
+    public ItemCollection(){}
+    public ItemCollection(Integer _id, String collectionName, String description, Integer _accountID, Bitmap image) {
+        setID(_id);
+        set_accountID(_accountID);
+        setCollectionName(collectionName);
+        setDescription(description);
+        this.image = image;
+        //this.collectibles = collectibles;
+    }
 
     public int getID(){
         return _id;

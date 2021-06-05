@@ -10,6 +10,9 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import ObjectLib.ItemCollection;
 import ObjectLib.UserAcount;
@@ -185,22 +188,25 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     //////////////////////
     // Collection Methods
     //////////////////////
-    public String loadCollections() {
-        String result = "";
+    public List<ItemCollection> loadCollections() {
+
         String query = " Select*FROM " + COLLECTION_TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
+        List<ItemCollection> outList = new ArrayList<>();
+
         while (cursor.moveToNext()) {
-            int result_0 = cursor.getInt(0);
+            int result_0 = Integer.parseInt(cursor.getString(0));
             String result_1 = cursor.getString(1);
             String result_2 = cursor.getString(2);
-            result += String.valueOf(result_0) + " " + result_1 + " " + result_2 + " " +
-                    System.getProperty("line.separator");
+            int result_3 = Integer.parseInt(cursor.getString(3));
+            Bitmap result_4 = getBitmapFromByteArray(cursor.getBlob(4));
+            outList.add(new ItemCollection(result_0,result_1,result_2,result_3,result_4));
         }
         cursor.close();
         db.close();
-        return result;
+        return outList;
     }
     public void addCollection(ItemCollection collection, UserAcount activeUser) {
         //String query = "INSERT INTO "+ACCOUNT_TABLE_NAME+" " +

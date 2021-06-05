@@ -6,20 +6,34 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import ObjectLib.UserAcount;
 
 public class SQLiteDBHelper  extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Pocket_DB";
+
+    //account DB
     public static final String ACCOUNT_TABLE_NAME = "User_account";
     public static final String ACCOUNT_COLUMN_ID = "_id";
     public static final String ACCOUNT_COLUMN_USERNAME = "username";
     public static final String ACCOUNT_COLUMN_EMAIL = "email";
     public static final String ACCOUNT_COLUMN_PASSWORD = "password";
 
-    public SQLiteDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public SQLiteDBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    //initialise singleton of DB
+    private static SQLiteDBHelper sInstance;
+
+    public static synchronized SQLiteDBHelper getDataBase(Context context) {
+        if (sInstance == null) {
+            sInstance = new SQLiteDBHelper(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
     @Override
@@ -29,6 +43,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
                 ACCOUNT_COLUMN_USERNAME + " TEXT, " +
                 ACCOUNT_COLUMN_EMAIL + " TEXT, " +
                 ACCOUNT_COLUMN_PASSWORD + " TEXT" + ")");
+
+        System.out.println("Acount DB Created");
 
     }
 
@@ -58,23 +74,31 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     }
 
     public void addAccount(UserAcount account) {
-        String query = "INSERT INTO "+ACCOUNT_TABLE_NAME+" " +
-                "("+ACCOUNT_COLUMN_USERNAME+", "+ACCOUNT_COLUMN_EMAIL+", "+ ACCOUNT_COLUMN_PASSWORD+") " +
-                "VALUES (" + account.getUsername() + ", " + account.getEmail() + ", " +account.getPassword() + ")";
-        //ContentValues values = new ContentValues();
-        //values.put(ACCOUNT_COLUMN_ID, null);
-        //values.put(ACCOUNT_COLUMN_USERNAME, account.getUsername());
-        //values.put(ACCOUNT_COLUMN_EMAIL, account.getEmail());
-        //values.put(ACCOUNT_COLUMN_PASSWORD, account.getPassword());
+        //String query = "INSERT INTO "+ACCOUNT_TABLE_NAME+" " +
+        //        "("+ACCOUNT_COLUMN_USERNAME+", "+ACCOUNT_COLUMN_EMAIL+", "+ ACCOUNT_COLUMN_PASSWORD+") " +
+        //        "VALUES (" + account.getUsername() + ", " + account.getEmail() + ", " +account.getPassword() + ")";
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            //values.put(ACCOUNT_COLUMN_ID, null);
+            values.put(ACCOUNT_COLUMN_USERNAME, account.getUsername());
+            values.put(ACCOUNT_COLUMN_EMAIL, account.getEmail());
+            values.put(ACCOUNT_COLUMN_PASSWORD, account.getPassword());
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(query);
-        //db.insert(ACCOUNT_TABLE_NAME, null, values);
-        db.close();
+            db.insertOrThrow(ACCOUNT_TABLE_NAME, null, values);
+            db.setTransactionSuccessful();
+        }
+        catch (Exception e){
+            Log.d("Error", "Error while trying to add acoount to database");
+        }
+        finally {
+            db.endTransaction();
+        }
     }
 
-    public UserAcount findAccount(String username) {
-        String query = "Select * FROM " + ACCOUNT_TABLE_NAME + "WHERE" + ACCOUNT_COLUMN_USERNAME + " = " + "'" + username + "'";
+    public UserAcount findAccountUserName(String username) {
+        String query = "Select * FROM " + ACCOUNT_TABLE_NAME + " WHERE " + ACCOUNT_COLUMN_USERNAME + " = " + "'" + username + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         UserAcount account = new UserAcount();
@@ -90,6 +114,24 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         db.close();
         return account;
     }
+    public UserAcount findAccountEmail(String email) {
+        String query = "Select * FROM " + ACCOUNT_TABLE_NAME + " WHERE " + ACCOUNT_COLUMN_EMAIL + " = " + "'" + email + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        UserAcount account = new UserAcount();
+        if (cursor.moveToFirst()) {
+            //cursor.moveToFirst();
+            account.setID(Integer.parseInt(cursor.getString(0)));
+            account.setUsername(cursor.getString(1));
+            account.setEmail(cursor.getString(2));
+            account.setPassword(cursor.getString(3));
+            cursor.close();
+        }
+        else account = null;
+        db.close();
+        return account;
+    }
+
     public boolean deleteAccount(int ID) {
         boolean result = false;
         String query = "Select*FROM" + ACCOUNT_TABLE_NAME + "WHERE" + ACCOUNT_COLUMN_ID + "= '" + String.valueOf(ID) + "'";

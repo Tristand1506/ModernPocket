@@ -1,6 +1,7 @@
 package UtilLib;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ public class LoginManager {
     private static final LoginManager Manage = new LoginManager();
     public static LoginManager getInstance() {return Manage;}
 
-    private List<UserAcount> accounts = new ArrayList<>();
+    //private List<UserAcount> accounts = new ArrayList<>();
+
+
 
     public boolean AddAccount(String username, String email, String password, Activity currentActivity){
 
@@ -39,45 +42,37 @@ public class LoginManager {
             return false;
         }
 
-        // repetition check
-        for (UserAcount acc : accounts) {
-
-            if (username.equals(acc.getUsername())){
-                Toast.makeText(currentActivity, "Username already taken.", Toast.LENGTH_SHORT).show();
-                System.out.println("invalid account : username taken");
-                return false;
-            }
-
-            if (email.equals(acc.getEmail())){
-                Toast.makeText(currentActivity, "Account already exists, try logging in.", Toast.LENGTH_LONG).show();
-                System.out.println("invalid account : Email in use");
-                return false;
-            }
+        if (SQLiteDBHelper.getDataBase(currentActivity).findAccountUserName(username)!=null){
+            Toast.makeText(currentActivity, "Username already taken.", Toast.LENGTH_SHORT).show();
+            System.out.println("invalid account : username taken");
+            return false;
         }
-        accounts.add(new UserAcount(username, email,password));
-        //AccDebug();
+        if (SQLiteDBHelper.getDataBase(currentActivity).findAccountEmail(email)!=null){
+            Toast.makeText(currentActivity, "Account already exists, try logging in.", Toast.LENGTH_LONG).show();
+            System.out.println("invalid account : Email in use");
+            return false;
+        }
+
+        SQLiteDBHelper.getDataBase(currentActivity).addAccount(new UserAcount(username,email,password));
+
+        AccDebug(currentActivity);
         return true;
     }
 
     public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
-        for (UserAcount acc : accounts) {
-            if (userIn.equals(acc.getUsername())||userIn.equals(acc.getEmail())){
-
-                return acc.ValidateAcount(passwordIn);
-            }
+        UserAcount acc = SQLiteDBHelper.getDataBase(activity).findAccountUserName(userIn);
+        if (acc == null){
+            acc = SQLiteDBHelper.getDataBase(activity).findAccountEmail(userIn);
+        }
+        if (acc != null){
+            return acc.ValidateAcount(passwordIn);
         }
         Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
         return false;
     }
 
-    public void AccDebug(){
-        for (UserAcount acc : accounts) {
-            System.out.println(" NEXT ACCOUNT... \n");
-            System.out.println("Username: " +acc.getUsername());
-            System.out.println("Email: " +acc.getEmail());
-            System.out.println("\n");
-
-        }
+    public void AccDebug(Activity activity){
+        System.out.println( SQLiteDBHelper.getDataBase(activity).loadAccounts() );
     }
 
 

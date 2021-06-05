@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="username"
+        android:fontFamily="@font/segoeuisl"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />

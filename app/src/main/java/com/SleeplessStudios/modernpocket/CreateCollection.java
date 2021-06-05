@@ -2,7 +2,9 @@ package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,5 +34,20 @@ public class CreateCollection extends AppCompatActivity {
         collDescription = (EditText) findViewById(R.id.coll_desc_txt);
         topCollectionName = (TextView) findViewById(R.id.editable_coll_creation_txt);
 
+        discardCollection.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                backToCollections();
+            }
+        });
+
+    }
+
+    public void backToCollections()
+    {
+        Intent intent = new Intent(this, CollectionsMain.class);
+        startActivity(intent);
     }
 }

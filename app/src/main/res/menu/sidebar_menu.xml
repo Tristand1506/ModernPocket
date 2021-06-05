@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+        <item android:id="@+id/sidebar_profile"
+            android:icon="@drawable/sidebar_profile1"
+            android:title="Profile" />
+
+        <item android:id="@+id/sidebar_fav"
+            android:icon="@drawable/sidebar_fav"
+            android:title="Favourites" />
+
+        <item android:id="@+id/sidebar_lent"
+            android:icon="@drawable/sidebar_lent"
+            android:title="Lent Items" />
+    </group>
+<group>
+    <item android:id="@+id/sidebar_settings"
+        android:icon="@drawable/sidebar_settings"
+        android:title="Settings" />
+
+        <item android:id="@+id/sidebar_rate"
+            android:icon="@drawable/sidebar_rate"
+            android:title="Rate App" />
+
+        <item android:id="@+id/sidebar_help"
+            android:icon="@drawable/sidebar_help"
+            android:title="Help" />
+
+        <item android:id="@+id/sidebar_logout"
+            android:icon="@drawable/sidebar_logout"
+            android:title="Log out" />
+</group>
+</menu>

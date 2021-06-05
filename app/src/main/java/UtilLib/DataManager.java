@@ -67,8 +67,11 @@ public  class DataManager {
         collections.remove(collection);
     }
 
-    private void RefreshCollection(){
-
+    private void RefreshCollection(Context context){
+        collections =  SQLiteDBHelper.getDataBase(context).loadCollections(LoginManager.getInstance().getActiveUser());
+        if (activeCollection != null){
+            SQLiteDBHelper.getDataBase(context).findCollectionByID(activeCollection.getID());
+        }
     }
 
 

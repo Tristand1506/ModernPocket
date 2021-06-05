@@ -188,9 +188,9 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     //////////////////////
     // Collection Methods
     //////////////////////
-    public List<ItemCollection> loadCollections() {
+    public List<ItemCollection> loadCollections( UserAcount account) {
 
-        String query = " Select*FROM " + COLLECTION_TABLE_NAME;
+        String query = " Select*FROM " + COLLECTION_TABLE_NAME + " WHERE "+ COLLECTION_COLUMN_ACCOUNT_ID + " = " + "'" + account.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -234,6 +234,24 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     }
     public ItemCollection findCollectionByName(String collectionName) {
         String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_NAME + " = " + "'" + collectionName + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        ItemCollection collection = new ItemCollection();
+        if (cursor.moveToFirst()) {
+            //cursor.moveToFirst();
+            collection.setID(Integer.parseInt(cursor.getString(0)));
+            collection.setCollectionName(cursor.getString(1));
+            collection.setDescription(cursor.getString(2));
+            collection.set_accountID(Integer.parseInt(cursor.getString(3)));
+            collection.image = getBitmapFromByteArray(cursor.getBlob(4));
+            cursor.close();
+        }
+        else collection = null;
+        db.close();
+        return collection;
+    }
+    public ItemCollection findCollectionByID(int id) {
+        String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_ID + " = " + "'" + id + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         ItemCollection collection = new ItemCollection();

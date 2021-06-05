@@ -86,7 +86,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="@+id/imageButton4"
         app:layout_constraintHorizontal_bias="0.219"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4" />
+        app:layout_constraintStart_toStartOf="@+id/imageButton4"
+        android:imeOptions="actionDone"/>
 
     <EditText
         android:id="@+id/username_txt"

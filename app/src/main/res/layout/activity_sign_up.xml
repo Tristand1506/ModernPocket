@@ -23,7 +23,8 @@
             app:layout_constraintBottom_toTopOf="@+id/pocket_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/signup_btn" />
+            app:srcCompat="@drawable/signup_btn"
+            android:imeOptions="actionDone"/>
 
         <ImageView
             android:id="@+id/pocket_img"

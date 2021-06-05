@@ -109,4 +109,15 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
     {
 
     }
+    @Override
+    public void onBackPressed()
+    {
+        if (drawer.isDrawerOpen(GravityCompat.END))
+        {
+            drawer.closeDrawer(GravityCompat.END);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

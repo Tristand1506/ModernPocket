@@ -52,14 +52,17 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Account DB
-        db.execSQL("CREATE TABLE " + ACCOUNT_TABLE_NAME + " (" +
-                ACCOUNT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                ACCOUNT_COLUMN_USERNAME + " TEXT, " +
-                ACCOUNT_COLUMN_EMAIL + " TEXT, " +
-                ACCOUNT_COLUMN_PASSWORD + " TEXT" + ")");
-        System.out.println("Acount DB Created");
+        CreateAccountDB(db);
+        CreateCollectionDB(db);
+    }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ACCOUNT_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + COLLECTION_TABLE_NAME);
+        onCreate(sqLiteDatabase);
+    }
+    private void CreateCollectionDB(SQLiteDatabase db){
         //Collection DB
         db.execSQL("CREATE TABLE " + COLLECTION_TABLE_NAME + " (" +
                 COLLECTION_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -69,15 +72,15 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
                 COLLECTION_COLUMN_IMAGE + " BLOB," +
                 " FOREIGN KEY ("+COLLECTION_COLUMN_ACCOUNT_ID+") REFERENCES "+ACCOUNT_TABLE_NAME+" ("+ACCOUNT_COLUMN_ID+"));");
         System.out.println("Collection DB Created");
-
-
-
     }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ACCOUNT_TABLE_NAME);
-        onCreate(sqLiteDatabase);
+    private void CreateAccountDB(SQLiteDatabase db){
+        // Account DB
+        db.execSQL("CREATE TABLE " + ACCOUNT_TABLE_NAME + " (" +
+                ACCOUNT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ACCOUNT_COLUMN_USERNAME + " TEXT, " +
+                ACCOUNT_COLUMN_EMAIL + " TEXT, " +
+                ACCOUNT_COLUMN_PASSWORD + " TEXT" + ")");
+        System.out.println("Account DB Created");
     }
 
     //////////////////
@@ -190,7 +193,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     //////////////////////
     public List<ItemCollection> loadCollections( UserAcount account) {
 
-        String query = " Select*FROM " + COLLECTION_TABLE_NAME + " WHERE "+ COLLECTION_COLUMN_ACCOUNT_ID + " = " + "'" + account.getID() + "'";
+        String query = " Select * FROM " + COLLECTION_TABLE_NAME + " WHERE "+ COLLECTION_COLUMN_ACCOUNT_ID + " = " + "'" + account.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 

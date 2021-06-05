@@ -22,6 +22,11 @@ public  class DataManager {
     List<ItemCollection> collections;
 
     private ItemCollection activeCollection;
+
+    public ItemCollection getActiveCollection() {
+        return activeCollection;
+    }
+
     public void setActiveCollection(ItemCollection ac){
         activeCollection = ac;
     }
@@ -67,7 +72,7 @@ public  class DataManager {
         collections.remove(collection);
     }
 
-    private void RefreshCollection(Context context){
+    public void RefreshCollection(Context context){
         collections =  SQLiteDBHelper.getDataBase(context).loadCollections(LoginManager.getInstance().getActiveUser());
         if (activeCollection != null){
             SQLiteDBHelper.getDataBase(context).findCollectionByID(activeCollection.getID());

@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
+
+import UtilLib.DataManager;
+import UtilLib.RecylerViewAdapter;
 
 public class CollectionsMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton createCollection;
@@ -24,6 +29,8 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections_main);
+        DataManager.getInstance().RefreshCollection(this);
+        initRecyclerView();
 
         drawer = findViewById(R.id.sidebar_main);
 
@@ -38,6 +45,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
             @Override
             public void onClick(View v)
             {
+                DataManager.getInstance().setActiveCollection(null);
                 openCreateCollection();
             }
         });
@@ -138,6 +146,13 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         else {
             super.onBackPressed();
         }
+    }
+
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_coll);
+        RecylerViewAdapter adapter = new RecylerViewAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

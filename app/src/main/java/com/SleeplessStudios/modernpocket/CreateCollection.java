@@ -2,6 +2,7 @@ package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ObjectLib.ItemCollection;
+import UtilLib.DataManager;
 
 public class CreateCollection extends AppCompatActivity {
     private ImageButton saveCollection;
@@ -34,6 +38,13 @@ public class CreateCollection extends AppCompatActivity {
         collDescription = (EditText) findViewById(R.id.coll_desc_txt);
         topCollectionName = (TextView) findViewById(R.id.editable_coll_creation_txt);
 
+        if (DataManager.getInstance().getActiveCollection() != null){
+            ItemCollection load = DataManager.getInstance().getActiveCollection();
+            topCollectionName.setText(load.getCollectionName());
+            collName.setText(load.getCollectionName());
+            collDescription.setText(load.getDescription());
+        }
+
         discardCollection.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -43,11 +54,21 @@ public class CreateCollection extends AppCompatActivity {
             }
         });
 
+        saveCollection.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v)
+        {
+            ItemCollection save = new ItemCollection(collName.getText().toString(),collDescription.getText().toString());
+            DataManager.getInstance().AddOrUpdateCollection(save,getApplicationContext());
+            backToCollections();
+        }
+        });
+
     }
 
     public void backToCollections()
     {
-        Intent intent = new Intent(this, CollectionsMain.class);
-        startActivity(intent);
+        DataManager.getInstance().RefreshCollection(this);
+        finish();
     }
 }

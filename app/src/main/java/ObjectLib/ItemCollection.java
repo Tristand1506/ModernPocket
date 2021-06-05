@@ -14,6 +14,12 @@ public class ItemCollection {
     public List<Collectible> collectibles;
 
     public ItemCollection(){}
+
+    public ItemCollection(String collectionName, String description) {
+        setCollectionName(collectionName);
+        setDescription(description);
+    }
+
     public ItemCollection(Integer _id, String collectionName, String description, Integer _accountID, Bitmap image) {
         setID(_id);
         set_accountID(_accountID);

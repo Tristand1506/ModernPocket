@@ -11,10 +11,9 @@
     tools:openDrawer="end">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view_coll">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:id="@+id/recycler_view_coll"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

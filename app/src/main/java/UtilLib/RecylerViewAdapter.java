@@ -27,14 +27,10 @@ package UtilLib;
 
 public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.ViewHolder> {
     private static final String TAG = "RecylerViewAdapter";
-
-    private ArrayList<String> mCollectionNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecylerViewAdapter(Context mContext, ArrayList<String> mCollectionNames, ArrayList<String> mImages ) {
-        this.mCollectionNames = mCollectionNames;
-        this.mImages = mImages;
+    public RecylerViewAdapter(Context mContext) {
+
         this.mContext = mContext;
     }
 

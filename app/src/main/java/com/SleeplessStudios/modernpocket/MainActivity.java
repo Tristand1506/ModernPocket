@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
 
+import UtilLib.DataManager;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton collections;
     private ImageButton tasks;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        DataManager.getInstance().RefreshCollection(this);
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);

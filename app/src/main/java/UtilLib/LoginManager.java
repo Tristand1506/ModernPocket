@@ -15,6 +15,11 @@ public class LoginManager {
     private static final LoginManager Manage = new LoginManager();
     public static LoginManager getInstance() {return Manage;}
 
+    private UserAcount activeUser;
+    public UserAcount getActiveUser(){
+    return activeUser;
+    }
+
     //private List<UserAcount> accounts = new ArrayList<>();
 
 
@@ -53,28 +58,37 @@ public class LoginManager {
             return false;
         }
 
+        // adds user to DB
         SQLiteDBHelper.getDataBase(currentActivity).addAccount(new UserAcount(username,email,password));
-
+        // sets active user to the user that just signed in
+        setActiveUser(SQLiteDBHelper.getDataBase(currentActivity).findAccountUserName(username));
         AccDebug(currentActivity);
         return true;
     }
 
     public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
         UserAcount acc = SQLiteDBHelper.getDataBase(activity).findAccountUserName(userIn);
+        boolean isValid = false;
         if (acc == null){
             acc = SQLiteDBHelper.getDataBase(activity).findAccountEmail(userIn);
         }
         if (acc != null){
-            return acc.ValidateAcount(passwordIn);
+            isValid = acc.ValidateAcount(passwordIn);
+        }
+        if (isValid){
+            setActiveUser(acc);
+            return isValid;
         }
         Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
-        return false;
+        return isValid;
     }
 
     public void AccDebug(Activity activity){
         System.out.println( SQLiteDBHelper.getDataBase(activity).loadAccounts() );
     }
 
-
+    private void setActiveUser(UserAcount user) {
+        activeUser = user;
+    }
 
 }

@@ -112,10 +112,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed()
+    {if (drawer.isDrawerOpen(GravityCompat.END))
     {
+        drawer.closeDrawer(GravityCompat.END);
+    }
+    else {
         finishAffinity();
     }
 
+    }
     public void openCollections()
     {
         Intent intent = new Intent(this, CollectionsMain.class);

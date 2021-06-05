@@ -128,5 +128,16 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     {
 
     }
+    @Override
+    public void onBackPressed()
+    {
+        if (drawer.isDrawerOpen(GravityCompat.END))
+        {
+            drawer.closeDrawer(GravityCompat.END);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 
 }

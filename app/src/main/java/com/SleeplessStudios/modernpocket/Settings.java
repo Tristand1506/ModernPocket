@@ -133,4 +133,15 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     {
 
     }
+    @Override
+    public void onBackPressed()
+    {
+        if (drawer.isDrawerOpen(GravityCompat.END))
+        {
+            drawer.closeDrawer(GravityCompat.END);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -79,7 +79,7 @@
         android:id="@+id/create_task_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/segoeuisl"
         android:text="Enter Name and Due Date"
         android:textColor="#000000"

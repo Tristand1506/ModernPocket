@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ItemCollection {
     private Integer _id;
+    private Integer _accountID;
     private String collectionName;
     private String description;
     public Bitmap image;
@@ -19,7 +20,16 @@ public class ItemCollection {
     }
     public void setID(int id){
         if (_id == null){
+            _id = id;
+        }
+    }
 
+    public int getAccountID(){
+        return _accountID;
+    }
+    public void set_accountID(int id){
+        if (_accountID == null){
+            _accountID = id;
         }
     }
 

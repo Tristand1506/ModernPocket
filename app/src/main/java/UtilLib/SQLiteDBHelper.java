@@ -31,6 +31,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public static final String COLLECTION_COLUMN_NAME = "name";
     public static final String COLLECTION_COLUMN_DESCRIPTION = "description";
     public static final String COLLECTION_COLUMN_IMAGE = "image";
+    public static final String COLLECTION_COLUMN_ACCOUNT_ID = "account_id";
 
     public SQLiteDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,6 +49,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Account DB
         db.execSQL("CREATE TABLE " + ACCOUNT_TABLE_NAME + " (" +
                 ACCOUNT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ACCOUNT_COLUMN_USERNAME + " TEXT, " +
@@ -55,11 +57,14 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
                 ACCOUNT_COLUMN_PASSWORD + " TEXT" + ")");
         System.out.println("Acount DB Created");
 
+        //Collection DB
         db.execSQL("CREATE TABLE " + COLLECTION_TABLE_NAME + " (" +
                 COLLECTION_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLLECTION_COLUMN_NAME + " TEXT, " +
                 COLLECTION_COLUMN_DESCRIPTION + " TEXT, " +
-                COLLECTION_COLUMN_IMAGE + " BLOB" + ")");
+                COLLECTION_COLUMN_ACCOUNT_ID + " INTEGER NOT NULL, " +
+                COLLECTION_COLUMN_IMAGE + " BLOB," +
+                " FOREIGN KEY ("+COLLECTION_COLUMN_ACCOUNT_ID+") REFERENCES "+ACCOUNT_TABLE_NAME+" ("+ACCOUNT_COLUMN_ID+"));");
         System.out.println("Collection DB Created");
 
 
@@ -197,7 +202,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         db.close();
         return result;
     }
-    public void addCollection(ItemCollection collection) {
+    public void addCollection(ItemCollection collection, UserAcount activeUser) {
         //String query = "INSERT INTO "+ACCOUNT_TABLE_NAME+" " +
         //        "("+ACCOUNT_COLUMN_USERNAME+", "+ACCOUNT_COLUMN_EMAIL+", "+ ACCOUNT_COLUMN_PASSWORD+") " +
         //        "VALUES (" + account.getUsername() + ", " + account.getEmail() + ", " +account.getPassword() + ")";
@@ -208,6 +213,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             //values.put(ACCOUNT_COLUMN_ID, null);
             values.put(COLLECTION_COLUMN_NAME, collection.getCollectionName());
             values.put(COLLECTION_COLUMN_DESCRIPTION, collection.getDescription());
+            values.put(COLLECTION_COLUMN_ACCOUNT_ID, activeUser.getID() );
             values.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
 
             db.insertOrThrow(COLLECTION_TABLE_NAME, null, values);
@@ -230,7 +236,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             collection.setID(Integer.parseInt(cursor.getString(0)));
             collection.setCollectionName(cursor.getString(1));
             collection.setDescription(cursor.getString(2));
-            collection.image = getBitmapFromByteArray(cursor.getBlob(3));
+            collection.set_accountID(Integer.parseInt(cursor.getString(3)));
+            collection.image = getBitmapFromByteArray(cursor.getBlob(4));
             cursor.close();
         }
         else collection = null;
@@ -276,7 +283,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public boolean updateCollection(int ID, ItemCollection collection) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
-        args.put(COLLECTION_COLUMN_ID, ID);
+        //args.put(COLLECTION_COLUMN_ID, ID);
         args.put(COLLECTION_COLUMN_NAME, collection.getCollectionName());
         args.put(COLLECTION_COLUMN_DESCRIPTION, collection.getDescription());
         args.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
@@ -284,6 +291,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     }
 
 
+
+    // decode Util
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);

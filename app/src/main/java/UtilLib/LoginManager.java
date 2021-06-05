@@ -58,8 +58,10 @@ public class LoginManager {
             return false;
         }
 
+        // adds user to DB
         SQLiteDBHelper.getDataBase(currentActivity).addAccount(new UserAcount(username,email,password));
-
+        // sets active user to the user that just signed in
+        setActiveUser(SQLiteDBHelper.getDataBase(currentActivity).findAccountUserName(username));
         AccDebug(currentActivity);
         return true;
     }
@@ -74,7 +76,7 @@ public class LoginManager {
             isValid = acc.ValidateAcount(passwordIn);
         }
         if (isValid){
-            activeUser = acc;
+            setActiveUser(acc);
             return isValid;
         }
         Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
@@ -83,6 +85,10 @@ public class LoginManager {
 
     public void AccDebug(Activity activity){
         System.out.println( SQLiteDBHelper.getDataBase(activity).loadAccounts() );
+    }
+
+    private void setActiveUser(UserAcount user) {
+        activeUser = user;
     }
 
 }

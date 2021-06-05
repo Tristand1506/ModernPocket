@@ -1,13 +1,17 @@
 package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-public class Favourites extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class Favourites extends AppCompatActivity{
     private ImageButton filter;
     private ImageButton sidebar;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

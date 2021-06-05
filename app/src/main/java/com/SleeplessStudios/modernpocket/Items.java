@@ -1,6 +1,7 @@
 package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.media.Image;
@@ -12,12 +13,15 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class Items extends AppCompatActivity {
     private ImageButton createItem;
     private ImageButton filterItems;
     private ImageButton sidebar;
     private ImageButton editItems;
     private TextView collectionName;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

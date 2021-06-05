@@ -20,12 +20,12 @@
         <activity android:name=".CreateCollection" />
         <activity android:name=".CreateObjective" />
         <activity android:name=".Objectives" />
-        <activity android:name=".TasksMain" />
+        <activity android:name=".LandingPage" />
         <activity android:name=".ObjectLens" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
-        <activity android:name=".LandingPage">
+        <activity android:name=".TasksMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

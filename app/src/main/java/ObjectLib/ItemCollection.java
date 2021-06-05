@@ -69,6 +69,10 @@ public class ItemCollection {
         return percCompleation;
     }
 
+    public int getCompleted() {
+        return 5;
+    }
+
     //TODO
     // image reference
 

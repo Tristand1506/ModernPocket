@@ -16,28 +16,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/off_white">
 
-    <ImageButton
-        android:id="@+id/create_item_btn"
-        android:background="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#F9F9F9"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/create" />
+        <ImageView
+            android:id="@+id/topbar_items_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_sidebar" />
 
-    <ImageView
-        android:id="@+id/topbar_items_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_sidebar" />
+        <ImageButton
+            android:id="@+id/create_item_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="#F9F9F9"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/create" />
 
         <ImageButton
             android:id="@+id/burgerbar_items_btn"
@@ -63,23 +64,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/filter" />
 
-    <TextView
-        android:id="@+id/editable_coll_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/segoeuisl"
-        android:capitalize="characters"
-        android:text="COLLECTION NAME"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-        app:layout_constraintEnd_toStartOf="@+id/filter_items_btn"
-        app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
-        app:layout_constraintVertical_bias="0.486" />
-
         <ImageButton
             android:id="@+id/edit_items"
             android:layout_width="wrap_content"
@@ -91,7 +75,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/edit" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/editable_coll_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:capitalize="characters"
+            android:fontFamily="@font/segoeuisl"
+            android:text="COLLECTION NAME"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
+            app:layout_constraintEnd_toStartOf="@+id/filter_items_btn"
+            app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
+            app:layout_constraintVertical_bias="0.486" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
 

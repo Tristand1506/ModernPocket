@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg_dialog_photo_img"
+        android:layout_width="285dp"
+        android:layout_height="111dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/screen_background_light" />
+
+    <Button
+        android:id="@+id/take_photo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/segoeuib"
+        android:text="CAMERA"
+        android:textColor="@color/red_bar"
+        app:iconTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintTop_toTopOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintVertical_bias="0.781" />
+
+    <Button
+        android:id="@+id/library_photo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/segoeuib"
+        android:text="LIBRARY"
+        android:textColor="@color/red_bar"
+        app:iconTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintTop_toTopOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintVertical_bias="0.781" />
+
+    <TextView
+        android:id="@+id/create_task_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/segoeuisl"
+        android:text="Add photo from:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/take_photo_btn"
+        app:layout_constraintEnd_toEndOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintStart_toStartOf="@+id/bg_dialog_photo_img"
+        app:layout_constraintTop_toTopOf="@+id/bg_dialog_photo_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

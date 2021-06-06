@@ -130,30 +130,6 @@
         app:layout_constraintTop_toBottomOf="@+id/items_amount_headingtxt"
         app:srcCompat="@drawable/plus" />
 
-    <ImageButton
-        android:id="@+id/check_createitem_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:background="@null"
-        android:backgroundTint="@color/real_red"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/checkmark" />
-
-    <ImageButton
-        android:id="@+id/x_createitem_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:background="@null"
-        android:backgroundTint="@color/real_red"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
-        app:layout_constraintEnd_toEndOf="@+id/topbar_createitem_img"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cross_mark" />
-
     <ImageView
         android:id="@+id/item_descbox_img"
         android:layout_width="wrap_content"
@@ -251,6 +227,30 @@
         app:layout_constraintEnd_toStartOf="@+id/create_item_type_btn"
         app:layout_constraintStart_toEndOf="@+id/cube_img"
         app:srcCompat="@drawable/line" />
+
+    <ImageButton
+        android:id="@+id/x_createitem_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
+        app:layout_constraintEnd_toEndOf="@+id/topbar_createitem_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cross_mark" />
+
+    <ImageButton
+        android:id="@+id/check_createitem_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
 
     <Spinner
         android:id="@+id/chooseitemtype_spinner"

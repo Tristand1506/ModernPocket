@@ -39,6 +39,7 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         setContentView(R.layout.activity_items);
         DataManager.getInstance().refreshItems(this);
         initRecyclerView();
+        collectionName = (TextView) findViewById(R.id.editable_coll_txt);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
 
         drawer = findViewById(R.id.sidebar_main);
@@ -71,7 +72,7 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         });
 
         editItems = (ImageButton) findViewById(R.id.edit_items);
-        collectionName = (TextView) findViewById(R.id.editable_coll_txt);
+
     }
 
     @Override

@@ -48,7 +48,7 @@ public class CreateItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item);
 
-        saveItem = (ImageButton) findViewById(R.id.create_item_btn);
+        saveItem = (ImageButton) findViewById(R.id.check_createitem_btn);
         discardItem = (ImageButton) findViewById(R.id.x_createitem_btn);
         addPhoto = (ImageButton) findViewById(R.id.item_add_img_btn);
         lessAmount = (ImageButton) findViewById(R.id.less_items_btn);

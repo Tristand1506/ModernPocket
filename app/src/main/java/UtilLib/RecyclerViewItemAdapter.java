@@ -65,8 +65,11 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
 
     @Override
     public int getItemCount() {
-
-        return DataManager.getInstance().collections.size();
+        if (DataManager.getInstance().getActiveCollection().collectibles != null) {
+            return DataManager.getInstance().getActiveCollection().collectibles.size();
+        } else {
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

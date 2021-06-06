@@ -22,17 +22,6 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
-    <ImageButton
-        android:id="@+id/favorite_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="#00FFFFFF"
-        tools:src="@drawable/star_hollow" />
-
 
     <View
         android:id="@+id/divider"
@@ -54,22 +43,21 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:src="@mipmap/ic_launcher" />
 
         <ProgressBar
+            android:id="@+id/coll_completion"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_centerInParent="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle"
-            tools:progress="60"
-            android:id="@+id/coll_completion"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
+            tools:progress="60" />
 
     </RelativeLayout>
 

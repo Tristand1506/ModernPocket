@@ -7,10 +7,16 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -36,6 +42,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public static final String COLLECTION_COLUMN_DESCRIPTION = "description";
     public static final String COLLECTION_COLUMN_IMAGE = "image";
     public static final String COLLECTION_COLUMN_ACCOUNT_ID = "account_id";
+
     //Item DB
     public static final String ITEM_TABLE_NAME = "items";
     public static final String ITEM_COLUMN_ID = "_id";
@@ -45,6 +52,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public static final String ITEM_COLUMN_ACQUISITION_DATE = "date";
     public static final String ITEM_COLUMN_LOCATION = "location";
     public static final String ITEM_COLUMN_IMAGE = "image";
+    public static final String ITEM_COLUMN_IS_FAVORITE = "favorite";
+    public static final String ITEM_COLUMN_IS_OWNED = "owned";
     public static final String ITEM_COLUMN_COLLECTION_ID = "collection_id";
 
     public SQLiteDBHelper(Context context) {
@@ -97,6 +106,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
                 ITEM_COLUMN_ACQUISITION_DATE+ " TEXT, " +
                 ITEM_COLUMN_LOCATION+ " TEXT, " +
                 ITEM_COLUMN_IMAGE + " BLOB," +
+                ITEM_COLUMN_IS_FAVORITE + " INTEGER," +
+                ITEM_COLUMN_IS_OWNED + " INTEGER," +
                 ITEM_COLUMN_COLLECTION_ID + " INTEGER NOT NULL, " +
                 " FOREIGN KEY ("+ITEM_COLUMN_COLLECTION_ID+") REFERENCES "+COLLECTION_TABLE_NAME+" ("+COLLECTION_COLUMN_ID+"));");
         System.out.println("Collection DB Created");
@@ -233,16 +244,16 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             String result_2 = cursor.getString(2);
             int result_3 = Integer.parseInt(cursor.getString(3));
             Bitmap result_4 = getBitmapFromByteArray(cursor.getBlob(4));
-            outList.add(new ItemCollection(result_0,result_1,result_2,result_3,result_4));
+            ItemCollection out = new ItemCollection(result_0,result_1,result_2,result_3,result_4);
+            out.collectibles = getItemsFromCollections(out);
+            outList.add(out);
         }
         cursor.close();
         db.close();
         return outList;
     }
     public void addCollection(ItemCollection collection, UserAcount activeUser) {
-        //String query = "INSERT INTO "+ACCOUNT_TABLE_NAME+" " +
-        //        "("+ACCOUNT_COLUMN_USERNAME+", "+ACCOUNT_COLUMN_EMAIL+", "+ ACCOUNT_COLUMN_PASSWORD+") " +
-        //        "VALUES (" + account.getUsername() + ", " + account.getEmail() + ", " +account.getPassword() + ")";
+
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
@@ -299,8 +310,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         db.close();
         return collection;
     }
-
-    /*public UserAcount findCollectionByItem(Collectible item) {
+    public UserAcount findCollectionByItem(Collectible item) {
         String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_ID + " = " + "'" + item.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -316,7 +326,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         else account = null;
         db.close();
         return account;
-    }*/
+    }
     public boolean deleteCollection(int ID) {
         boolean result = false;
         String query = "Select*FROM" + COLLECTION_TABLE_NAME + "WHERE" + COLLECTION_COLUMN_ID + "= '" + String.valueOf(ID) + "'";
@@ -344,6 +354,81 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         args.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
         return db.update(COLLECTION_TABLE_NAME, args, COLLECTION_COLUMN_ID + "=" + ID, null) > 0;
     }
+
+    // item methods
+    public List<Collectible> getItemsFromCollections(ItemCollection collection) {
+        String query = " Select * FROM " + ITEM_TABLE_NAME + " WHERE "+ ITEM_COLUMN_COLLECTION_ID+ " = " + "'" + collection.getID() + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        List<Collectible> outList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            int id = Integer.parseInt(cursor.getString(0));
+            String name = cursor.getString(1);
+            int type  = Integer.parseInt(cursor.getString(2));
+            String desc = cursor.getString(3);
+            Date date = getDateFromString(cursor.getString(4));
+            //Location loc = LocationFromLatLong(cursor.getString(5));
+            String loc = cursor.getString(5);
+            Bitmap image = getBitmapFromByteArray(cursor.getBlob(6));
+            boolean favorite = Boolean.parseBoolean(cursor.getString(7));
+            boolean owned = Boolean.parseBoolean(cursor.getString(8));
+            int containingCollection =Integer.parseInt(cursor.getString(9));
+            outList.add(new Collectible(id, name, type, desc, date, loc, image, favorite, owned, containingCollection) {
+            });
+        }
+        cursor.close();
+        db.close();
+        return outList;
+    }
+    public void addItem(Collectible item, ItemCollection collection) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            //values.put(ACCOUNT_COLUMN_ID, null);
+            values.put(ITEM_COLUMN_NAME, item.getName());
+            values.put(ITEM_COLUMN_TYPE, item.getItemType());
+            values.put(ITEM_COLUMN_DESCRIPTION, item.getDescription());
+            values.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
+            //values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
+            values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+            values.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
+            values.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
+            values.put(ITEM_COLUMN_IS_FAVORITE, item.isOwned);
+            values.put(ITEM_COLUMN_COLLECTION_ID, collection.getID());
+
+            db.insertOrThrow(COLLECTION_TABLE_NAME, null, values);
+            db.setTransactionSuccessful();
+        }
+        catch (Exception e){
+            Log.d("Error", "Error while trying to add Collection to database with exception\n"+e);
+        }
+        finally {
+            db.endTransaction();
+        }
+    }
+    public boolean updateItem(int ID, Collectible item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        //args.put(COLLECTION_COLUMN_ID, ID);
+        args.put(ITEM_COLUMN_NAME, item.getName());
+        args.put(ITEM_COLUMN_TYPE, item.getItemType());
+        args.put(ITEM_COLUMN_DESCRIPTION, item.getDescription());
+        args.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
+        //args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
+        args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+        args.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
+        args.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
+        args.put(ITEM_COLUMN_IS_OWNED, item.isOwned);
+        args.put(ITEM_COLUMN_COLLECTION_ID, item.getCollectionID());
+        return db.update(ITEM_TABLE_NAME, args, ITEM_COLUMN_ID + "=" + ID, null) > 0;
+    }
+
+
+
+
     // decode Util
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -355,6 +440,27 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             return BitmapFactory.decodeByteArray(bArray, 0 ,bArray.length);
         }
         return null;
+    }
+
+    static DateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    public static Date getDateFromString(String dateIn){
+        Date date = new Date();
+        try{
+            date = iso8601Format.parse(dateIn);
+        } catch (ParseException e){
+            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+        }
+        return date;
+    }
+
+
+    public static Location LocationFromLatLong(String latLong){
+        Location loc = new Location(LocationManager.GPS_PROVIDER);
+        String[] latLongArr= latLong.split("-");
+        loc.setLatitude(Double.parseDouble(latLongArr[0]));
+        loc.setLongitude(Double.parseDouble(latLongArr[1]));
+        return loc;
     }
 
 

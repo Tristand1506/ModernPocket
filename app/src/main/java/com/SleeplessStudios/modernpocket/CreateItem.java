@@ -1,9 +1,17 @@
 package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import ObjectLib.Collectible;
+import UtilLib.DataManager;
+import UtilLib.SQLiteDBHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +19,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreateItem extends AppCompatActivity {
     private ImageButton saveItem;
@@ -54,6 +67,25 @@ public class CreateItem extends AppCompatActivity {
 
         photo = (CircleImageView) findViewById(R.id.item_image_img);
 
+        discardItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToItems();
+            }
+        });
+        saveItem.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
+                Bitmap photoIn = bd.getBitmap();
+                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(), getDateFromString(acquireDate.getText().toString()), acquireLoc.getText().toString() ,photoIn);
+                DataManager.getInstance().AddOrUpdateItem(in,getParent());
+                backToItems();
+            }
+        });
+
         //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);
         //array for spinner
@@ -62,4 +94,24 @@ public class CreateItem extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChooseItemType.setAdapter(adapter);
     }
+
+    public void backToItems() {
+        DataManager.getInstance().refreshItems(this);
+        finish();
+    }
+
+
+    public static Date getDateFromString(String dateIn){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateIn);
+        } catch (ParseException e){
+            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+        }
+        return date;
+    }
+
+
+
 }

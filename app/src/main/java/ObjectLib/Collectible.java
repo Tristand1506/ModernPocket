@@ -1,14 +1,15 @@
 package ObjectLib;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 
 import java.util.Date;
 
-public abstract class Collectible {
+public class Collectible {
 
     // generic constructor
-    public Collectible(String name, String description, boolean isFavourite, boolean isOwned,
-                       Date acquisitionDate, Location acquisitionLoc ) {
+/*
+    public Collectible(int id, String name, int type, String description, Date date, Location loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
         this.name = name;
         this.description = description;
         this.isFavourite = isFavourite;
@@ -16,15 +17,92 @@ public abstract class Collectible {
         setAcquisitionDate(acquisitionDate);
         setAcquisitionLoc(acquisitionLoc);
     }
+*/
+    public Collectible(int id, String name, int type, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
+        _id = id;
+        _collectionId = coll;
+        this.name = name;
+        itemType = type;
+        this.description = description;
+        this.isFavourite = isFavourite;
+        this.isOwned = isOwned;
+        image = img;
+        setAcquisitionDate(date);
+        setAcquisitionLoc(loc);
+    }
+
+    public Collectible(String name, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned) {
+        this.name = name;
+        this.description = description;
+        this.isFavourite = isFavourite;
+        this.isOwned = isOwned;
+        image = img;
+        setAcquisitionDate(date);
+        setAcquisitionLoc(loc);
+    }
+    public Collectible(String name, String description, Date date, String loc, Bitmap img) {
+        this.name = name;
+        this.description = description;
+        image = img;
+        setAcquisitionDate(date);
+        setAcquisitionLoc(loc);
+    }
+
+    private Integer _id;
+    private Integer _collectionId;
+    int itemType;
+    private String name;
+    private String description;
+    public Bitmap image;
+    public boolean isFavourite;
 
 
-    String name;
-    String description;
-    boolean isFavourite;
-
-    boolean isOwned;
+    public boolean isOwned;
     private Date acquisitionDate;
-    private Location acquisitionLoc;
+    // private Location acquisitionLoc;
+    private String acquisitionLoc;
+
+
+    ///////////////
+    //Gets and Sets
+    ///////////////
+    public int getID(){
+        return _id;
+    }
+    public void setID(int id){
+        if (_id == null){
+            _id = id;
+        }
+    }
+    public int getCollectionID(){
+        return _collectionId;
+    }
+    public void setCollectionID(int id){
+        if (_collectionId == null){
+            _collectionId = id;
+        }
+    }
+
+
+
+    public int getItemType() {
+        return itemType;
+    }
+
+    public void setName(String name){
+        if (!name.trim().isEmpty()){
+            this.name = name;
+        }
+    }
+    public String getName(){
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
 
     ///////////////////////
     // Owned Conditional Gets and Sets
@@ -42,11 +120,19 @@ public abstract class Collectible {
         }
     }
 
-    public Location getAcquisitionLoc() {
+    public String getAcquisitionLoc() {
         return acquisitionLoc;
     }
 
-    public void setAcquisitionLoc(Location acquisitionLoc) {
+    /*public void setAcquisitionLoc(Location acquisitionLoc) {
+        if (!isOwned){
+            this.acquisitionLoc = null;
+        }
+        else {
+            this.acquisitionLoc = acquisitionLoc;
+        }
+    }*/
+    public void setAcquisitionLoc(String acquisitionLoc) {
         if (!isOwned){
             this.acquisitionLoc = null;
         }

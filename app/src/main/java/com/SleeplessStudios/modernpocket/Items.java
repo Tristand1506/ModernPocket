@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.media.Image;
@@ -19,6 +21,10 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import UtilLib.DataManager;
+import UtilLib.RecyclerViewCollectionAdapter;
+import UtilLib.RecyclerViewItemAdapter;
+
 public class Items extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton createItem;
     private ImageButton filterItems;
@@ -31,6 +37,9 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
+        DataManager.getInstance().refreshItems(this);
+        initRecyclerView();
+        collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
 
         drawer = findViewById(R.id.sidebar_main);
 
@@ -63,6 +72,13 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
 
         editItems = (ImageButton) findViewById(R.id.edit_items);
         collectionName = (TextView) findViewById(R.id.editable_coll_txt);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().refreshItems(this);
+        initRecyclerView();
     }
 
     @Override
@@ -170,5 +186,13 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         else {
             super.onBackPressed();
         }
+    }
+
+
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
+        RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

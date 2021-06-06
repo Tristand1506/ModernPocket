@@ -9,11 +9,6 @@
     android:id="@+id/sidebar_main"
     tools:openDrawer="end">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_items"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -91,6 +86,17 @@
             app:layout_constraintEnd_toStartOf="@+id/filter_items_btn"
             app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
             app:layout_constraintVertical_bias="0.486" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_items"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topbar_items_img"
+            app:layout_constraintVertical_bias="1.0"></androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

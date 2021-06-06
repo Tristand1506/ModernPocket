@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import com.google.android.material.navigation.NavigationView;
 
 import UtilLib.DataManager;
-import UtilLib.RecylerViewAdapter;
+import UtilLib.RecyclerViewCollectionAdapter;
 
 public class CollectionsMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton createCollection;
@@ -68,6 +68,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         super.onResume();
         DataManager.getInstance().RefreshCollection(this);
         initRecyclerView();
+        DataManager.getInstance().setActiveCollection(null);
     }
 
     @Override
@@ -174,7 +175,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_coll);
-        RecylerViewAdapter adapter = new RecylerViewAdapter(this);
+        RecyclerViewCollectionAdapter adapter = new RecyclerViewCollectionAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

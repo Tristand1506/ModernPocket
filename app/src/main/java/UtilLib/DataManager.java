@@ -68,6 +68,15 @@ public  class DataManager {
         }
 
     }
+    public void AddOrUpdateItem(Collectible item, Context context){
+        if (activeItem == null) {
+            SQLiteDBHelper.getDataBase(context).addItem(item, activeCollection);
+        }
+        else{
+            SQLiteDBHelper.getDataBase(context).updateItem(activeItem.getID(),item);
+        }
+
+    }
     public void RemoveCollection(ItemCollection collection){
         collections.remove(collection);
     }
@@ -76,6 +85,11 @@ public  class DataManager {
         collections =  SQLiteDBHelper.getDataBase(context).loadCollections(LoginManager.getInstance().getActiveUser());
         if (activeCollection != null){
             SQLiteDBHelper.getDataBase(context).findCollectionByID(activeCollection.getID());
+        }
+    }
+    public void refreshItems(Context context){
+        if (activeCollection!=null){
+            activeCollection.collectibles = SQLiteDBHelper.getDataBase(context).getItemsFromCollections(activeCollection);
         }
     }
 

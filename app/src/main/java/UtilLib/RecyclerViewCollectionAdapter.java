@@ -2,12 +2,10 @@ package UtilLib;
 
  import android.content.Context;
  import android.content.Intent;
- import android.media.Image;
  import android.util.Log;
  import android.view.LayoutInflater;
  import android.view.View;
  import android.view.ViewGroup;
- import android.widget.ImageButton;
  import android.widget.ProgressBar;
  import android.widget.RelativeLayout;
  import android.widget.TextView;
@@ -18,18 +16,15 @@ package UtilLib;
  import com.SleeplessStudios.modernpocket.Items;
  import com.SleeplessStudios.modernpocket.R;
 
- import java.util.ArrayList;
-
  import ObjectLib.ItemCollection;
- import ObjectLib.UserAcount;
  import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.ViewHolder> {
-    private static final String TAG = "RecylerViewAdapter";
+public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<RecyclerViewCollectionAdapter.ViewHolder> {
+    private static final String TAG = "RecyclerViewCollectionAdapter";
     private Context mContext;
 
-    public RecylerViewAdapter(Context mContext) {
+    public RecyclerViewCollectionAdapter(Context mContext) {
 
         this.mContext = mContext;
     }
@@ -45,7 +40,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
+        //Log.d(TAG, "onBindViewHolder: called.");
         ItemCollection load = DataManager.getInstance().collections.get(position);
         holder.image.setImageBitmap(load.image);
         holder.collectionName.setText(load.getCollectionName());
@@ -65,7 +60,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
     @Override
     public int getItemCount() {
 
-        return DataManager.getInstance().collections.size();
+        return DataManager.getInstance().getActiveCollection().collectibles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="110dp"
     android:background="@color/off_white">
 
-
     <TextView
-        android:id="@+id/collection_name"
+        android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/img_perc_layout"
+        android:layout_toRightOf="@id/img_relative_layout"
         android:fontFamily="@font/segoeuisl"
         android:letterSpacing="0.2"
-        android:text="Collection Name"
+        android:text="Item Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
     <ImageButton
-        android:id="@+id/favorite_btn"
+        android:id="@+id/item_favorite_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:paddingRight="10dp"
         android:background="#00FFFFFF"
         tools:src="@drawable/star_hollow" />
 
+    <ImageButton
+        android:id="@+id/item_lent_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:background="#00FFFFFF"
+        tools:src="@drawable/lent_icon" />
+
+    <CheckBox
+        android:id="@+id/item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
 
     <View
         android:id="@+id/divider"
@@ -44,16 +60,15 @@
         android:background="?android:attr/listDivider" />
 
     <RelativeLayout
-        android:id="@+id/img_perc_layout"
+        android:id="@+id/img_relative_layout"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:gravity="center_horizontal"
         android:layout_marginStart="10dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/item_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
@@ -61,13 +76,6 @@
             android:layout_marginStart="16dp"
             android:src="@mipmap/ic_launcher" />
 
-        <ProgressBar
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/coll_completion"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
     </RelativeLayout>
-
 
 </RelativeLayout>

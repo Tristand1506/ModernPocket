@@ -80,7 +80,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
             image = itemView.findViewById((R.id.profile_image));
             collectionName = itemView.findViewById(R.id.collection_name);
             //favorite = itemView.findViewById(R.id.favorite_btn);
-            completion = itemView.findViewById(R.id.compleation);
+            completion = itemView.findViewById(R.id.coll_completion);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }

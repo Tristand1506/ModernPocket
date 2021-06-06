@@ -1,6 +1,7 @@
 package com.SleeplessStudios.modernpocket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -27,7 +28,7 @@ public class CreateItem extends AppCompatActivity {
     private EditText returnDate;
     private TextView itemName;
     private Spinner spinnerChooseItemType;
-    private ImageView photo;
+    private CircleImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class CreateItem extends AppCompatActivity {
 
         itemName = (TextView) findViewById(R.id.top_item_name_txt);
 
-        photo = (ImageView) findViewById(R.id.item_image_img);
+        photo = (CircleImageView) findViewById(R.id.item_image_img);
 
         //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);

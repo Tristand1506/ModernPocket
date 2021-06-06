@@ -14,9 +14,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:fontFamily="@font/segoeuisl"
         android:inputType="textPersonName"
         android:text="Name"
-        android:fontFamily="@font/segoeuisl"
         android:textColor="@color/text_grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topbar_createitem_img" />
@@ -66,10 +66,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:fontFamily="@font/segoeuisl"
         android:hint="Who Has This?"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/lent_to_img"
-        android:fontFamily="@font/segoeuisl"
         app:layout_constraintTop_toBottomOf="@+id/item_location_acq_txt" />
 
     <EditText
@@ -87,13 +87,28 @@
         app:layout_constraintStart_toEndOf="@+id/less_items_btn"
         app:layout_constraintTop_toBottomOf="@+id/items_amount_headingtxt" />
 
+    <EditText
+        android:id="@+id/item_desc_txt"
+        android:layout_width="373dp"
+        android:layout_height="98dp"
+        android:ems="10"
+        android:fontFamily="@font/segoeuisl"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:boxBackgroundMode="none"
+        app:layout_constraintBottom_toBottomOf="@+id/item_descbox_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="@+id/item_descbox_img"
+        app:layout_constraintTop_toTopOf="@+id/item_descbox_img" />
+
     <ImageButton
         android:id="@+id/less_items_btn"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@null"
         android:backgroundTint="@color/off_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/items_amount_headingtxt"
@@ -101,11 +116,11 @@
 
     <ImageButton
         android:id="@+id/create_item_type_btn"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="24dp"
+        android:background="@null"
         android:backgroundTint="#F9F9F9"
         app:layout_constraintBottom_toTopOf="@+id/item_desc_headingtxt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +140,30 @@
         app:layout_constraintTop_toBottomOf="@+id/items_amount_headingtxt"
         app:srcCompat="@drawable/plus" />
 
+    <ImageButton
+        android:id="@+id/check_createitem_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
+
+    <ImageButton
+        android:id="@+id/x_createitem_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
+        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
+        app:layout_constraintEnd_toEndOf="@+id/topbar_createitem_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cross_mark" />
+
     <ImageView
         android:id="@+id/item_descbox_img"
         android:layout_width="wrap_content"
@@ -135,21 +174,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/items_amount_txt"
         app:srcCompat="@drawable/box" />
-
-    <EditText
-        android:id="@+id/item_desc_txt"
-        android:layout_width="373dp"
-        android:layout_height="98dp"
-        android:ems="10"
-        android:fontFamily="@font/segoeuisl"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:boxBackgroundMode="none"
-        app:layout_constraintBottom_toBottomOf="@+id/item_descbox_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="@+id/item_descbox_img"
-        app:layout_constraintTop_toTopOf="@+id/item_descbox_img" />
 
     <ImageView
         android:id="@+id/topbar_createitem_img"
@@ -227,9 +251,9 @@
         android:layout_width="249dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/segoeuisl"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
+        android:fontFamily="@font/segoeuisl"
         app:layout_constraintBottom_toTopOf="@+id/spinnerline_img"
         app:layout_constraintEnd_toStartOf="@+id/create_item_type_btn"
         app:layout_constraintHorizontal_bias="0.454"
@@ -241,8 +265,8 @@
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Description"
         android:fontFamily="@font/segoeuisl"
+        android:text="Description"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/item_descbox_img"
         app:layout_constraintStart_toStartOf="parent" />
@@ -253,8 +277,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:text="Amount"
         android:fontFamily="@font/segoeuisl"
+        android:text="Amount"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name_txt" />
@@ -265,43 +289,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Item Type"
         android:fontFamily="@font/segoeuisl"
+        android:text="Item Type"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/chooseitemtype_spinner"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/check_createitem_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:background="@null"
-        android:backgroundTint="@color/real_red"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/checkmark" />
-
-    <ImageButton
-        android:id="@+id/x_createitem_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:background="@null"
-        android:backgroundTint="@color/real_red"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
-        app:layout_constraintEnd_toEndOf="@+id/topbar_createitem_img"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cross_mark" />
 
     <TextView
         android:id="@+id/top_item_name_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:capitalize="characters"
-        android:text="ITEM"
         android:fontFamily="@font/segoeuisl"
+        android:text="ITEM"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
@@ -311,17 +311,17 @@
         app:layout_constraintStart_toEndOf="@+id/check_createitem_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/item_image_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar_createitem_img"
-        app:srcCompat="@drawable/item_generic" />
-
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_image_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/item_generic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_name_txt"
+        app:layout_constraintTop_toBottomOf="@+id/topbar_createitem_img" />
+
+    <ImageButton
         android:id="@+id/item_add_img_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -330,7 +330,7 @@
         android:src="@drawable/add_image"
         app:layout_constraintBottom_toBottomOf="@+id/item_image_img"
         app:layout_constraintEnd_toEndOf="@+id/item_image_img"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/item_image_img"
         app:layout_constraintTop_toTopOf="@+id/item_image_img"
         app:layout_constraintVertical_bias="1.0" />

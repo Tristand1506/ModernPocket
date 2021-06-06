@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -62,7 +64,9 @@ public class CreateCollection extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            ItemCollection save = new ItemCollection(collName.getText().toString(),collDescription.getText().toString());
+            BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
+            Bitmap photoIn = bd.getBitmap();
+            ItemCollection save = new ItemCollection(collName.getText().toString(),collDescription.getText().toString(),photoIn);
             DataManager.getInstance().AddOrUpdateCollection(save,getApplicationContext());
             backToCollections();
         }

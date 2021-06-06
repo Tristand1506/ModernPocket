@@ -49,7 +49,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
         ItemCollection load = DataManager.getInstance().collections.get(position);
         holder.image.setImageBitmap(load.image);
         holder.collectionName.setText(load.getCollectionName());
-        //holder.completion.
+        holder.completion.setProgress(0);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

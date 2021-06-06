@@ -35,6 +35,16 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public static final String COLLECTION_COLUMN_DESCRIPTION = "description";
     public static final String COLLECTION_COLUMN_IMAGE = "image";
     public static final String COLLECTION_COLUMN_ACCOUNT_ID = "account_id";
+    //Item DB
+    public static final String ITEM_TABLE_NAME = "items";
+    public static final String ITEM_COLUMN_ID = "_id";
+    public static final String ITEM_COLUMN_NAME = "name";
+    public static final String ITEM_COLUMN_TYPE = "type";
+    public static final String ITEM_COLUMN_DESCRIPTION = "description";
+    public static final String ITEM_COLUMN_ACQUISITION_DATE = "date";
+    public static final String ITEM_COLUMN_LOCATION = "location";
+    public static final String ITEM_COLUMN_IMAGE = "image";
+    public static final String ITEM_COLUMN_COLLECTION_ID = "collection_id";
 
     public SQLiteDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,6 +72,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + COLLECTION_TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+
     private void CreateCollectionDB(SQLiteDatabase db){
         //Collection DB
         db.execSQL("CREATE TABLE " + COLLECTION_TABLE_NAME + " (" +
@@ -71,6 +82,18 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
                 COLLECTION_COLUMN_ACCOUNT_ID + " INTEGER NOT NULL, " +
                 COLLECTION_COLUMN_IMAGE + " BLOB," +
                 " FOREIGN KEY ("+COLLECTION_COLUMN_ACCOUNT_ID+") REFERENCES "+ACCOUNT_TABLE_NAME+" ("+ACCOUNT_COLUMN_ID+"));");
+        System.out.println("Collection DB Created");
+    }
+    private void CreateItemDB(SQLiteDatabase db){
+        //Collection DB
+        db.execSQL("CREATE TABLE " + ITEM_TABLE_NAME + " (" +
+                ITEM_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ITEM_COLUMN_NAME + " TEXT, "+
+                ITEM_COLUMN_TYPE + " TEXT NOT NULL, " +
+                ITEM_COLUMN_DESCRIPTION + " TEXT, " +
+                ITEM_COLUMN_COLLECTION_ID + " INTEGER NOT NULL, " +
+                COLLECTION_COLUMN_IMAGE + " BLOB," +
+                " FOREIGN KEY ("+ITEM_COLUMN_COLLECTION_ID+") REFERENCES "+COLLECTION_TABLE_NAME+" ("+COLLECTION_COLUMN_ID+"));");
         System.out.println("Collection DB Created");
     }
     private void CreateAccountDB(SQLiteDatabase db){
@@ -316,9 +339,6 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         args.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
         return db.update(COLLECTION_TABLE_NAME, args, COLLECTION_COLUMN_ID + "=" + ID, null) > 0;
     }
-
-
-
     // decode Util
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

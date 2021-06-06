@@ -64,6 +64,13 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().RefreshCollection(this);
+        initRecyclerView();
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sidebar_collections:

@@ -15,9 +15,10 @@ public class ItemCollection {
 
     public ItemCollection(){}
 
-    public ItemCollection(String collectionName, String description) {
+    public ItemCollection(String collectionName, String description, Bitmap image ) {
         setCollectionName(collectionName);
         setDescription(description);
+        this.image = image;
     }
 
     public ItemCollection(Integer _id, String collectionName, String description, Integer _accountID, Bitmap image) {

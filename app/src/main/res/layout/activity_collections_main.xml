@@ -10,16 +10,23 @@
     android:id="@+id/sidebar_main"
     tools:openDrawer="end">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_coll"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageButton
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_coll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topbar_img"
+            android:layout_marginTop="100dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageButton
         android:id="@+id/create_coll_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,6 +102,8 @@
         android:layout_gravity="end"
         android:id="@+id/sidebar_view"
         app:headerLayout="@layout/sidebar_header"
-        app:menu="@menu/sidebar_menu"/>
+        app:menu="@menu/sidebar_menu">
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

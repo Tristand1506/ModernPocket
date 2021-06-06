@@ -83,12 +83,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/segoeuisl"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="@+id/imageButton4"
         app:layout_constraintHorizontal_bias="0.219"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4"
-        android:imeOptions="actionDone"/>
+        app:layout_constraintStart_toStartOf="@+id/imageButton4" />
 
     <EditText
         android:id="@+id/username_txt"
@@ -97,6 +98,7 @@
         android:ems="10"
         android:fontFamily="@font/segoeuisl"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/user_img"
         app:layout_constraintEnd_toEndOf="@+id/user_img"
         app:layout_constraintHorizontal_bias="0.219"

@@ -1,11 +1,14 @@
 package com.SleeplessStudios.modernpocket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -19,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +31,8 @@ import java.util.List;
 
 import ObjectLib.ItemCollection;
 import UtilLib.DataManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CreateCollection extends AppCompatActivity {
@@ -52,11 +58,9 @@ public class CreateCollection extends AppCompatActivity {
         saveCollection = (ImageButton) findViewById(R.id.check_btn);
         discardCollection = (ImageButton) findViewById(R.id.x_btn);
         collectionImage = (ImageButton) findViewById(R.id.coll_add_img_btn);
-        collectionImage.setOnClickListener(new View.OnClickListener()
-        {
+        collectionImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 openPhotoDialog();
             }
         });
@@ -66,44 +70,39 @@ public class CreateCollection extends AppCompatActivity {
         topCollectionName = (TextView) findViewById(R.id.editable_coll_creation_txt);
         photo = (CircleImageView) findViewById(R.id.coll_image_img);
 
-        if (DataManager.getInstance().getActiveCollection() != null){
+        if (DataManager.getInstance().getActiveCollection() != null) {
             ItemCollection load = DataManager.getInstance().getActiveCollection();
             topCollectionName.setText(load.getCollectionName());
             collName.setText(load.getCollectionName());
             collDescription.setText(load.getDescription());
         }
 
-        discardCollection.setOnClickListener(new View.OnClickListener()
-        {
+        discardCollection.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 backToCollections();
             }
         });
 
-        saveCollection.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v)
-        {
-            BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
-            Bitmap photoIn = bd.getBitmap();
-            ItemCollection save = new ItemCollection(collName.getText().toString(),collDescription.getText().toString(),photoIn);
-            DataManager.getInstance().AddOrUpdateCollection(save,getApplicationContext());
-            backToCollections();
-        }
+        saveCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
+                Bitmap photoIn = bd.getBitmap();
+                ItemCollection save = new ItemCollection(collName.getText().toString(), collDescription.getText().toString(), photoIn);
+                DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
+                backToCollections();
+            }
         });
 
     }
 
-    public void backToCollections()
-    {
+    public void backToCollections() {
         DataManager.getInstance().RefreshCollection(this);
         finish();
     }
 
-    public void openPhotoDialog()
-    {
+    public void openPhotoDialog() {
         dialogBuilder = new AlertDialog.Builder(this);
         final View photoDialogView = getLayoutInflater().inflate(R.layout.dialog_choose_photo_type, null);
 
@@ -115,33 +114,60 @@ public class CreateCollection extends AppCompatActivity {
         dialog = dialogBuilder.create();
         dialog.show();
 
-        takePhoto.setOnClickListener(new View.OnClickListener()
-        {
+        takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
+                askCamPermission();
                 dialog.dismiss();
             }
         });
 
-        libraryPhoto.setOnClickListener(new View.OnClickListener()
-        {
+        libraryPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 dialog.dismiss();
             }
         });
     }
 
+    private void askCamPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
+        } else {
+            openCamera();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            }
+        } else {
+            Toast.makeText(this, "Camera permission is required to use the camera", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void openCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera, 102);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 102) {
+            Bitmap image = (Bitmap) data.getExtras().get("data");
+            photo.setImageBitmap(image);
+        }
 
         //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {

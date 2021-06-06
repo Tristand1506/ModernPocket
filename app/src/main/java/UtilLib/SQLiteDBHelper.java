@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import ObjectLib.Collectible;
 import ObjectLib.ItemCollection;
 import ObjectLib.UserAcount;
 
@@ -64,12 +65,14 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         CreateAccountDB(db);
         CreateCollectionDB(db);
+        CreateItemDB(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ACCOUNT_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + COLLECTION_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ITEM_TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -85,14 +88,16 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         System.out.println("Collection DB Created");
     }
     private void CreateItemDB(SQLiteDatabase db){
-        //Collection DB
+        //ITEMs DB
         db.execSQL("CREATE TABLE " + ITEM_TABLE_NAME + " (" +
                 ITEM_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ITEM_COLUMN_NAME + " TEXT, "+
                 ITEM_COLUMN_TYPE + " TEXT NOT NULL, " +
                 ITEM_COLUMN_DESCRIPTION + " TEXT, " +
+                ITEM_COLUMN_ACQUISITION_DATE+ " TEXT, " +
+                ITEM_COLUMN_LOCATION+ " TEXT, " +
+                ITEM_COLUMN_IMAGE + " BLOB," +
                 ITEM_COLUMN_COLLECTION_ID + " INTEGER NOT NULL, " +
-                COLLECTION_COLUMN_IMAGE + " BLOB," +
                 " FOREIGN KEY ("+ITEM_COLUMN_COLLECTION_ID+") REFERENCES "+COLLECTION_TABLE_NAME+" ("+COLLECTION_COLUMN_ID+"));");
         System.out.println("Collection DB Created");
     }
@@ -294,9 +299,9 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         db.close();
         return collection;
     }
-    // find by item
-    /*public UserAcount findCollectionByItem(String email) {
-        String query = "Select * FROM " + ACCOUNT_TABLE_NAME + " WHERE " + ACCOUNT_COLUMN_EMAIL + " = " + "'" + email + "'";
+
+    /*public UserAcount findCollectionByItem(Collectible item) {
+        String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_ID + " = " + "'" + item.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         UserAcount account = new UserAcount();

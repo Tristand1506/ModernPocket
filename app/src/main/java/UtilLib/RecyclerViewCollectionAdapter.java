@@ -1,23 +1,23 @@
 package UtilLib;
 
- import android.content.Context;
- import android.content.Intent;
- import android.util.Log;
- import android.view.LayoutInflater;
- import android.view.View;
- import android.view.ViewGroup;
- import android.widget.ProgressBar;
- import android.widget.RelativeLayout;
- import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
- import androidx.annotation.NonNull;
- import androidx.recyclerview.widget.*;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.*;
 
- import com.SleeplessStudios.modernpocket.Items;
- import com.SleeplessStudios.modernpocket.R;
+import com.SleeplessStudios.modernpocket.Items;
+import com.SleeplessStudios.modernpocket.R;
 
- import ObjectLib.ItemCollection;
- import de.hdodenhof.circleimageview.CircleImageView;
+import ObjectLib.ItemCollection;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<RecyclerViewCollectionAdapter.ViewHolder> {
@@ -33,7 +33,7 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_collection,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_collection, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -48,19 +48,21 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 DataManager.getInstance().setActiveCollection(load);
                 Intent intent = new Intent(mContext, Items.class);
                 mContext.startActivity(intent);
             }
-        } );
+        });
     }
 
     @Override
     public int getItemCount() {
-
-        return DataManager.getInstance().getActiveCollection().collectibles.size();
+        if (DataManager.getInstance().getActiveCollection().collectibles != null) {
+            return DataManager.getInstance().getActiveCollection().collectibles.size();
+        } else {
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,6 +72,7 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         //ImageButton favorite;
         ProgressBar completion;
         RelativeLayout parentLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById((R.id.profile_image));

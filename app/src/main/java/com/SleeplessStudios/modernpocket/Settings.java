@@ -69,6 +69,15 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
         {
+            case R.id.sidebar_collections:
+                openCollections();
+                break;
+            case R.id.sidebar_tasks:
+                openTasks();
+                break;
+            case R.id.sidebar_lens:
+                openLens();
+                break;
             case R.id.sidebar_profile:
                 openProfile();
                 break;
@@ -80,9 +89,6 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.sidebar_settings:
                 openSettings();
-                break;
-            case R.id.sidebar_rate:
-                openRate();
                 break;
             case R.id.sidebar_help:
                 openHelp();
@@ -117,6 +123,21 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public void openSettings()
     {
         Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+    public void openCollections()
+    {
+        Intent intent = new Intent(this, CollectionsMain.class);
+        startActivity(intent);
+    }
+    public void openTasks()
+    {
+        Intent intent = new Intent(this, TasksMain.class);
+        startActivity(intent);
+    }
+    public void openLens()
+    {
+        Intent intent = new Intent(this, ObjectLens.class);
         startActivity(intent);
     }
 

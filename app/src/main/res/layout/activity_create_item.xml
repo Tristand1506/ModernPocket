@@ -88,19 +88,6 @@
         app:layout_constraintTop_toBottomOf="@+id/items_amount_headingtxt" />
 
     <ImageButton
-        android:id="@+id/item_photo_btn"
-        android:background="@null"
-        android:layout_width="84dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/off_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
-        app:layout_constraintStart_toEndOf="@+id/item_name_txt"
-        app:layout_constraintTop_toBottomOf="@+id/topbar_createitem_img"
-        app:srcCompat="@drawable/item_photo" />
-
-    <ImageButton
         android:id="@+id/less_items_btn"
         android:background="@null"
         android:layout_width="wrap_content"
@@ -286,11 +273,11 @@
 
     <ImageButton
         android:id="@+id/check_createitem_btn"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:backgroundTint="@color/red_bar"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
         app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -298,11 +285,11 @@
 
     <ImageButton
         android:id="@+id/x_createitem_btn"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/red_bar"
+        android:background="@null"
+        android:backgroundTint="@color/real_red"
         app:layout_constraintBottom_toBottomOf="@+id/topbar_createitem_img"
         app:layout_constraintEnd_toEndOf="@+id/topbar_createitem_img"
         app:layout_constraintTop_toTopOf="parent"
@@ -323,5 +310,29 @@
         app:layout_constraintEnd_toStartOf="@+id/x_createitem_btn"
         app:layout_constraintStart_toEndOf="@+id/check_createitem_btn"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_image_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar_createitem_img"
+        app:srcCompat="@drawable/item_generic" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_add_img_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/add_image"
+        app:layout_constraintBottom_toBottomOf="@+id/item_image_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_image_img"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toStartOf="@+id/item_image_img"
+        app:layout_constraintTop_toTopOf="@+id/item_image_img"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

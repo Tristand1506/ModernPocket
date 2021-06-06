@@ -87,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
         {
+            case R.id.sidebar_collections:
+                openCollections();
+                break;
+            case R.id.sidebar_tasks:
+                openTasks();
+                break;
+            case R.id.sidebar_lens:
+                openLens();
+                break;
             case R.id.sidebar_profile:
                 openProfile();
                 break;
@@ -98,9 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.sidebar_settings:
                 openSettings();
-                break;
-            case R.id.sidebar_rate:
-                openRate();
                 break;
             case R.id.sidebar_help:
                 openHelp();

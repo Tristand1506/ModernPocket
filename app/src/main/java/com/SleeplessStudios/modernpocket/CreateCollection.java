@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class CreateCollection extends AppCompatActivity {
     private EditText collName;
     private EditText collDescription;
     private TextView topCollectionName;
+    private ImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,11 @@ public class CreateCollection extends AppCompatActivity {
 
         saveCollection = (ImageButton) findViewById(R.id.check_btn);
         discardCollection = (ImageButton) findViewById(R.id.x_btn);
-        collectionImage = (ImageButton) findViewById(R.id.coll_icon_btn);
+        collectionImage = (ImageButton) findViewById(R.id.coll_add_img_btn);
         collName = (EditText) findViewById(R.id.coll_name_txt);
         collDescription = (EditText) findViewById(R.id.coll_desc_txt);
         topCollectionName = (TextView) findViewById(R.id.editable_coll_creation_txt);
+        photo = (ImageView) findViewById(R.id.coll_image_img);
 
         if (DataManager.getInstance().getActiveCollection() != null){
             ItemCollection load = DataManager.getInstance().getActiveCollection();

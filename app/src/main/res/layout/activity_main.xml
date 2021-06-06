@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@null"
-        android:backgroundTint="@color/red_bar"
+        android:backgroundTint="@color/real_red"
         app:layout_constraintBottom_toBottomOf="@+id/bar_img"
         app:layout_constraintEnd_toEndOf="@+id/bar_img"
         app:layout_constraintTop_toTopOf="parent"

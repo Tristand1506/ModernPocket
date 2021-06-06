@@ -23,27 +23,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_sidebar" />
 
-    <ImageButton
-        android:id="@+id/burger_bar_fav_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/fav_topbar_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/burger_bar" />
+        <ImageButton
+            android:id="@+id/burger_bar_fav_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/fav_topbar_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/burger_bar" />
 
-    <ImageButton
-        android:id="@+id/fav_filter_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/fav_topbar_img"
-        app:layout_constraintEnd_toStartOf="@+id/burger_bar_fav_btn"
-        app:layout_constraintTop_toTopOf="@+id/fav_topbar_img"
-        app:srcCompat="@drawable/filter" />
+        <ImageButton
+            android:id="@+id/fav_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/fav_topbar_img"
+            app:layout_constraintEnd_toStartOf="@+id/burger_bar_fav_btn"
+            app:layout_constraintTop_toTopOf="@+id/fav_topbar_img"
+            app:srcCompat="@drawable/filter" />
 
     <TextView
         android:id="@+id/textView2"

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class CreateItem extends AppCompatActivity {
     private EditText returnDate;
     private TextView itemName;
     private Spinner spinnerChooseItemType;
+    private ImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class CreateItem extends AppCompatActivity {
 
         saveItem = (ImageButton) findViewById(R.id.create_item_btn);
         discardItem = (ImageButton) findViewById(R.id.x_createitem_btn);
-        addPhoto = (ImageButton) findViewById(R.id.item_photo_btn);
+        addPhoto = (ImageButton) findViewById(R.id.item_add_img_btn);
         lessAmount = (ImageButton) findViewById(R.id.less_items_btn);
         addAmount = (ImageButton) findViewById(R.id.add_items_btn);
         createItemType = (ImageButton) findViewById(R.id.create_item_type_btn);
@@ -48,6 +50,8 @@ public class CreateItem extends AppCompatActivity {
         returnDate = (EditText) findViewById(R.id.item_return_date_txt);
 
         itemName = (TextView) findViewById(R.id.top_item_name_txt);
+
+        photo = (ImageView) findViewById(R.id.item_image_img);
 
         //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);

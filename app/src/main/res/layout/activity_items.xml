@@ -35,27 +35,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_sidebar" />
 
-    <ImageButton
-        android:id="@+id/burgerbar_items_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/burger_bar" />
+        <ImageButton
+            android:id="@+id/burgerbar_items_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/burger_bar" />
 
-    <ImageButton
-        android:id="@+id/filter_items_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-        app:layout_constraintEnd_toStartOf="@+id/burgerbar_items_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/filter" />
+        <ImageButton
+            android:id="@+id/filter_items_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
+            app:layout_constraintEnd_toStartOf="@+id/burgerbar_items_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/filter" />
 
     <TextView
         android:id="@+id/editable_coll_txt"
@@ -74,16 +76,16 @@
         app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
         app:layout_constraintVertical_bias="0.486" />
 
-    <ImageButton
-        android:id="@+id/edit_items"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-        app:layout_constraintEnd_toStartOf="@+id/editable_coll_txt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/edit" />
+        <ImageButton
+            android:id="@+id/edit_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
+            app:layout_constraintEnd_toStartOf="@+id/editable_coll_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

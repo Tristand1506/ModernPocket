@@ -23,42 +23,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_sidebar" />
 
-    <ImageButton
-        android:id="@+id/filter_objectives_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
-        app:layout_constraintEnd_toStartOf="@+id/burger_bar_objectives_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526"
-        app:srcCompat="@drawable/filter" />
+        <ImageButton
+            android:id="@+id/filter_objectives_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
+            app:layout_constraintEnd_toStartOf="@+id/burger_bar_objectives_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.526"
+            app:srcCompat="@drawable/filter" />
 
-    <ImageButton
-        android:id="@+id/burger_bar_objectives_btn"
-        android:background="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/burger_bar" />
+        <ImageButton
+            android:id="@+id/burger_bar_objectives_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/burger_bar" />
 
-    <ImageButton
-        android:id="@+id/edit_objectives_btn"
-        android:background="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/red_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
-        app:layout_constraintEnd_toStartOf="@+id/editable_taskname_txt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/edit" />
+        <ImageButton
+            android:id="@+id/edit_objectives_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:backgroundTint="@color/real_red"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_objectives_img"
+            app:layout_constraintEnd_toStartOf="@+id/editable_taskname_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit" />
 
     <ImageButton
         android:id="@+id/create_objective_btn"

@@ -18,6 +18,7 @@ import java.util.List;
 
 import ObjectLib.ItemCollection;
 import UtilLib.DataManager;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CreateCollection extends AppCompatActivity {
     private ImageButton saveCollection;
@@ -26,7 +27,7 @@ public class CreateCollection extends AppCompatActivity {
     private EditText collName;
     private EditText collDescription;
     private TextView topCollectionName;
-    private ImageView photo;
+    private CircleImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class CreateCollection extends AppCompatActivity {
         collName = (EditText) findViewById(R.id.coll_name_txt);
         collDescription = (EditText) findViewById(R.id.coll_desc_txt);
         topCollectionName = (TextView) findViewById(R.id.editable_coll_creation_txt);
-        photo = (ImageView) findViewById(R.id.coll_image_img);
+        photo = (CircleImageView) findViewById(R.id.coll_image_img);
 
         if (DataManager.getInstance().getActiveCollection() != null){
             ItemCollection load = DataManager.getInstance().getActiveCollection();

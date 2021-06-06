@@ -229,7 +229,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             db.setTransactionSuccessful();
         }
         catch (Exception e){
-            Log.d("Error", "Error while trying to add Collection to database");
+            Log.d("Error", "Error while trying to add Collection to database with exception\n"+e);
         }
         finally {
             db.endTransaction();

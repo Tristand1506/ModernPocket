@@ -48,19 +48,20 @@
         app:layout_constraintTop_toTopOf="@+id/profile_bg_img"
         app:srcCompat="@drawable/profile_avatar" />
 
-    <TextView
-        android:id="@+id/profile_username_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@username"
-        android:fontFamily="@font/segoeuisl"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_bg_img"
-        app:layout_constraintEnd_toEndOf="@+id/profile_bg_img"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/profile_bg_img"
-        app:layout_constraintTop_toBottomOf="@+id/profile_avatar_btn"
-        app:layout_constraintVertical_bias="0.15" />
+        <TextView
+            android:id="@+id/profile_username_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoeuisl"
+            android:text="@username"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_bg_img"
+            app:layout_constraintEnd_toEndOf="@+id/profile_bg_img"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="@+id/profile_bg_img"
+            app:layout_constraintTop_toBottomOf="@+id/profile_avatar_btn"
+            app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/profile_email_headertxt"
@@ -138,57 +139,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_email_txt"
-        android:layout_width="377dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:fontFamily="@font/segoeuisl"
-        android:inputType="textEmailAddress"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_email_headertxt" />
+        <EditText
+            android:id="@+id/edit_email_txt"
+            android:layout_width="377dp"
+            android:layout_height="47dp"
+            android:ems="10"
+            android:fontFamily="@font/segoeuisl"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_email_headertxt" />
 
-    <EditText
-        android:id="@+id/edit_phone_txt"
-        android:layout_width="375dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:fontFamily="@font/segoeuisl"
-        android:inputType="number"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_phone_headertxt" />
+        <EditText
+            android:id="@+id/edit_phone_txt"
+            android:layout_width="375dp"
+            android:layout_height="42dp"
+            android:ems="10"
+            android:fontFamily="@font/segoeuisl"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_phone_headertxt" />
 
-    <EditText
-        android:id="@+id/edit_gender_txt"
-        android:layout_width="374dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:fontFamily="@font/segoeuisl"
-        android:inputType="textPersonName"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_gender_headertxt" />
+        <EditText
+            android:id="@+id/edit_gender_txt"
+            android:layout_width="374dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:fontFamily="@font/segoeuisl"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_gender_headertxt" />
 
-    <EditText
-        android:id="@+id/edit_DOB_txt"
-        android:layout_width="374dp"
-        android:layout_height="46dp"
-        android:ems="10"
-        android:fontFamily="@font/segoeuisl"
-        android:inputType="date"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_DOB_headertxt" />
+        <EditText
+            android:id="@+id/edit_DOB_txt"
+            android:layout_width="374dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:fontFamily="@font/segoeuisl"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.378"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_DOB_headertxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
     //-------NAVIGATION DRAWER------
     <com.google.android.material.navigation.NavigationView

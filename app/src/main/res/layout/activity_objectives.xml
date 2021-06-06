@@ -99,17 +99,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.513" />
 
-    <EditText
-        android:id="@+id/objective_due_date_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/segoeuisl"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toEndOf="@+id/objective_due_date_headingtxt"
-        app:layout_constraintTop_toBottomOf="@+id/topbar_objectives_img" />
+        <EditText
+            android:id="@+id/objective_due_date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:fontFamily="@font/segoeuisl"
+            android:inputType="date"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/objective_due_date_headingtxt"
+            app:layout_constraintTop_toBottomOf="@+id/topbar_objectives_img" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -72,6 +72,7 @@
         android:fontFamily="@font/segoeuisl"
         android:hint="Type Name"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/item_type_img"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"

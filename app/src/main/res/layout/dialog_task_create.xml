@@ -55,9 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Task Name"
         android:fontFamily="@font/segoeuisl"
+        android:hint="Task Name"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
         app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
         app:layout_constraintTop_toBottomOf="@+id/create_task_prompt" />
@@ -68,9 +69,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="DD/MM/YY"
         android:fontFamily="@font/segoeuisl"
+        android:hint="DD/MM/YY"
         android:inputType="date"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/bg_dialog_img"
         app:layout_constraintStart_toStartOf="@+id/bg_dialog_img"
         app:layout_constraintTop_toBottomOf="@+id/editable_task_name_txt" />

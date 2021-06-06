@@ -64,9 +64,13 @@
         <ProgressBar
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
+            tools:progress="60"
             android:id="@+id/coll_completion"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
+
     </RelativeLayout>
 
 

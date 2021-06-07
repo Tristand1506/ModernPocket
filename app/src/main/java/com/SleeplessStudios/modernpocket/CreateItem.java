@@ -1,16 +1,27 @@
 package com.SleeplessStudios.modernpocket;
 
+import ObjectLib.ItemCollection;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ObjectLib.Collectible;
 import UtilLib.DataManager;
 import UtilLib.LoginManager;
 import UtilLib.SQLiteDBHelper;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,7 +31,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,6 +59,12 @@ public class CreateItem extends AppCompatActivity {
     private CircleImageView photo;
     private TextView amountHeading;
 
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private Button takePhoto;
+    private Button libraryPhoto;
+    private int GET_FROM_GALLERY = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +74,13 @@ public class CreateItem extends AppCompatActivity {
         saveItem = (ImageButton) findViewById(R.id.check_createitem_btn);
         discardItem = (ImageButton) findViewById(R.id.x_createitem_btn);
         addPhoto = (ImageButton) findViewById(R.id.item_add_img_btn);
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPhotoDialog();
+            }
+        });
+
         lessAmount = (ImageButton) findViewById(R.id.less_items_btn);
         addAmount = (ImageButton) findViewById(R.id.add_items_btn);
         createItemType = (ImageButton) findViewById(R.id.create_item_type_btn);
@@ -133,7 +160,80 @@ public class CreateItem extends AppCompatActivity {
         }
         return date;
     }
+    private void askCamPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
+        } else {
+            openCamera();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            }
+        } else {
+            Toast.makeText(this, "Camera permission is required to use the camera", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    private void openCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera, 102);
+    }
+    public void openPhotoDialog() {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View photoDialogView = getLayoutInflater().inflate(R.layout.dialog_choose_photo_type, null);
 
+        takePhoto = (Button) photoDialogView.findViewById(R.id.take_photo_btn);
+        libraryPhoto = (Button) photoDialogView.findViewById(R.id.library_photo_btn);
 
+        dialogBuilder.setView(photoDialogView);
+
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askCamPermission();
+                dialog.dismiss();
+            }
+        });
+
+        libraryPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                dialog.dismiss();
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 102) {
+            Bitmap image = (Bitmap) data.getExtras().get("data");
+            photo.setImageBitmap(image);
+        }
+
+        //Detects request codes
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                photo.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
 }

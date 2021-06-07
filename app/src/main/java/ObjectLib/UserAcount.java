@@ -56,4 +56,14 @@ public class UserAcount {
     public boolean ValidateAcount (String password){
         return password.equals(this.password);
     }
+
+    @Override
+    public String toString() {
+        return "UserAcount{" +
+                "_id=" + _id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

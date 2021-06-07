@@ -67,6 +67,7 @@ public class LoginManager {
     }
 
     public boolean ValidateAccount(String userIn,String passwordIn, Activity activity){
+        AccDebug(activity);
         UserAcount acc = SQLiteDBHelper.getDataBase(activity).findAccountUserName(userIn);
         boolean isValid = false;
         if (acc == null){
@@ -77,6 +78,7 @@ public class LoginManager {
         }
         if (isValid){
             setActiveUser(acc);
+            System.out.println(activeUser.toString());
             return isValid;
         }
         Toast.makeText(activity, "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
@@ -89,6 +91,10 @@ public class LoginManager {
 
     private void setActiveUser(UserAcount user) {
         activeUser = user;
+    }
+
+    public void ClearActiveUser(){
+        activeUser = null;
     }
 
 }

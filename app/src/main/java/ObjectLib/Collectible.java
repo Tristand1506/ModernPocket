@@ -44,6 +44,9 @@ public class Collectible {
         this.name = name;
         this.description = description;
         image = img;
+        if (date!=null || loc != null){
+            isOwned = true;
+        }
         setAcquisitionDate(date);
         setAcquisitionLoc(loc);
     }

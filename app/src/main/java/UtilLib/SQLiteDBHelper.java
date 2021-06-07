@@ -391,19 +391,20 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             values.put(ITEM_COLUMN_NAME, item.getName());
             values.put(ITEM_COLUMN_TYPE, item.getItemType());
             values.put(ITEM_COLUMN_DESCRIPTION, item.getDescription());
+            System.out.println(item.getAcquisitionDate().toString());
             values.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
             //values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
             values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
             values.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
             values.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
-            values.put(ITEM_COLUMN_IS_FAVORITE, item.isOwned);
+            values.put(ITEM_COLUMN_IS_OWNED, item.isOwned);
             values.put(ITEM_COLUMN_COLLECTION_ID, collection.getID());
 
-            db.insertOrThrow(COLLECTION_TABLE_NAME, null, values);
+            db.insertOrThrow(ITEM_TABLE_NAME, null, values);
             db.setTransactionSuccessful();
         }
         catch (Exception e){
-            Log.d("Error", "Error while trying to add Collection to database with exception\n"+e);
+            Log.d("Error", "Error while trying to add Item to database with exception\n"+e);
         }
         finally {
             db.endTransaction();
@@ -442,7 +443,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         return null;
     }
 
-    static DateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    static DateFormat iso8601Format = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Date getDateFromString(String dateIn){
         Date date = new Date();
@@ -453,6 +454,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         }
         return date;
     }
+
+
 
 
     public static Location LocationFromLatLong(String latLong){

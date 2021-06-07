@@ -44,7 +44,7 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         ItemCollection load = DataManager.getInstance().collections.get(position);
         holder.image.setImageBitmap(load.image);
         holder.collectionName.setText(load.getCollectionName());
-        holder.completion.setProgress(0);
+        holder.completion.setProgress((int)load.getCompleation()*100);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

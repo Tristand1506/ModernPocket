@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import UtilLib.LoginManager;
+
 public class LandingPage extends AppCompatActivity {
     private ImageButton signUp;
     private ImageButton login;
@@ -16,6 +18,7 @@ public class LandingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
+        LoginManager.getInstance().ClearActiveUser();
 
         //button listener
         signUp = (ImageButton) findViewById(R.id.lp_signup_btn);
@@ -39,7 +42,11 @@ public class LandingPage extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoginManager.getInstance().ClearActiveUser();
+    }
 
     //method to open activity using intent
     public void openSignUpScreen()

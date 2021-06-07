@@ -30,6 +30,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections_main);
         DataManager.getInstance().RefreshCollection(this);
+        DataManager.getInstance().setActiveCollection(null);
         initRecyclerView();
 
         drawer = findViewById(R.id.sidebar_main);
@@ -67,8 +68,9 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     protected void onResume() {
         super.onResume();
         DataManager.getInstance().RefreshCollection(this);
-        initRecyclerView();
         DataManager.getInstance().setActiveCollection(null);
+        initRecyclerView();
+
     }
 
     @Override

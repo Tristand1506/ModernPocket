@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DataManager.getInstance().RefreshCollection(this);
+        DataManager.getInstance().setActiveCollection(null);
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().setActiveCollection(null);
     }
 
     @Override

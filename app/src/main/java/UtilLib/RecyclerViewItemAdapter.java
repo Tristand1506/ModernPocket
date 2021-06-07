@@ -2,6 +2,8 @@ package UtilLib;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.SleeplessStudios.modernpocket.CreateItem;
 import com.SleeplessStudios.modernpocket.Items;
 import com.SleeplessStudios.modernpocket.R;
+
+import java.util.Date;
 
 import ObjectLib.Collectible;
 import ObjectLib.ItemCollection;
@@ -47,10 +51,10 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
         Collectible load = DataManager.getInstance().getActiveCollection().collectibles.get(position);
         holder.image.setImageBitmap(load.image);
         holder.itemName.setText(load.getName());
+        System.out.println("Favorite: " + load.isFavourite + "\nIs Owned: "+load.isOwned);
         holder.owned.setChecked(load.isOwned);
         holder.favorite.setChecked(load.isFavourite);
         holder.lent.setEnabled(load.isLent());
-
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,22 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
                 mContext.startActivity(intent);
             }
         } );
+
+        holder.owned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.owned.isChecked()) {
+                    load.isOwned = holder.owned.isChecked();
+                    load.setAcquisitionDate((new Date()));
+                    load.setAcquisitionLoc(new Location(LocationManager.GPS_PROVIDER).toString());
+                }
+                else{
+                    load.setAcquisitionDate(null);
+                    load.setAcquisitionLoc(null);
+                    load.isOwned = holder.owned.isChecked();
+                }
+            }
+        });
     }
 
     @Override

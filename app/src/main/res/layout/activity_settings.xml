@@ -14,6 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/topbar_settings_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_sidebar" />
+
         <ImageButton
             android:id="@+id/settings_acc_btn"
             android:layout_width="wrap_content"
@@ -93,15 +102,6 @@
             app:layout_constraintEnd_toStartOf="@+id/burger_bar_settings_btn"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/filter" />
-
-        <ImageView
-            android:id="@+id/topbar_settings_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/top_sidebar" />
 
         <ImageView
             android:id="@+id/line1_img"

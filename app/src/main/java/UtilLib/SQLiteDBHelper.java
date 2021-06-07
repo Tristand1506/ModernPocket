@@ -368,12 +368,19 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             String name = cursor.getString(1);
             int type  = Integer.parseInt(cursor.getString(2));
             String desc = cursor.getString(3);
-            Date date = getDateFromString(cursor.getString(4));
-            //Location loc = LocationFromLatLong(cursor.getString(5));
-            String loc = cursor.getString(5);
+            boolean owned = convertTOBool(Integer.parseInt( cursor.getString(8)));
+            Date date;
+            String loc;
+            if (owned) {
+                date = getDateFromString(cursor.getString(4));
+                //Location loc = LocationFromLatLong(cursor.getString(5));
+                loc = cursor.getString(5);
+            }else{
+                date = null;
+                loc = "";
+            }
             Bitmap image = getBitmapFromByteArray(cursor.getBlob(6));
-            boolean favorite = Boolean.parseBoolean(cursor.getString(7));
-            boolean owned = Boolean.parseBoolean(cursor.getString(8));
+            boolean favorite = convertTOBool(Integer.parseInt( cursor.getString(7)));
             int containingCollection =Integer.parseInt(cursor.getString(9));
             outList.add(new Collectible(id, name, type, desc, date, loc, image, favorite, owned, containingCollection) {
             });
@@ -391,10 +398,11 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             values.put(ITEM_COLUMN_NAME, item.getName());
             values.put(ITEM_COLUMN_TYPE, item.getItemType());
             values.put(ITEM_COLUMN_DESCRIPTION, item.getDescription());
-            System.out.println(item.getAcquisitionDate().toString());
-            values.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
-            //values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
-            values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+            if(item.isOwned){
+                values.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
+                //values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
+                values.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+            }
             values.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
             values.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
             values.put(ITEM_COLUMN_IS_OWNED, item.isOwned);
@@ -417,9 +425,11 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         args.put(ITEM_COLUMN_NAME, item.getName());
         args.put(ITEM_COLUMN_TYPE, item.getItemType());
         args.put(ITEM_COLUMN_DESCRIPTION, item.getDescription());
-        args.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
-        //args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
-        args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+        if(item.isOwned){
+            args.put(ITEM_COLUMN_ACQUISITION_DATE, iso8601Format.format(item.getAcquisitionDate()));
+            //args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc().getLatitude() + "-" +item.getAcquisitionLoc().getLatitude());
+            args.put(ITEM_COLUMN_LOCATION, item.getAcquisitionLoc());
+        }
         args.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
         args.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
         args.put(ITEM_COLUMN_IS_OWNED, item.isOwned);
@@ -466,5 +476,13 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         return loc;
     }
 
+    private static boolean convertTOBool(int in){
+        if (in == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 }

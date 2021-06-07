@@ -98,7 +98,6 @@ public class CreateItem extends AppCompatActivity {
     }
 
     public void backToItems() {
-        DataManager.getInstance().refreshItems(this);
         finish();
     }
 
@@ -110,6 +109,7 @@ public class CreateItem extends AppCompatActivity {
             date = dateFormat.parse(dateIn);
         } catch (ParseException e){
             Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+            return null;
         }
         return date;
     }

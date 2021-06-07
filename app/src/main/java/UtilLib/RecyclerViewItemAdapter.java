@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -66,19 +67,31 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
             }
         } );
 
-        holder.owned.setOnClickListener(new View.OnClickListener() {
+        holder.owned.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (holder.owned.isChecked()) {
-                    load.isOwned = holder.owned.isChecked();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                DataManager.getInstance().setActiveItem(load);
+                System.out.println("owned is now " + isChecked + "\nnow updating" );
+                if (isChecked) {
+
+                    load.isOwned = isChecked;
                     load.setAcquisitionDate((new Date()));
                     load.setAcquisitionLoc(new Location(LocationManager.GPS_PROVIDER).toString());
                 }
                 else{
                     load.setAcquisitionDate(null);
                     load.setAcquisitionLoc(null);
-                    load.isOwned = holder.owned.isChecked();
+                    load.isOwned = isChecked;
                 }
+                System.out.println(load.toString());
+                DataManager.getInstance().AddOrUpdateItem(load,mContext);
+                DataManager.getInstance().setActiveItem(null);
+            }
+        });
+        holder.owned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

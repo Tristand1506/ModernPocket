@@ -44,7 +44,7 @@ public class Collectible {
         this.name = name;
         this.description = description;
         image = img;
-        if (date!=null || loc != null){
+        if (date!=null || !loc.trim().isEmpty()) {
             isOwned = true;
         }
         setAcquisitionDate(date);
@@ -191,6 +191,22 @@ public class Collectible {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Collectible{" +
+                "_id=" + _id +
+                ", _collectionId=" + _collectionId +
+                ", itemType=" + itemType +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image=" + image +
+                ", isFavourite=" + isFavourite +
+                ", isOwned=" + isOwned +
+                ", acquisitionDate=" + acquisitionDate +
+                ", acquisitionLoc='" + acquisitionLoc + '\'' +
+                ", isLent=" + isLent +
+                ", borrowedTo='" + borrowedTo + '\'' +
+                ", expectedReturn=" + expectedReturn +
+                '}';
+    }
 }

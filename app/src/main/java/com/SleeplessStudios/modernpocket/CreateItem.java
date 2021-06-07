@@ -42,6 +42,7 @@ public class CreateItem extends AppCompatActivity {
     private TextView itemName;
     private Spinner spinnerChooseItemType;
     private CircleImageView photo;
+    private TextView amountHeading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class CreateItem extends AppCompatActivity {
         returnDate = (EditText) findViewById(R.id.item_return_date_txt);
 
         itemName = (TextView) findViewById(R.id.top_item_name_txt);
+        amountHeading = (TextView) findViewById(R.id.items_amount_headingtxt);
 
         photo = (CircleImageView) findViewById(R.id.item_image_img);
 

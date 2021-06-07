@@ -9,27 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 import UtilLib.DataManager;
-import UtilLib.RecyclerViewCollectionAdapter;
 import UtilLib.RecyclerViewItemAdapter;
 
 public class Items extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton createItem;
     private ImageButton filterItems;
     private ImageButton sidebar;
-    private ImageButton editItems;
+    private ImageButton editCollection;
     private TextView collectionName;
     private DrawerLayout drawer;
 
@@ -72,7 +67,13 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
             }
         });
 
-        editItems = (ImageButton) findViewById(R.id.edit_items);
+        editCollection = (ImageButton) findViewById(R.id.edit_items);
+        editCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCollectionEdit();
+            }
+        });
 
     }
 
@@ -82,6 +83,7 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         DataManager.getInstance().refreshItems(this);
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
+        collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
     }
 
     @Override
@@ -119,9 +121,13 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         return true;
     }
 
-    public void openItemCreation()
-    {
+    public void openItemCreation() {
         Intent intent = new Intent(this, CreateItem.class);
+        startActivity(intent);
+    }
+
+    public void openCollectionEdit() {
+        Intent intent = new Intent(this, CreateCollection.class);
         startActivity(intent);
     }
 

@@ -71,10 +71,7 @@ public class CreateCollection extends AppCompatActivity {
         photo = (CircleImageView) findViewById(R.id.coll_image_img);
 
         if (DataManager.getInstance().getActiveCollection() != null) {
-            ItemCollection load = DataManager.getInstance().getActiveCollection();
-            topCollectionName.setText(load.getCollectionName());
-            collName.setText(load.getCollectionName());
-            collDescription.setText(load.getDescription());
+            PopulateFields(DataManager.getInstance().getActiveCollection());
         }
 
         discardCollection.setOnClickListener(new View.OnClickListener() {
@@ -91,10 +88,20 @@ public class CreateCollection extends AppCompatActivity {
                 Bitmap photoIn = bd.getBitmap();
                 ItemCollection save = new ItemCollection(collName.getText().toString(), collDescription.getText().toString(), photoIn);
                 DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
+                //DataManager.getInstance().setActiveCollection(DataManager.getInstance().getActiveCollection());
+                DataManager.getInstance().RefreshCollection(getParent());
                 backToCollections();
             }
         });
 
+
+
+    }
+
+    private void PopulateFields(ItemCollection activeCollection) {
+        collName.setText(activeCollection.getCollectionName());
+        collDescription.setText(activeCollection.getDescription());
+        photo.setImageBitmap(activeCollection.image);
     }
 
     public void backToCollections() {

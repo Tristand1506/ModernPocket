@@ -72,7 +72,10 @@ public class ItemCollection {
                 collected++;
             }
         }
-        percCompleation = (float) (collectibles.size() / collected) ;
+        if (collectibles.size() > 0) {
+            percCompleation = (float) (collected / collectibles.size());
+        }
+        else{percCompleation = 0;}
         return percCompleation;
     }
 

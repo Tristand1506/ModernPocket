@@ -26,6 +26,10 @@ public  class DataManager {
     public ItemCollection getActiveCollection() {
         return activeCollection;
     }
+    public Collectible getActiveItem() {
+        return activeItem;
+    }
+
 
     public void setActiveCollection(ItemCollection ac){
         activeCollection = ac;
@@ -73,6 +77,7 @@ public  class DataManager {
             SQLiteDBHelper.getDataBase(context).addItem(item, activeCollection);
         }
         else{
+            item.setCollectionID(activeItem.getCollectionID());
             SQLiteDBHelper.getDataBase(context).updateItem(activeItem.getID(),item);
         }
 
@@ -84,7 +89,7 @@ public  class DataManager {
     public void RefreshCollection(Context context){
         collections =  SQLiteDBHelper.getDataBase(context).loadCollections(LoginManager.getInstance().getActiveUser());
         if (activeCollection != null){
-            SQLiteDBHelper.getDataBase(context).findCollectionByID(activeCollection.getID());
+            activeCollection = SQLiteDBHelper.getDataBase(context).findCollectionByID(activeCollection.getID());
         }
     }
     public void refreshItems(Context context){

@@ -2,7 +2,6 @@ package UtilLib;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,8 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         ItemCollection load = DataManager.getInstance().collections.get(position);
         holder.image.setImageBitmap(load.image);
         holder.collectionName.setText(load.getCollectionName());
-        holder.completion.setProgress((int)load.getCompleation()*100);
+        System.out.println("Loading progress of " + load.getCollectionName() + "\nProgress at: " + load.getCompletion()*100  );
+        holder.completion.setProgress(load.getCompletion());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

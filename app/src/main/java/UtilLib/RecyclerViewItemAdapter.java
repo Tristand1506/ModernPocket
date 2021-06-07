@@ -88,12 +88,6 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
                 DataManager.getInstance().setActiveItem(null);
             }
         });
-        holder.owned.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override

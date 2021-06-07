@@ -64,26 +64,21 @@ public class ItemCollection {
         description = desc;
     }
 
-    public float getCompleation(){
-    float percCompleation;
-    int collected = 0;
+    public int getCompletion(){
+    float percCompletion;
+    float collected = 0f;
         for (Collectible item : collectibles) {
             if (item.isOwned){
                 collected++;
             }
         }
         if (collectibles.size() > 0) {
-            percCompleation = (float) (collected / collectibles.size());
+            percCompletion = (float)(collected / (float)collectibles.size());
+            System.out.println("Compleation: "+ collected + "/" + collectibles.size() + "\n at: " + percCompletion*100f +"%");
         }
-        else{percCompleation = 0;}
-        return percCompleation;
+        else{percCompletion = 0;}
+        return (int)(percCompletion*100f);
     }
 
-    public int getCompleted() {
-        return 5;
-    }
-
-    //TODO
-    // image reference
 
 }

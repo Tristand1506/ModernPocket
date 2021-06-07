@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ObjectLib.Collectible;
 import UtilLib.DataManager;
+import UtilLib.LoginManager;
 import UtilLib.SQLiteDBHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,6 +49,7 @@ public class CreateItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item);
+
 
         saveItem = (ImageButton) findViewById(R.id.check_createitem_btn);
         discardItem = (ImageButton) findViewById(R.id.x_createitem_btn);
@@ -95,15 +97,33 @@ public class CreateItem extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, itemTypeList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChooseItemType.setAdapter(adapter);
+
+        if (DataManager.getInstance().getActiveItem()!=null){
+            System.out.println("Current Account: "+ LoginManager.getInstance().getActiveUser().getUsername());
+            PopulateFields(DataManager.getInstance().getActiveItem());
+        }
+    }
+
+    private void PopulateFields(Collectible activeItem) {
+        name.setText(activeItem.getName());
+        description.setText(activeItem.getDescription());
+        photo.setImageBitmap(activeItem.image);
+        if (activeItem.isOwned) {
+            acquireDate.setText(dateFormat.format(activeItem.getAcquisitionDate()));
+            acquireLoc.setText(activeItem.getAcquisitionLoc());
+        }
+
+        //todo
+        // lent and return
     }
 
     public void backToItems() {
         finish();
     }
 
-
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static Date getDateFromString(String dateIn){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
         Date date = new Date();
         try{
             date = dateFormat.parse(dateIn);

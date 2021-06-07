@@ -26,6 +26,10 @@ public  class DataManager {
     public ItemCollection getActiveCollection() {
         return activeCollection;
     }
+    public Collectible getActiveItem() {
+        return activeItem;
+    }
+
 
     public void setActiveCollection(ItemCollection ac){
         activeCollection = ac;

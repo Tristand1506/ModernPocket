@@ -18,7 +18,7 @@ public class LandingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-        LoginManager.getInstance().ClearActiveUser();
+        //LoginManager.getInstance().ClearActiveUser();
 
         //button listener
         signUp = (ImageButton) findViewById(R.id.lp_signup_btn);
@@ -45,7 +45,7 @@ public class LandingPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LoginManager.getInstance().ClearActiveUser();
+        //LoginManager.getInstance().ClearActiveUser();
     }
 
     //method to open activity using intent

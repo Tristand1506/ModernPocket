@@ -63,18 +63,19 @@
             android:id="@+id/edit_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
             android:backgroundTint="@color/real_red"
             app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-            app:layout_constraintEnd_toStartOf="@+id/editable_coll_txt"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
             app:srcCompat="@drawable/edit" />
 
         <TextView
             android:id="@+id/editable_coll_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:capitalize="characters"
             android:fontFamily="@font/segoeuisl"
             android:text="COLLECTION NAME"
@@ -84,8 +85,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
             app:layout_constraintEnd_toStartOf="@+id/filter_items_btn"
-            app:layout_constraintTop_toTopOf="@+id/topbar_items_img"
-            app:layout_constraintVertical_bias="0.486" />
+            app:layout_constraintStart_toEndOf="@+id/edit_items"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_items"

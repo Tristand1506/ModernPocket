@@ -37,6 +37,7 @@
         android:layout_width="373dp"
         android:layout_height="98dp"
         android:ems="10"
+        android:textColorHint="@color/text_grey"
         android:fontFamily="@font/segoeuisl"
         android:gravity="start|top"
         android:inputType="textMultiLine"
@@ -72,8 +73,9 @@
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
-        android:text="Description"
         android:fontFamily="@font/segoeuisl"
+        android:text="Description"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/objective_name_txt" />

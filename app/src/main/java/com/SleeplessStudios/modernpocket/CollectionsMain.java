@@ -120,36 +120,43 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
 
     public void openProfile()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
     public void openFavourites()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, Favourites.class);
         startActivity(intent);
     }
     public void openLent()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, LentItems.class);
         startActivity(intent);
     }
     public void openSettings()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
     public void openCollections()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, CollectionsMain.class);
         startActivity(intent);
     }
     public void openTasks()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, TasksMain.class);
         startActivity(intent);
     }
     public void openLens()
     {
+        drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, ObjectLens.class);
         startActivity(intent);
     }

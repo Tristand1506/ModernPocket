@@ -142,43 +142,57 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     public void openProfile()
     {
+        if (drawer.isDrawerOpen(GravityCompat.END))
+        {
+            drawer.closeDrawer(GravityCompat.END);
+        }
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
     public void openFavourites()
     {
+        if (drawer.isDrawerOpen(GravityCompat.END))
+        {
+            drawer.closeDrawer(GravityCompat.END);
+        }
         Intent intent = new Intent(this, Favourites.class);
         startActivity(intent);
     }
     public void openLent()
     {
+            drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, LentItems.class);
         startActivity(intent);
     }
     public void openSettings()
     {
+            drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
     public void openCollections()
     {
+            drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, CollectionsMain.class);
         startActivity(intent);
     }
     public void openTasks()
     {
+            drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, TasksMain.class);
         startActivity(intent);
     }
     public void openLens()
     {
+            drawer.closeDrawer(GravityCompat.END);
         Intent intent = new Intent(this, ObjectLens.class);
         startActivity(intent);
     }
 
     public void Logout()
     {
-
+        Intent intent = new Intent(this, LandingPage.class);
+        startActivity(intent);
     }
     //-----------------------TO DO--------------------------------------
     public void openRate()

@@ -13,26 +13,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:layout_toRightOf="@id/img_perc_layout"
         android:fontFamily="@font/segoeuisl"
         android:letterSpacing="0.2"
-        android:text="Collection Name"
+        android:text="Task Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
-
-    <ImageButton
-        android:id="@+id/chart_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/collection_name"
-        android:backgroundTint="@color/off_white"
-        android:src="@drawable/chart" />
 
     <View
         android:id="@+id/divider"
@@ -52,23 +41,42 @@
         android:layout_marginStart="10dp"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher" />
-
         <ProgressBar
-            android:id="@+id/coll_completion"
+            android:id="@+id/task_completion"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle"
             tools:progress="0" />
+
+        <TextView
+            android:id="@+id/task_completion_perc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black"
+            tools:text="60%" />
+
+        <ImageView
+            android:id="@+id/complete_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/green_check"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/incomplete_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/exclamation_red"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

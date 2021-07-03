@@ -1,38 +1,51 @@
 package com.SleeplessStudios.modernpocket;
 
+import ObjectLib.Collectible;
+import ObjectLib.ItemCollection;
+import UtilLib.DataManager;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
 
-import UtilLib.DataManager;
-import UtilLib.RecyclerViewCollectionAdapter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 
-public class CollectionsMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private ImageButton createCollection;
-    private ImageButton filterCollections;
+public class Chart extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton sidebar;
     private DrawerLayout drawer;
-    private ImageButton pieChart;
 
+    private int value = 1;
+    private static Hashtable<String, Integer> table = new Hashtable();
+    public static HashMap items = new HashMap();
+
+    private PieChart pieChart;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collections_main);
-        DataManager.getInstance().RefreshCollection(this);
-        DataManager.getInstance().setActiveCollection(null);
-        initRecyclerView();
+        setContentView(R.layout.activity_chart);
 
         drawer = findViewById(R.id.sidebar_main);
 
@@ -41,20 +54,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
 
-        createCollection = (ImageButton) findViewById(R.id.create_coll_btn);
-        createCollection.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                DataManager.getInstance().setActiveCollection(null);
-                openCreateCollection();
-            }
-        });
-
-        filterCollections = (ImageButton) findViewById(R.id.filter_coll_btn);
-
-        sidebar = (ImageButton) findViewById(R.id.burgerbar_coll_btn);
+        sidebar = (ImageButton) findViewById(R.id.burgerbar_chart_btn);
         sidebar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -64,24 +64,9 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
             }
         });
 
-        pieChart = (ImageButton) findViewById(R.id.chart_btn);
-        pieChart.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openChart();
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        DataManager.getInstance().RefreshCollection(this);
-        DataManager.getInstance().setActiveCollection(null);
-        initRecyclerView();
-
+        pieChart = findViewById(R.id.pieChart_chart);
+        setupPieChart();
+        loadPieChartData();
     }
 
     @Override
@@ -116,13 +101,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
                 break;
         }
         return true;
-    }
 
-    //method to open activity using intent
-    public void openCreateCollection()
-    {
-        Intent intent = new Intent(this, CreateCollection.class);
-        startActivity(intent);
     }
     public void openSidebar()
     {
@@ -178,14 +157,13 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         startActivity(intent);
     }
     //-----------------------TO DO--------------------------------------
-    public void openHelp()
+    public void openRate()
     {
 
     }
-    public void openChart()
+    public void openHelp()
     {
-        Intent intent = new Intent(this, Chart.class);
-        startActivity(intent);
+
     }
     @Override
     public void onBackPressed()
@@ -199,11 +177,75 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
         }
     }
 
-    private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_coll);
-        RecyclerViewCollectionAdapter adapter = new RecyclerViewCollectionAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void checkItemDuplicates()
+    {
+        for (Collectible item : DataManager.getInstance().getActiveCollection().collectibles)
+        {
+            if (items.containsKey(item.getName()) == false)
+            {
+                items.put(item.getName(), value);
+            }
+            else if(items.containsKey(item.getName()))
+            {
+                int tempValue = Integer.parseInt(items.get(item.getName()).toString());
+                items.replace(item.getName(), tempValue +1);
+            }
+        }
+        table.putAll(items);
     }
 
+    private void setupPieChart()
+    {
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setUsePercentValues(true);
+        pieChart.setEntryLabelColor(12);
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.setCenterText(DataManager.getInstance().getActiveCollection().getCollectionName());
+        pieChart.setCenterTextSize(24);
+        pieChart.getDescription().setEnabled(false);
+
+        Legend l = pieChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setEnabled(true);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void loadPieChartData()
+    {
+        checkItemDuplicates();
+
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+        //for (Hashtable hashtable: table)
+        //{
+            //entries.add(new PieEntry(table.get(table)/table.size(), ));
+        //}
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int color: ColorTemplate.MATERIAL_COLORS)
+        {
+            colors.add(color);
+        }
+
+        for (int color: ColorTemplate.VORDIPLOM_COLORS)
+        {
+            colors.add(color);
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(colors);
+
+        PieData data = new PieData(dataSet);
+        data.setDrawValues(true);
+        data.setValueFormatter(new PercentFormatter(pieChart));
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.BLACK);
+
+        pieChart.setData(data);
+        pieChart.invalidate();
+    }
 }

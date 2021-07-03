@@ -2,40 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.SleeplessStudios.modernpocket">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/app_icon"
+        android:label="Modern Pocket"
+        android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ModernPocket">
-        <activity android:name=".Items"
-            android:theme="@style/TransparentStatusBar"></activity>
+        <activity android:name=".Chart"></activity>
+        <activity
+            android:name=".Items"
+            android:theme="@style/TransparentStatusBar" />
         <activity android:name=".CreateItem" />
         <activity android:name=".CreateItemType" />
-        <activity android:name=".LentItems"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".Settings"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".EditProfile"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".Favourites"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".CollectionsMain"
-            android:theme="@style/TransparentStatusBar"/>
+        <activity
+            android:name=".LentItems"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".Settings"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".EditProfile"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".Favourites"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".CollectionsMain"
+            android:theme="@style/TransparentStatusBar" />
         <activity android:name=".CreateCollection" />
         <activity android:name=".CreateObjective" />
-        <activity android:name=".Objectives"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".TasksMain"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".ObjectLens"
-            android:theme="@style/TransparentStatusBar"/>
-        <activity android:name=".MainActivity"
-            android:theme="@style/TransparentStatusBar"/>
+        <activity
+            android:name=".Objectives"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".TasksMain"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".ObjectLens"
+            android:theme="@style/TransparentStatusBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/TransparentStatusBar" />
         <activity android:name=".SignUp" />
         <activity android:name=".Login" />
         <activity android:name=".LandingPage">
@@ -46,5 +54,8 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

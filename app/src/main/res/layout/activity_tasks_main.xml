@@ -14,17 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/wip_item_type7"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_tasks"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Work in Progress"
-            android:textColor="@color/black"
-            android:textSize="36sp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/topbar_img">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <ImageButton
         android:id="@+id/create_task_btn"

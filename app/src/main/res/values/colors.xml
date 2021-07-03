@@ -12,4 +12,6 @@
     <color name="red_bar">#BF443B</color>
     <color name="real_red">#E04443</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="task_green">#296720</color>
+    <color name="task_red">#A73231</color>
 </resources>

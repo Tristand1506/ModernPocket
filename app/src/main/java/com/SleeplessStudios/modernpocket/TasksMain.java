@@ -1,11 +1,17 @@
 package com.SleeplessStudios.modernpocket;
 
+import ObjectLib.ItemCollection;
+import ObjectLib.Task;
+import UtilLib.DataManager;
+import UtilLib.RecyclerViewCollectionAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,12 +41,20 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_main);
 
+        DataManager.getInstance().RefreshCollection(this);
+        DataManager.getInstance().setActiveCollection(null);
+        initRecyclerView();
+
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
         drawer.addDrawerListener(toggle);
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
+
+        if (DataManager.getInstance().getActiveCollection() != null) {
+            PopulateFields(DataManager.getInstance().getActiveCollection());
+        }
 
         filter = (ImageButton) findViewById(R.id.filter_tasks_btn);
         sidebar = (ImageButton) findViewById(R.id.burgerbar_tasks_btn);
@@ -195,19 +209,32 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         startActivity(intent);
     }
     //-----------------------TO DO--------------------------------------
-    public void openRate()
-    {
-
-    }
     public void openHelp()
     {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().RefreshCollection(this);
+        DataManager.getInstance().setActiveCollection(null);
+        initRecyclerView();
+    }
+
     public void CreateTask()
     {
-
+        //Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());
+       //DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
+        DataManager.getInstance().RefreshCollection(getParent());
+        dialog.dismiss();
     }
+
+    private void PopulateFields(ItemCollection activeCollection) {
+        taskName.setText(activeCollection.getCollectionName());
+        taskDueDate.setText(activeCollection.getDescription());
+    }
+
     @Override
     public void onBackPressed()
     {
@@ -218,5 +245,12 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         else {
             super.onBackPressed();
         }
+    }
+
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_tasks);
+        RecyclerViewCollectionAdapter adapter = new RecyclerViewCollectionAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

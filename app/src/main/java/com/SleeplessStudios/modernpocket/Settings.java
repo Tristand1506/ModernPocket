@@ -20,7 +20,6 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     private ImageButton privacy;
     private ImageButton help;
     private ImageButton about;
-    private ImageButton filter;
     private ImageButton sidebar;
     private DrawerLayout drawer;
 
@@ -42,7 +41,6 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         privacy = (ImageButton) findViewById(R.id.settings_privacy_btn);
         help = (ImageButton) findViewById(R.id.settings_help_btn);
         about = (ImageButton) findViewById(R.id.settings_about_btn);
-        filter = (ImageButton) findViewById(R.id.filter_settings_btn);
         sidebar = (ImageButton) findViewById(R.id.burger_bar_settings_btn);
         sidebar.setOnClickListener(new View.OnClickListener()
         {

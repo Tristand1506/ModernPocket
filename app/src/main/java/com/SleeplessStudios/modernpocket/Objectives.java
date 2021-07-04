@@ -8,10 +8,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -60,6 +62,33 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
             public void onClick(View v)
             {
                 openCreateObjective();
+            }
+        });
+
+        filterObjectives.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu dropDownMenu = new PopupMenu(Objectives.this, filterObjectives);
+                final Menu menu = dropDownMenu.getMenu();
+
+                menu.add(0, 0, 0, "Item 1");
+                menu.add(0, 1, 0, "Item 2");
+
+                dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case 0:
+                                // item ID 0 was clicked
+                                return true;
+                            case 1:
+                                // item ID 1 was clicked
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+                dropDownMenu.show();
             }
         });
     }

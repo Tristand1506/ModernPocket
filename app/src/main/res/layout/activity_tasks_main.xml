@@ -60,19 +60,7 @@
             app:layout_constraintVertical_bias="0.512"
             app:srcCompat="@drawable/burger_bar" />
 
-        <ImageButton
-            android:id="@+id/filter_tasks_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            android:backgroundTint="@color/real_red"
-            app:layout_constraintBottom_toBottomOf="@+id/topbar_tasks_img"
-            app:layout_constraintEnd_toStartOf="@+id/burgerbar_tasks_btn"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/filter" />
-
-    <ImageView
+        <ImageView
         android:id="@+id/tasks_ribbon_img"
         android:layout_width="82dp"
         android:layout_height="140dp"
@@ -94,7 +82,7 @@
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/topbar_tasks_img"
-        app:layout_constraintEnd_toStartOf="@+id/filter_tasks_btn"
+        app:layout_constraintEnd_toStartOf="@+id/burgerbar_tasks_btn"
         app:layout_constraintStart_toEndOf="@+id/tasks_ribbon_img"
         app:layout_constraintTop_toTopOf="parent" />
 

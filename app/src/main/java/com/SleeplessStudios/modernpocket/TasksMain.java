@@ -24,7 +24,6 @@ import android.widget.ImageButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class TasksMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private ImageButton filter;
     private ImageButton sidebar;
     private ImageButton createTask;
     private DrawerLayout drawer;
@@ -56,7 +55,6 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
             //PopulateFields(DataManager.getInstance().getActiveCollection());
         //}
 
-        filter = (ImageButton) findViewById(R.id.filter_tasks_btn);
         sidebar = (ImageButton) findViewById(R.id.burgerbar_tasks_btn);
         sidebar.setOnClickListener(new View.OnClickListener()
         {

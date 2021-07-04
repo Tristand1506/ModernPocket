@@ -49,7 +49,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
-        Collectible load = DataManager.getInstance().getActiveCollection().collectibles.get(position);
+        Collectible load = DataManager.getInstance().getActiveCollection().getCollectibles().get(position);
         holder.image.setImageBitmap(load.image);
         holder.itemName.setText(load.getName());
         System.out.println("Favorite: " + load.isFavourite + "\nIs Owned: "+load.isOwned);
@@ -92,8 +92,8 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
 
     @Override
     public int getItemCount() {
-        if (DataManager.getInstance().getActiveCollection().collectibles != null) {
-            return DataManager.getInstance().getActiveCollection().collectibles.size();
+        if (DataManager.getInstance().getActiveCollection().getCollectibles() != null) {
+            return DataManager.getInstance().getActiveCollection().getCollectibles().size();
         } else {
             return 0;
         }

@@ -8,15 +8,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.PopupMenu;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,7 +23,6 @@ import UtilLib.RecyclerViewItemAdapter;
 public class Items extends AppCompatActivity {
     private ImageButton createItem;
     private ImageButton filterItems;
-
     private ImageButton editCollection;
     private ImageButton pieChart;
     private TextView collectionName;
@@ -35,13 +31,13 @@ public class Items extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
-        DataManager.getInstance().refreshItems(this);
+        //DataManager.getInstance().refreshItems(this);
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
-        collectionName = (TextView) findViewById(R.id.editable_coll_txt);
+        collectionName = findViewById(R.id.editable_coll_txt);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
 
-        createItem = (ImageButton) findViewById(R.id.create_item_btn);
+        createItem = findViewById(R.id.create_item_btn);
 
         createItem.setOnClickListener(new View.OnClickListener()
         {
@@ -52,35 +48,8 @@ public class Items extends AppCompatActivity {
             }
         });
 
-        filterItems = (ImageButton) findViewById(R.id.filter_items_btn);
-        filterItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu dropDownMenu = new PopupMenu(Items.this, filterItems);
-                final Menu menu = dropDownMenu.getMenu();
-
-                menu.add(0, 0, 0, "Item 1");
-                menu.add(0, 1, 0, "Item 2");
-
-                dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case 0:
-                                // item ID 0 was clicked
-                                return true;
-                            case 1:
-                                // item ID 1 was clicked
-                                return true;
-                        }
-                        return false;
-                    }
-                });
-                dropDownMenu.show();
-            }
-        });
-
-        pieChart = (ImageButton) findViewById(R.id.chart_btn);
+        filterItems =  findViewById(R.id.filter_items_btn);
+        pieChart =  findViewById(R.id.chart_btn);
         pieChart.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -90,7 +59,7 @@ public class Items extends AppCompatActivity {
             }
         });
 
-        editCollection = (ImageButton) findViewById(R.id.edit_items);
+        editCollection =  findViewById(R.id.edit_items);
         editCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +72,7 @@ public class Items extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        DataManager.getInstance().refreshItems(this);
+        //DataManager.getInstance().refreshItems(this);
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());

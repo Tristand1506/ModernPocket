@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,19 +14,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import ObjectLib.ItemCollection;
 import UtilLib.DataManager;
@@ -87,21 +81,18 @@ public class CreateCollection extends AppCompatActivity {
                 BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
                 Bitmap photoIn = bd.getBitmap();
                 ItemCollection save = new ItemCollection(collName.getText().toString(), collDescription.getText().toString(), photoIn);
-                DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
+                DataManager.getInstance().AddOrUpdateCollection(save);
                 //DataManager.getInstance().setActiveCollection(DataManager.getInstance().getActiveCollection());
                 DataManager.getInstance().RefreshCollection(getParent());
                 backToCollections();
             }
         });
-
-
-
     }
 
     private void PopulateFields(ItemCollection activeCollection) {
         collName.setText(activeCollection.getCollectionName());
         collDescription.setText(activeCollection.getDescription());
-        photo.setImageBitmap(activeCollection.image);
+        photo.setImageBitmap(activeCollection.getImageBitmap());
     }
 
     public void backToCollections() {

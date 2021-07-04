@@ -189,7 +189,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void checkItemDuplicates()
     {
-        for (Collectible item : DataManager.getInstance().getActiveCollection().collectibles)
+        for (Collectible item : DataManager.getInstance().getActiveCollection().getCollectibles())
         {
             if (items.containsKey(item.getName()) == false)
             {

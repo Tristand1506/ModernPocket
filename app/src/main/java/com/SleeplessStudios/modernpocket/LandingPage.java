@@ -14,6 +14,8 @@ public class LandingPage extends AppCompatActivity {
     private ImageButton signUp;
     private ImageButton login;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,25 +23,11 @@ public class LandingPage extends AppCompatActivity {
         //LoginManager.getInstance().ClearActiveUser();
 
         //button listener
-        signUp = (ImageButton) findViewById(R.id.lp_signup_btn);
-        signUp.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openSignUpScreen();
-            }
-        });
+        signUp = findViewById(R.id.lp_signup_btn);
+        signUp.setOnClickListener(v -> openSignUpScreen());
 
-        login = (ImageButton) findViewById(R.id.lp_login_btn);
-        login.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openLoginScreen();
-            }
-        });
+        login = findViewById(R.id.lp_login_btn);
+        login.setOnClickListener(v -> openLoginScreen());
     }
 
     @Override

@@ -126,7 +126,7 @@ public class CreateItem extends AppCompatActivity {
         spinnerChooseItemType.setAdapter(adapter);
 
         if (DataManager.getInstance().getActiveItem()!=null){
-            System.out.println("Current Account: "+ LoginManager.getInstance().getActiveUser().getUsername());
+            //System.out.println("Current Account: "+ LoginManager.getInstance().getActiveUser().getUsername());
             PopulateFields(DataManager.getInstance().getActiveItem());
         }
     }

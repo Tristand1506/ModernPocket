@@ -31,13 +31,13 @@ public class Items extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
-        DataManager.getInstance().refreshItems(this);
+        //DataManager.getInstance().refreshItems(this);
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
-        collectionName = (TextView) findViewById(R.id.editable_coll_txt);
+        collectionName = findViewById(R.id.editable_coll_txt);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
 
-        createItem = (ImageButton) findViewById(R.id.create_item_btn);
+        createItem = findViewById(R.id.create_item_btn);
 
         createItem.setOnClickListener(new View.OnClickListener()
         {
@@ -48,8 +48,8 @@ public class Items extends AppCompatActivity {
             }
         });
 
-        filterItems = (ImageButton) findViewById(R.id.filter_items_btn);
-        pieChart = (ImageButton) findViewById(R.id.chart_btn);
+        filterItems =  findViewById(R.id.filter_items_btn);
+        pieChart =  findViewById(R.id.chart_btn);
         pieChart.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -59,7 +59,7 @@ public class Items extends AppCompatActivity {
             }
         });
 
-        editCollection = (ImageButton) findViewById(R.id.edit_items);
+        editCollection =  findViewById(R.id.edit_items);
         editCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +72,7 @@ public class Items extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        DataManager.getInstance().refreshItems(this);
+        //DataManager.getInstance().refreshItems(this);
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());

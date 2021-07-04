@@ -7,7 +7,11 @@ import java.util.Date;
 
 public class Collectible {
 
+
     // generic constructor
+    public Collectible(){
+
+    }
 /*
     public Collectible(int id, String name, int type, String description, Date date, Location loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
         this.name = name;
@@ -18,7 +22,7 @@ public class Collectible {
         setAcquisitionLoc(acquisitionLoc);
     }
 */
-    public Collectible(int id, String name, int type, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
+    public Collectible(String id, String name, int type, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
         _id = id;
         _collectionId = coll;
         this.name = name;
@@ -51,7 +55,7 @@ public class Collectible {
         setAcquisitionLoc(loc);
     }
 
-    private Integer _id;
+    private String _id;
     private Integer _collectionId;
     int itemType;
     private String name;
@@ -69,10 +73,10 @@ public class Collectible {
     ///////////////
     //Gets and Sets
     ///////////////
-    public int getID(){
+    public String getID(){
         return _id;
     }
-    public void setID(int id){
+    public void setID(String id){
         if (_id == null){
             _id = id;
         }
@@ -127,14 +131,6 @@ public class Collectible {
         return acquisitionLoc;
     }
 
-    /*public void setAcquisitionLoc(Location acquisitionLoc) {
-        if (!isOwned){
-            this.acquisitionLoc = null;
-        }
-        else {
-            this.acquisitionLoc = acquisitionLoc;
-        }
-    }*/
     public void setAcquisitionLoc(String acquisitionLoc) {
         if (!isOwned){
             this.acquisitionLoc = null;

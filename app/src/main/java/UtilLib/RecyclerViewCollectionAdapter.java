@@ -41,23 +41,23 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
         ItemCollection load = DataManager.getInstance().collections.get(position);
-        holder.image.setImageBitmap(load.image);
+        holder.image.setImageBitmap(load.getImageBitmap());
         holder.collectionName.setText(load.getCollectionName());
         System.out.println("Loading progress of " + load.getCollectionName() + "\nProgress at: " + load.getCompletion()*100  );
         holder.completion.setProgress(load.getCompletion());
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DataManager.getInstance().setActiveCollection(load);
-                Intent intent = new Intent(mContext, Items.class);
-                mContext.startActivity(intent);
-            }
+        holder.parentLayout.setOnClickListener(v -> {
+            DataManager.getInstance().setActiveCollection(load);
+            Intent intent = new Intent(mContext, Items.class);
+            mContext.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
+        if (DataManager.getInstance().collections == null){
+            return 0;
+        }
         return DataManager.getInstance().collections.size();
     }
 

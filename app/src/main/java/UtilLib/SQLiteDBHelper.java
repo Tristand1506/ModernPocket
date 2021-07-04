@@ -154,7 +154,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             //values.put(ACCOUNT_COLUMN_ID, null);
             values.put(ACCOUNT_COLUMN_USERNAME, account.getUsername());
             values.put(ACCOUNT_COLUMN_EMAIL, account.getEmail());
-            values.put(ACCOUNT_COLUMN_PASSWORD, account.getPassword());
+            //values.put(ACCOUNT_COLUMN_PASSWORD, account.getPassword());
 
             db.insertOrThrow(ACCOUNT_TABLE_NAME, null, values);
             db.setTransactionSuccessful();
@@ -173,10 +173,10 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         UserAcount account = new UserAcount();
         if (cursor.moveToFirst()) {
             //cursor.moveToFirst();
-            account.setID(Integer.parseInt(cursor.getString(0)));
+            //account.setID(Integer.parseInt(cursor.getString(0)));
             account.setUsername(cursor.getString(1));
             account.setEmail(cursor.getString(2));
-            account.setPassword(cursor.getString(3));
+            //account.setPassword(cursor.getString(3));
             cursor.close();
         }
         else account = null;
@@ -190,10 +190,10 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         UserAcount account = new UserAcount();
         if (cursor.moveToFirst()) {
             //cursor.moveToFirst();
-            account.setID(Integer.parseInt(cursor.getString(0)));
+            //account.setID(Integer.parseInt(cursor.getString(0)));
             account.setUsername(cursor.getString(1));
             account.setEmail(cursor.getString(2));
-            account.setPassword(cursor.getString(3));
+            //account.setPassword(cursor.getString(3));
             cursor.close();
         }
         else account = null;
@@ -208,11 +208,11 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         UserAcount account = new UserAcount();
         if (cursor.moveToFirst()) {
-            account.setID(Integer.parseInt(cursor.getString(0)));
-            db.delete(ACCOUNT_TABLE_NAME, ACCOUNT_COLUMN_ID + "=?",
+            //account.setID(Integer.parseInt(cursor.getString(0)));
+            /*db.delete(ACCOUNT_TABLE_NAME, ACCOUNT_COLUMN_ID + "=?",
                     new String[] {
                 String.valueOf(account.getID())
-            });
+            });*/
             cursor.close();
             result = true;
         }
@@ -230,7 +230,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
     //////////////////////
     // Collection Methods
     //////////////////////
-    public List<ItemCollection> loadCollections( UserAcount account) {
+    /*public List<ItemCollection> loadCollections( UserAcount account) {
 
         String query = " Select * FROM " + COLLECTION_TABLE_NAME + " WHERE "+ COLLECTION_COLUMN_ACCOUNT_ID + " = " + "'" + account.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -251,8 +251,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return outList;
-    }
-    public void addCollection(ItemCollection collection, UserAcount activeUser) {
+    }*/
+    /*public void addCollection(ItemCollection collection, UserAcount activeUser) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -273,8 +273,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         finally {
             db.endTransaction();
         }
-    }
-    public ItemCollection findCollectionByName(String collectionName) {
+    }*/
+    /*public ItemCollection findCollectionByName(String collectionName) {
         String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_NAME + " = " + "'" + collectionName + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -291,15 +291,15 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         else collection = null;
         db.close();
         return collection;
-    }
-    public ItemCollection findCollectionByID(int id) {
+    }*/
+    /*public ItemCollection findCollectionByID(int id) {
         String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_ID + " = " + "'" + id + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         ItemCollection collection = new ItemCollection();
         if (cursor.moveToFirst()) {
             //cursor.moveToFirst();
-            collection.setID(Integer.parseInt(cursor.getString(0)));
+            collection.setID(cursor.getString(0));
             collection.setCollectionName(cursor.getString(1));
             collection.setDescription(cursor.getString(2));
             collection.set_accountID(Integer.parseInt(cursor.getString(3)));
@@ -309,15 +309,15 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         else collection = null;
         db.close();
         return collection;
-    }
-    public UserAcount findCollectionByItem(Collectible item) {
+    }*/
+    /*public UserAcount findCollectionByItem(Collectible item) {
         String query = "Select * FROM " + COLLECTION_TABLE_NAME + " WHERE " + COLLECTION_COLUMN_ID + " = " + "'" + item.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         UserAcount account = new UserAcount();
         if (cursor.moveToFirst()) {
             //cursor.moveToFirst();
-            account.setID(Integer.parseInt(cursor.getString(0)));
+            account.setID(cursor.getString(0));
             account.setUsername(cursor.getString(1));
             account.setEmail(cursor.getString(2));
             account.setPassword(cursor.getString(3));
@@ -326,8 +326,8 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         else account = null;
         db.close();
         return account;
-    }
-    public boolean deleteCollection(int ID) {
+    }*/
+    /*public boolean deleteCollection(int ID) {
         boolean result = false;
         String query = "Select*FROM" + COLLECTION_TABLE_NAME + "WHERE" + COLLECTION_COLUMN_ID + "= '" + String.valueOf(ID) + "'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -344,19 +344,19 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         }
         db.close();
         return result;
-    }
+    }*/
     public boolean updateCollection(int ID, ItemCollection collection) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         //args.put(COLLECTION_COLUMN_ID, ID);
         args.put(COLLECTION_COLUMN_NAME, collection.getCollectionName());
         args.put(COLLECTION_COLUMN_DESCRIPTION, collection.getDescription());
-        args.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
+        //args.put(COLLECTION_COLUMN_IMAGE, getBitmapAsByteArray(collection.image));
         return db.update(COLLECTION_TABLE_NAME, args, COLLECTION_COLUMN_ID + "=" + ID, null) > 0;
     }
 
     // item methods
-    public List<Collectible> getItemsFromCollections(ItemCollection collection) {
+    /*public List<Collectible> getItemsFromCollections(ItemCollection collection) {
         String query = " Select * FROM " + ITEM_TABLE_NAME + " WHERE "+ ITEM_COLUMN_COLLECTION_ID+ " = " + "'" + collection.getID() + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -388,7 +388,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return outList;
-    }
+    }*/
     public void addItem(Collectible item, ItemCollection collection) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -406,7 +406,7 @@ public class SQLiteDBHelper  extends SQLiteOpenHelper {
             values.put(ITEM_COLUMN_IMAGE, getBitmapAsByteArray(item.image));
             values.put(ITEM_COLUMN_IS_FAVORITE, item.isFavourite);
             values.put(ITEM_COLUMN_IS_OWNED, item.isOwned);
-            values.put(ITEM_COLUMN_COLLECTION_ID, collection.getID());
+            values.put(ITEM_COLUMN_COLLECTION_ID, collection.getId());
 
             db.insertOrThrow(ITEM_TABLE_NAME, null, values);
             db.setTransactionSuccessful();

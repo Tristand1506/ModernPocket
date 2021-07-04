@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
 
-        sidebar = (ImageButton) findViewById(R.id.burger_bar_main_btn);
+        sidebar = findViewById(R.id.burger_bar_main_btn);
         sidebar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         //button listener
-        collections = (ImageButton) findViewById(R.id.collections_btn);
+        collections = findViewById(R.id.collections_btn);
         collections.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         //button listener
-        tasks = (ImageButton) findViewById(R.id.tasks_btn);
+        tasks = findViewById(R.id.tasks_btn);
         tasks.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         //button listener
-        googleLens = (ImageButton) findViewById(R.id.objectlens_btn);
+        googleLens = findViewById(R.id.objectlens_btn);
         googleLens.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DataManager.getInstance().initData();
     }
 
     @Override

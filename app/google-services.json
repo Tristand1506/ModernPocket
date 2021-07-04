@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "476352950018",
+    "project_id": "modernpocket-f5780",
+    "storage_bucket": "modernpocket-f5780.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476352950018:android:3e5a2cfb55f305b26d9c1b",
+        "android_client_info": {
+          "package_name": "com.SleeplessStudios.modernpocket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476352950018-h5dnd22rd19anefjtatkhs9ddfql93fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA35EvvxEIKeljglokb-cVeoGfPRA7f8xg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476352950018-h5dnd22rd19anefjtatkhs9ddfql93fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

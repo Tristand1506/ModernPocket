@@ -1,17 +1,20 @@
 package ObjectLib;
 
 import android.graphics.Bitmap;
-import android.media.Image;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import java.util.List;
 
+import UtilLib.DataManager;
+
 public class ItemCollection {
-    private Integer _id;
-    private Integer _accountID;
-    private String collectionName;
-    private String description;
-    public Bitmap image;
-    public List<Collectible> collectibles;
+    String id;
+    //Integer _accountID;
+    String collectionName;
+    String description;
+    private Bitmap image;
+    private List<Collectible> collectibles;
 
     public ItemCollection(){}
 
@@ -21,52 +24,67 @@ public class ItemCollection {
         this.image = image;
     }
 
-    public ItemCollection(Integer _id, String collectionName, String description, Integer _accountID, Bitmap image) {
+/*    public ItemCollection(String _id, String collectionName, String description, Integer _accountID, Bitmap image) {
         setID(_id);
         set_accountID(_accountID);
         setCollectionName(collectionName);
         setDescription(description);
         this.image = image;
         //this.collectibles = collectibles;
+    }*/
+
+    public String getId() {
+        return id;
     }
 
-    public int getID(){
-        return _id;
-    }
-    public void setID(int id){
-        if (_id == null){
-            _id = id;
+    public void setId(String id) {
+        if (this.id == null){
+            this.id = id;
         }
     }
 
-    public int getAccountID(){
+    /*    public int getAccountID(){
         return _accountID;
     }
     public void set_accountID(int id){
         if (_accountID == null){
             _accountID = id;
         }
-    }
+    }*/
 
-    public String getCollectionName(){
+    public String getCollectionName() {
         return collectionName;
     }
-    public void setCollectionName(String name){
-        if (!name.trim().isEmpty()){
-            collectionName = name;
+
+    public void setCollectionName(String collectionName) {
+        if (!collectionName.trim().isEmpty()){
+            this.collectionName = collectionName;
         }
+
     }
 
-    public String getDescription(){
-        return  description;
+    public String getDescription() {
+        return description;
     }
-    public void setDescription(String desc){
-        description = desc;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Collectible> getCollectibles() {
+        return collectibles;
+    }
+
+    public void setCollectibles(List<Collectible> collectibles) {
+        this.collectibles = collectibles;
     }
 
     public int getCompletion(){
     float percCompletion;
     float collected = 0f;
+    if (collectibles == null){
+        return 0;
+    }
         for (Collectible item : collectibles) {
             if (item.isOwned){
                 collected++;
@@ -80,5 +98,36 @@ public class ItemCollection {
         return (int)(percCompletion*100f);
     }
 
+    public Bitmap getImageBitmap() {
+        return image;
+    }
 
+
+    public String getImage() {
+        if (image != null) {
+            return DataManager.getBitmapAsBase64(image);
+        }
+        return null;
+    }
+
+    public void setImageBitmap(Bitmap image) {
+        this.image = image;
+    }
+    public void setImage(String b64) {
+        byte[] bArray = Base64.decode(b64,Base64.URL_SAFE);
+        if (bArray != null){
+            setImageBitmap( BitmapFactory.decodeByteArray(bArray, 0 ,bArray.length) );
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ItemCollection{" +
+                "id='" + id + '\'' +
+                ", collectionName='" + collectionName + '\'' +
+                ", description='" + description + '\'' +
+                ", image=" + getImage() + '\''+
+                ", collectibles=" + collectibles +
+                '}';
+    }
 }

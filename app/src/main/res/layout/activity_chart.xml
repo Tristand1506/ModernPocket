@@ -14,6 +14,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/topbar_img_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_sidebar" />
+
+        <ImageButton
+            android:id="@+id/burgerbar_chart_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_img_chart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/burger_bar" />
+
+        <TextView
+            android:id="@+id/chart_coll_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/segoeuisl"
+            android:text="COLLECTION NAME"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_img_chart"
+            app:layout_constraintEnd_toStartOf="@+id/burgerbar_chart_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/topbar_img_chart" />
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart_chart"
             android:layout_width="422dp"
@@ -21,42 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topbar_img" />
-    <ImageView
-        android:id="@+id/topbar_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_sidebar" />
-
-    <ImageButton
-        android:id="@+id/burgerbar_chart_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/burger_bar" />
-
-        <TextView
-            android:id="@+id/chart_coll_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/segoeuisl"
-            android:text="COLLECTION NAME"
-            android:layout_marginRight="20dp"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/topbar_img"
-            app:layout_constraintEnd_toStartOf="@+id/burgerbar_chart_btn"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/topbar_img_chart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView

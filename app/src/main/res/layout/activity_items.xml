@@ -50,26 +50,26 @@
             app:srcCompat="@drawable/create" />
 
         <ImageButton
-            android:id="@+id/burgerbar_items_btn"
+            android:id="@+id/chart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:background="@null"
             android:backgroundTint="@color/real_red"
             app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/burger_bar" />
+            app:srcCompat="@drawable/info" />
 
         <ImageButton
             android:id="@+id/filter_items_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:background="@null"
             android:backgroundTint="@color/real_red"
             app:layout_constraintBottom_toBottomOf="@+id/topbar_items_img"
-            app:layout_constraintEnd_toStartOf="@+id/burgerbar_items_btn"
+            app:layout_constraintEnd_toStartOf="@+id/chart_btn"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/filter" />
 

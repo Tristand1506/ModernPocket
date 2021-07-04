@@ -14,9 +14,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -30,6 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Set;
 
 public class Chart extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton sidebar;
@@ -40,6 +44,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     public static HashMap items = new HashMap();
 
     private PieChart pieChart;
+    private TextView collectionName;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -64,7 +69,11 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
             }
         });
 
+        collectionName = (TextView) findViewById(R.id.chart_coll_name);
+        collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
+
         pieChart = findViewById(R.id.pieChart_chart);
+        checkItemDuplicates();
         setupPieChart();
         loadPieChartData();
     }
@@ -199,7 +208,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     {
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelColor(12);
+        pieChart.setEntryLabelColor(14);
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setCenterText(DataManager.getInstance().getActiveCollection().getCollectionName());
         pieChart.setCenterTextSize(24);
@@ -208,7 +217,10 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
         Legend l = pieChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setYOffset(40f);
+        l.setXOffset(10f);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setTextSize(14f);
         l.setDrawInside(false);
         l.setEnabled(true);
     }
@@ -216,14 +228,20 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadPieChartData()
     {
-        checkItemDuplicates();
-
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        //for (Hashtable hashtable: table)
-        //{
-            //entries.add(new PieEntry(table.get(table)/table.size(), ));
-        //}
+        Set<String> keys = table.keySet();
+
+        //entries.add(new PieEntry(0.2f, "key"));
+        //entries.add(new PieEntry(0.5f, "stinky"));
+        //entries.add(new PieEntry(0.3f, "yes"));
+
+        for (String key: keys)
+        {
+            entries.add(new PieEntry(table.get(key)/table.size(), key));
+            System.out.println(key);
+            System.out.println(table.get(key)/table.size());
+        }
 
         ArrayList<Integer> colors = new ArrayList<>();
         for (int color: ColorTemplate.MATERIAL_COLORS)
@@ -242,7 +260,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
         PieData data = new PieData(dataSet);
         data.setDrawValues(true);
         data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
+        data.setValueTextSize(14f);
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);

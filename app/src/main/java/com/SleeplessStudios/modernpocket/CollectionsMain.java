@@ -24,7 +24,6 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     private ImageButton filterCollections;
     private ImageButton sidebar;
     private DrawerLayout drawer;
-    private ImageButton pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +60,6 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
             public void onClick(View v)
             {
                 openSidebar();
-            }
-        });
-
-        pieChart = (ImageButton) findViewById(R.id.chart_btn);
-        pieChart.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openChart();
             }
         });
     }
@@ -181,11 +170,6 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     public void openHelp()
     {
 
-    }
-    public void openChart()
-    {
-        Intent intent = new Intent(this, Chart.class);
-        startActivity(intent);
     }
     @Override
     public void onBackPressed()

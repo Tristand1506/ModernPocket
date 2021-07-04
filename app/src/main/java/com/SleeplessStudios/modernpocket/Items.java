@@ -20,13 +20,12 @@ import com.google.android.material.navigation.NavigationView;
 import UtilLib.DataManager;
 import UtilLib.RecyclerViewItemAdapter;
 
-public class Items extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Items extends AppCompatActivity {
     private ImageButton createItem;
     private ImageButton filterItems;
-    private ImageButton sidebar;
     private ImageButton editCollection;
+    private ImageButton pieChart;
     private TextView collectionName;
-    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +36,6 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         DataManager.getInstance().setActiveItem(null);
         collectionName = (TextView) findViewById(R.id.editable_coll_txt);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
-
-        drawer = findViewById(R.id.sidebar_main);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
-        drawer.addDrawerListener(toggle);
-        NavigationView navView = findViewById(R.id.sidebar_view);
-        navView.setNavigationItemSelectedListener(this);
 
         createItem = (ImageButton) findViewById(R.id.create_item_btn);
 
@@ -57,13 +49,13 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         });
 
         filterItems = (ImageButton) findViewById(R.id.filter_items_btn);
-        sidebar = (ImageButton) findViewById(R.id.burgerbar_items_btn);
-        sidebar.setOnClickListener(new View.OnClickListener()
+        pieChart = (ImageButton) findViewById(R.id.chart_btn);
+        pieChart.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                openSidebar();
+                openPieChart();
             }
         });
 
@@ -86,40 +78,6 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
-            case R.id.sidebar_collections:
-                openCollections();
-                break;
-            case R.id.sidebar_tasks:
-                openTasks();
-                break;
-            case R.id.sidebar_lens:
-                openLens();
-                break;
-            case R.id.sidebar_profile:
-                openProfile();
-                break;
-            case R.id.sidebar_fav:
-                openFavourites();
-                break;
-            case R.id.sidebar_lent:
-                openLent();
-                break;
-            case R.id.sidebar_settings:
-                openSettings();
-                break;
-            case R.id.sidebar_help:
-                openHelp();
-                break;
-            case R.id.sidebar_logout:
-                Logout();
-                break;
-        }
-        return true;
-    }
 
     public void openItemCreation() {
         Intent intent = new Intent(this, CreateItem.class);
@@ -128,54 +86,6 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
 
     public void openCollectionEdit() {
         Intent intent = new Intent(this, CreateCollection.class);
-        startActivity(intent);
-    }
-
-    public void openSidebar()
-    {
-        drawer.openDrawer(GravityCompat.END);
-    }
-
-    public void openProfile()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, EditProfile.class);
-        startActivity(intent);
-    }
-    public void openFavourites()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, Favourites.class);
-        startActivity(intent);
-    }
-    public void openLent()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, LentItems.class);
-        startActivity(intent);
-    }
-    public void openSettings()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
-    }
-    public void openCollections()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, CollectionsMain.class);
-        startActivity(intent);
-    }
-    public void openTasks()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, TasksMain.class);
-        startActivity(intent);
-    }
-    public void openLens()
-    {
-        drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, ObjectLens.class);
         startActivity(intent);
     }
 
@@ -193,23 +103,17 @@ public class Items extends AppCompatActivity implements NavigationView.OnNavigat
     {
 
     }
-    @Override
-    public void onBackPressed()
-    {
-        if (drawer.isDrawerOpen(GravityCompat.END))
-        {
-            drawer.closeDrawer(GravityCompat.END);
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
-
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void openPieChart()
+    {
+        Intent intent = new Intent(this, Chart.class);
+        startActivity(intent);
     }
 }

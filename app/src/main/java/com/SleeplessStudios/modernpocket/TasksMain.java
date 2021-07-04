@@ -41,9 +41,9 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_main);
 
-        DataManager.getInstance().RefreshCollection(this);
-        DataManager.getInstance().setActiveCollection(null);
-        initRecyclerView();
+        //DataManager.getInstance().RefreshCollection(this);
+        //DataManager.getInstance().setActiveCollection(null);
+        //initRecyclerView();
 
         drawer = findViewById(R.id.sidebar_main);
 
@@ -52,9 +52,9 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
 
-        if (DataManager.getInstance().getActiveCollection() != null) {
-            PopulateFields(DataManager.getInstance().getActiveCollection());
-        }
+        //if (DataManager.getInstance().getActiveCollection() != null) {
+            //PopulateFields(DataManager.getInstance().getActiveCollection());
+        //}
 
         filter = (ImageButton) findViewById(R.id.filter_tasks_btn);
         sidebar = (ImageButton) findViewById(R.id.burgerbar_tasks_btn);
@@ -214,19 +214,19 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        DataManager.getInstance().RefreshCollection(this);
-        DataManager.getInstance().setActiveCollection(null);
-        initRecyclerView();
-    }
+    //@Override
+    //protected void onResume() {
+        //super.onResume();
+        //DataManager.getInstance().RefreshCollection(this);
+        //DataManager.getInstance().setActiveCollection(null);
+        //initRecyclerView();
+    //}
 
     public void CreateTask()
     {
         //Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());
        //DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
-        DataManager.getInstance().RefreshCollection(getParent());
+        //DataManager.getInstance().RefreshCollection(getParent());
         dialog.dismiss();
     }
 

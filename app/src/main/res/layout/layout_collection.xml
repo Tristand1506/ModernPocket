@@ -22,18 +22,6 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
-
-    <ImageButton
-        android:id="@+id/chart_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/collection_name"
-        android:backgroundTint="@color/off_white"
-        android:src="@drawable/chart" />
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

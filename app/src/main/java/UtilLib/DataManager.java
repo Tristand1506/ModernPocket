@@ -36,8 +36,8 @@ public class DataManager {
 
     private String TAG = "DataManger";
 
-    private DatabaseReference collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Collections");
-    private DatabaseReference taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Tasks");
+    private DatabaseReference collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Collections");
+    private DatabaseReference taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Tasks");
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference("Collection Images");
 
     List<Task> tasks = new ArrayList<Task>();
@@ -170,8 +170,8 @@ public class DataManager {
     }
 
     public void initData(){
-        collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Collections");
-        taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Tasks");
+        collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Collections");
+        taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Tasks");
     }
 
     public static String getBitmapAsBase64(Bitmap bitmap) {

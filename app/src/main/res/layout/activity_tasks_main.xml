@@ -18,7 +18,7 @@
             android:id="@+id/recycler_view_tasks"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,15 +61,15 @@
             app:srcCompat="@drawable/burger_bar" />
 
         <ImageView
-        android:id="@+id/tasks_ribbon_img"
-        android:layout_width="82dp"
-        android:layout_height="140dp"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/tasks_ribbon" />
+            android:id="@+id/tasks_ribbon_img"
+            android:layout_width="82dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_tasks_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/tasks_ribbon" />
 
     <TextView
         android:id="@+id/tasks_top_txt"

@@ -5,7 +5,7 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="110dp"
-    android:background="@color/white">
+    android:background="@color/off_white">
 
 
     <RelativeLayout

@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topbar_img_chart"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="68dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -58,16 +58,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/burger_bar" />
 
-    <ImageView
-        android:id="@+id/coll_ribbon_img"
-        android:layout_width="82dp"
-        android:layout_height="140dp"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/collections_ribbon" />
+        <ImageView
+            android:id="@+id/coll_ribbon_img"
+            android:layout_width="82dp"
+            android:layout_height="140dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="@+id/collections_top_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/collections_ribbon" />
 
         <ImageButton
             android:id="@+id/filter_coll_btn"

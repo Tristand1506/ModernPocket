@@ -1,10 +1,14 @@
 package com.SleeplessStudios.modernpocket;
 
+import UtilLib.DataManager;
+import UtilLib.RecyclerViewItemAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lent_items);
 
+        initRecyclerView();
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
@@ -71,6 +76,15 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().initData();
+        //DataManager.getInstance().getFavourites();
+        initRecyclerView();
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -177,5 +191,11 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
         else {
             super.onBackPressed();
         }
+    }
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
+        RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

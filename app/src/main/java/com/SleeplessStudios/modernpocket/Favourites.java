@@ -173,10 +173,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         startActivity(intent);
     }
     //-----------------------TO DO--------------------------------------
-    public void openRate()
-    {
-
-    }
     public void openHelp()
     {
 

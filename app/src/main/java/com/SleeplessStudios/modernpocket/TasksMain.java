@@ -212,19 +212,8 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
-    //@Override
-    //protected void onResume() {
-        //super.onResume();
-        //DataManager.getInstance().RefreshCollection(this);
-        //DataManager.getInstance().setActiveCollection(null);
-        //initRecyclerView();
-    //}
-
     public void CreateTask()
     {
-        //Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());
-       //DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
-        //DataManager.getInstance().RefreshCollection(getParent());
         dialog.dismiss();
     }
 

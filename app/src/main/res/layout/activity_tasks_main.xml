@@ -64,7 +64,7 @@
             android:id="@+id/tasks_ribbon_img"
             android:layout_width="82dp"
             android:layout_height="140dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:scaleType="fitStart"
             app:layout_constraintBottom_toBottomOf="@+id/topbar_tasks_img"
             app:layout_constraintStart_toStartOf="parent"

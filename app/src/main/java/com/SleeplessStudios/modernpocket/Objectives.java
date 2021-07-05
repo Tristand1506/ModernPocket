@@ -26,7 +26,6 @@ import UtilLib.RecyclerViewObjectiveAdapter;
 
 public class Objectives extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton createObjective;
-    private ImageButton edit;
     private ImageButton filterObjectives;
     private ImageButton sidebar;
     private EditText dueDate;
@@ -47,7 +46,6 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
         navView.setNavigationItemSelectedListener(this);
 
         createObjective = (ImageButton) findViewById(R.id.create_objective_btn);
-        edit = (ImageButton) findViewById(R.id.edit_objectives_btn);
         filterObjectives = (ImageButton) findViewById(R.id.filter_objectives_btn);
         sidebar = (ImageButton) findViewById(R.id.burger_bar_objectives_btn);
         sidebar.setOnClickListener(new View.OnClickListener()

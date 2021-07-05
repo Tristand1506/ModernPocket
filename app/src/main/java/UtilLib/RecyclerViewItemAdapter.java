@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,13 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.SleeplessStudios.modernpocket.CreateItem;
-import com.SleeplessStudios.modernpocket.Items;
 import com.SleeplessStudios.modernpocket.R;
 
 import java.util.Date;
 
 import ObjectLib.Collectible;
-import ObjectLib.ItemCollection;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -50,11 +47,11 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
         Collectible load = DataManager.getInstance().getActiveCollection().getCollectibles().get(position);
-        holder.image.setImageBitmap(load.image);
+        holder.image.setImageBitmap(load.getImageBitmap());
         holder.itemName.setText(load.getName());
-        System.out.println("Favorite: " + load.isFavourite + "\nIs Owned: "+load.isOwned);
-        holder.owned.setChecked(load.isOwned);
-        holder.favorite.setChecked(load.isFavourite);
+        System.out.println("Favorite: " + load.isFavourite() + "\nIs Owned: "+load.isOwned());
+        holder.owned.setChecked(load.isOwned());
+        holder.favorite.setChecked(load.isFavourite());
         holder.lent.setEnabled(load.isLent());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -73,18 +70,32 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
                 DataManager.getInstance().setActiveItem(load);
                 System.out.println("owned is now " + isChecked + "\nnow updating" );
                 if (isChecked) {
-
-                    load.isOwned = isChecked;
-                    load.setAcquisitionDate((new Date()));
+                    load.setAcquisitionDateWithDate((new Date()));
                     load.setAcquisitionLoc(new Location(LocationManager.GPS_PROVIDER).toString());
                 }
                 else{
-                    load.setAcquisitionDate(null);
+                    load.setAcquisitionDateWithDate(null);
                     load.setAcquisitionLoc(null);
-                    load.isOwned = isChecked;
                 }
                 System.out.println(load.toString());
-                DataManager.getInstance().AddOrUpdateItem(load,mContext);
+                DataManager.getInstance().AddOrUpdateItem(load);
+                //DataManager.getInstance().setActiveCollection(DataManager.getInstance().getActiveCollection());
+                DataManager.getInstance().setActiveItem(null);
+            }
+        });
+        holder.favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                DataManager.getInstance().setActiveItem(load);
+                System.out.println("owned is now " + isChecked + "\nnow updating" );
+                if (isChecked) {
+                    load.setFavourite(isChecked);
+                }
+                else{
+                    load.setFavourite(isChecked);
+                }
+                System.out.println(load.toString());
+                DataManager.getInstance().AddOrUpdateItem(load);
                 DataManager.getInstance().setActiveItem(null);
             }
         });
@@ -92,11 +103,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
 
     @Override
     public int getItemCount() {
-        if (DataManager.getInstance().getActiveCollection().getCollectibles() != null) {
-            return DataManager.getInstance().getActiveCollection().getCollectibles().size();
-        } else {
-            return 0;
-        }
+        return DataManager.getInstance().getActiveCollection().getCollectibles().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

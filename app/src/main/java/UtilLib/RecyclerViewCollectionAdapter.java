@@ -46,10 +46,14 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         System.out.println("Loading progress of " + load.getCollectionName() + "\nProgress at: " + load.getCompletion()*100  );
         holder.completion.setProgress(load.getCompletion());
 
-        holder.parentLayout.setOnClickListener(v -> {
-            DataManager.getInstance().setActiveCollection(load);
-            Intent intent = new Intent(mContext, Items.class);
-            mContext.startActivity(intent);
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Chekking Active Item at -"+position+"- \n" + DataManager.getInstance().collections.get(position) );
+                DataManager.getInstance().setActiveCollection(load);
+                Intent intent = new Intent(mContext, Items.class);
+                mContext.startActivity(intent);
+            }
         });
     }
 

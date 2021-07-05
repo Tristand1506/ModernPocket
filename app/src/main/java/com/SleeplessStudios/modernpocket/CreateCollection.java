@@ -82,8 +82,7 @@ public class CreateCollection extends AppCompatActivity {
                 Bitmap photoIn = bd.getBitmap();
                 ItemCollection save = new ItemCollection(collName.getText().toString(), collDescription.getText().toString(), photoIn);
                 DataManager.getInstance().AddOrUpdateCollection(save);
-                //DataManager.getInstance().setActiveCollection(DataManager.getInstance().getActiveCollection());
-                DataManager.getInstance().RefreshCollection(getParent());
+
                 backToCollections();
             }
         });
@@ -96,7 +95,7 @@ public class CreateCollection extends AppCompatActivity {
     }
 
     public void backToCollections() {
-        DataManager.getInstance().RefreshCollection(this);
+        //DataManager.getInstance().RefreshCollection(this);
         finish();
     }
 

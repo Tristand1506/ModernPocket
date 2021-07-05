@@ -141,8 +141,6 @@ public class LoginManager {
     public void initUsers(){
         userData = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
     }
-    public void AccDebug(Activity activity){
-        System.out.println( SQLiteDBHelper.getDataBase(activity).loadAccounts() );
-    }
+
 
 }

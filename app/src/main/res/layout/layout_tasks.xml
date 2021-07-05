@@ -67,6 +67,8 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="16dp"
             android:src="@drawable/green_check"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
             android:visibility="visible" />
 
         <ImageView
@@ -76,6 +78,8 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="16dp"
             android:src="@drawable/exclamation_red"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
             android:visibility="visible" />
 
     </RelativeLayout>

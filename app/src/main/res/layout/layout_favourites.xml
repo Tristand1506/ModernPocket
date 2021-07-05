@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:background="@color/off_white">
+
+    <TextView
+        android:id="@+id/fav_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@id/img_relative_layout"
+        android:fontFamily="@font/segoeuisl"
+        android:letterSpacing="0.2"
+        android:text="Item Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/listDivider" />
+
+    <RelativeLayout
+        android:id="@+id/img_relative_layout"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/fav_favorite_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:scaleY="1.5"
+            android:scaleX="1.5"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="#00FFFFFF"
+
+            android:button="@drawable/favorite_checkbox"
+            android:checked="true"
+            tools:src="@drawable/star_fill" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

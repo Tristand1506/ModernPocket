@@ -1,5 +1,6 @@
 package com.SleeplessStudios.modernpocket;
 
+import UtilLib.DataManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,6 +71,15 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 dropDownMenu.show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().getFavourites();
+
+        //initRecyclerView();
+
     }
 
     @Override

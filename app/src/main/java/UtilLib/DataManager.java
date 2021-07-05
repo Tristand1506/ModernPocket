@@ -291,6 +291,16 @@ public class DataManager {
         return null;
     }
 
-
-
+    public List<Collectible> getFavourites()
+        {
+            List<Collectible> out = new ArrayList<Collectible>();
+            for (Collectible item : items)
+            {
+                if (item.isFavourite())
+                {
+                    out.add(item);
+                }
+            }
+            return out;
+        }
 }

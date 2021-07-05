@@ -3,6 +3,7 @@
     package="com.SleeplessStudios.modernpocket">
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="Modern Pocket"
@@ -53,9 +54,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="label" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
 
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

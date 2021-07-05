@@ -126,18 +126,6 @@
                 app:srcCompat="@drawable/minus" />
 
             <ImageButton
-                android:id="@+id/create_item_type_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="52dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:backgroundTint="#F9F9F9"
-                app:layout_constraintBottom_toTopOf="@+id/item_desc_headingtxt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/small_create" />
-
-            <ImageButton
                 android:id="@+id/add_items_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,9 +144,10 @@
                 android:id="@+id/item_descbox_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="144dp"
+                android:layout_marginTop="68dp"
                 android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.642"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/items_amount_txt"
                 app:srcCompat="@drawable/box" />
@@ -220,53 +209,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/location_acquired_img"
                 app:srcCompat="@drawable/lent_icon" />
 
-            <ImageView
-                android:id="@+id/cube_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/item_desc_headingtxt"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/cube_icon" />
-
-            <ImageView
-                android:id="@+id/spinnerline_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/item_desc_headingtxt"
-                app:layout_constraintEnd_toStartOf="@+id/create_item_type_btn"
-                app:layout_constraintStart_toEndOf="@+id/cube_img"
-                app:srcCompat="@drawable/line" />
-
-            <Spinner
-                android:id="@+id/chooseitemtype_spinner"
-                android:layout_width="249dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/segoeuisl"
-                app:layout_constraintBottom_toTopOf="@+id/spinnerline_img"
-                app:layout_constraintEnd_toStartOf="@+id/create_item_type_btn"
-                app:layout_constraintHorizontal_bias="0.454"
-                app:layout_constraintStart_toEndOf="@+id/cube_img" />
-
             <TextView
                 android:id="@+id/item_desc_headingtxt"
                 android:layout_width="107dp"
                 android:layout_height="27dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/segoeuisl"
                 android:text="Description"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/item_descbox_img"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/items_amount_txt"
+                app:layout_constraintVertical_bias="0.909" />
 
             <TextView
                 android:id="@+id/items_amount_headingtxt"
@@ -281,18 +237,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_name_txt" />
 
-            <TextView
-                android:id="@+id/items_type_headingtxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/segoeuisl"
-                android:text="Item Type"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/chooseitemtype_spinner"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/item_image_img"

@@ -43,7 +43,6 @@ public class CreateItem extends AppCompatActivity {
     private ImageButton addPhoto;
     private ImageButton lessAmount;
     private ImageButton addAmount;
-    private ImageButton createItemType;
     private EditText name;
     private EditText amount;
     private EditText description;
@@ -80,7 +79,6 @@ public class CreateItem extends AppCompatActivity {
 
         lessAmount = (ImageButton) findViewById(R.id.less_items_btn);
         addAmount = (ImageButton) findViewById(R.id.add_items_btn);
-        createItemType = (ImageButton) findViewById(R.id.create_item_type_btn);
 
         name = (EditText) findViewById(R.id.item_name_txt);
         amount = (EditText) findViewById(R.id.items_amount_txt);
@@ -115,7 +113,7 @@ public class CreateItem extends AppCompatActivity {
             }
         });
 
-        //spinner
+       /* //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);
         //array for spinner
         String[] itemTypeList = getResources().getStringArray(R.array.item_types);
@@ -126,7 +124,7 @@ public class CreateItem extends AppCompatActivity {
         if (DataManager.getInstance().getActiveItem()!=null){
             //System.out.println("Current Account: "+ LoginManager.getInstance().getActiveUser().getUsername());
             PopulateFields(DataManager.getInstance().getActiveItem());
-        }
+        }*/
     }
 
     private void PopulateFields(Collectible activeItem) {

@@ -1,14 +1,12 @@
 package com.SleeplessStudios.modernpocket;
 
-import ObjectLib.ItemCollection;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ObjectLib.Collectible;
 import UtilLib.DataManager;
-import UtilLib.LoginManager;
-import UtilLib.SQLiteDBHelper;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -28,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -111,8 +108,9 @@ public class CreateItem extends AppCompatActivity {
             {
                 BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
                 Bitmap photoIn = bd.getBitmap();
-                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(), getDateFromString(acquireDate.getText().toString()), acquireLoc.getText().toString() ,photoIn);
-                DataManager.getInstance().AddOrUpdateItem(in,getParent());
+                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(),acquireDate.getText().toString(), acquireLoc.getText().toString() ,photoIn);
+                DataManager.getInstance().AddOrUpdateItem(in);
+                DataManager.getInstance().RefreshActiveCollection();
                 backToItems();
             }
         });
@@ -134,9 +132,9 @@ public class CreateItem extends AppCompatActivity {
     private void PopulateFields(Collectible activeItem) {
         name.setText(activeItem.getName());
         description.setText(activeItem.getDescription());
-        photo.setImageBitmap(activeItem.image);
-        if (activeItem.isOwned) {
-            acquireDate.setText(dateFormat.format(activeItem.getAcquisitionDate()));
+        photo.setImageBitmap(activeItem.getImageBitmap());
+        if (activeItem.isOwned()) {
+            acquireDate.setText(activeItem.getAcquisitionDate());
             acquireLoc.setText(activeItem.getAcquisitionLoc());
         }
 
@@ -148,18 +146,8 @@ public class CreateItem extends AppCompatActivity {
         finish();
     }
 
-    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    public static Date getDateFromString(String dateIn){
 
-        Date date = new Date();
-        try{
-            date = dateFormat.parse(dateIn);
-        } catch (ParseException e){
-            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
-            return null;
-        }
-        return date;
-    }
+
     private void askCamPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
@@ -236,4 +224,6 @@ public class CreateItem extends AppCompatActivity {
             }
         }
     }
+
+
 }

@@ -31,7 +31,8 @@ public class Items extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
-        //DataManager.getInstance().refreshItems(this);
+
+        System.out.println("Chekking Active Item\n" + DataManager.getInstance().getActiveItem() );
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
         collectionName = findViewById(R.id.editable_coll_txt);
@@ -72,7 +73,7 @@ public class Items extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //DataManager.getInstance().refreshItems(this);
+        DataManager.getInstance().initData();
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());

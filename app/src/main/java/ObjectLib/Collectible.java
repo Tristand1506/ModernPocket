@@ -1,9 +1,16 @@
 package ObjectLib;
 
 import android.graphics.Bitmap;
-import android.location.Location;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import UtilLib.DataManager;
 
 public class Collectible {
 
@@ -22,11 +29,10 @@ public class Collectible {
         setAcquisitionLoc(acquisitionLoc);
     }
 */
-    public Collectible(String id, String name, int type, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
-        _id = id;
-        _collectionId = coll;
+/*    public Collectible(String id, String name, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, String coll) {
+        this.id = id;
+        collectionId = coll;
         this.name = name;
-        itemType = type;
         this.description = description;
         this.isFavourite = isFavourite;
         this.isOwned = isOwned;
@@ -34,7 +40,6 @@ public class Collectible {
         setAcquisitionDate(date);
         setAcquisitionLoc(loc);
     }
-
     public Collectible(String name, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned) {
         this.name = name;
         this.description = description;
@@ -43,8 +48,8 @@ public class Collectible {
         image = img;
         setAcquisitionDate(date);
         setAcquisitionLoc(loc);
-    }
-    public Collectible(String name, String description, Date date, String loc, Bitmap img) {
+    }*/
+    public Collectible(String name, String description, String date, String loc, Bitmap img) {
         this.name = name;
         this.description = description;
         image = img;
@@ -55,16 +60,15 @@ public class Collectible {
         setAcquisitionLoc(loc);
     }
 
-    private String _id;
-    private Integer _collectionId;
-    int itemType;
+    private String id;
+    private String collectionId;
     private String name;
     private String description;
-    public Bitmap image;
-    public boolean isFavourite;
+    private Bitmap image;
+    private boolean isFavourite;
 
 
-    public boolean isOwned;
+    private boolean isOwned;
     private Date acquisitionDate;
     // private Location acquisitionLoc;
     private String acquisitionLoc;
@@ -73,36 +77,31 @@ public class Collectible {
     ///////////////
     //Gets and Sets
     ///////////////
-    public String getID(){
-        return _id;
+    public String getId(){
+        return id;
     }
-    public void setID(String id){
-        if (_id == null){
-            _id = id;
-        }
-    }
-    public int getCollectionID(){
-        return _collectionId;
-    }
-    public void setCollectionID(int id){
-        if (_collectionId == null){
-            _collectionId = id;
+    public void setId(String id){
+        if (this.id == null){
+            this.id = id;
         }
     }
 
-
-
-    public int getItemType() {
-        return itemType;
+    public String getCollectionId(){
+        return collectionId;
+    }
+    public void setCollectionId(String id){
+        if (collectionId == null){
+            collectionId = id;
+        }
     }
 
+    public String getName(){
+        return name;
+    }
     public void setName(String name){
         if (!name.trim().isEmpty()){
             this.name = name;
         }
-    }
-    public String getName(){
-        return name;
     }
 
     public String getDescription() {
@@ -110,34 +109,77 @@ public class Collectible {
     }
 
 
+    public Bitmap getImageBitmap() {
+        return image;
+    }
+
+
+    public String getImage() {
+        if (image != null) {
+            return DataManager.getBitmapAsBase64(image);
+        }
+        return null;
+    }
+
+    public void setImageBitmap(Bitmap image) {
+        this.image = image;
+    }
+    public void setImage(String b64) {
+        byte[] bArray = Base64.decode(b64,Base64.URL_SAFE);
+        if (bArray != null){
+            setImageBitmap( BitmapFactory.decodeByteArray(bArray, 0 ,bArray.length) );
+        }
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
     ///////////////////////
     // Owned Conditional Gets and Sets
     ///////////////////////
-    public Date getAcquisitionDate() {
-        return acquisitionDate;
+
+
+    public boolean isOwned() {
+        if (getAcquisitionDate() != null || getAcquisitionLoc() != null) {
+
+            return true;
+        }
+        else return  false;
     }
 
-    public void setAcquisitionDate(Date acquisitionDate) {
-        if (!isOwned){
-            this.acquisitionDate = null;
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public String getAcquisitionDate() {
+        if (acquisitionDate != null) {
+            return dateFormat.format(acquisitionDate);
         }
-        else {
-            this.acquisitionDate = acquisitionDate;
+        else return null;
+    }
+
+    public void setAcquisitionDate(String acquisitionDate) {
+        if (!acquisitionDate.isEmpty()) {
+            this.acquisitionDate = getDateFromString(acquisitionDate);
         }
+        else this.acquisitionDate = null;
+    }
+
+    public void setAcquisitionDateWithDate(Date acquisitionDate) {
+        this.acquisitionDate = acquisitionDate;
     }
 
     public String getAcquisitionLoc() {
         return acquisitionLoc;
     }
-
     public void setAcquisitionLoc(String acquisitionLoc) {
-        if (!isOwned){
-            this.acquisitionLoc = null;
-        }
-        else {
+        if (acquisitionLoc != null){
+            if (!acquisitionLoc.isEmpty())
             this.acquisitionLoc = acquisitionLoc;
         }
+        else this.acquisitionLoc = null;
     }
 
     //loaner data
@@ -152,19 +194,18 @@ public class Collectible {
         return isLent;
     }
 
-    public void setLent(boolean lent) {
+    public void setLent(boolean isLent) {
         if (!isOwned){
             this.isLent = false;
         }
         else {
-            this.isLent = lent;
+            this.isLent = isLent;
         }
     }
 
     public String getBorrowedTo() {
         return borrowedTo;
     }
-
     public void setBorrowedTo(String borrowedTo) {
         if (!isOwned){
             this.borrowedTo = null;
@@ -177,7 +218,6 @@ public class Collectible {
     public Date getExpectedReturn() {
         return expectedReturn;
     }
-
     public void setExpectedReturn(Date expectedReturn) {
         if (!isOwned){
             this.expectedReturn = null;
@@ -189,20 +229,31 @@ public class Collectible {
 
     @Override
     public String toString() {
-        return "Collectible{" +
-                "_id=" + _id +
-                ", _collectionId=" + _collectionId +
-                ", itemType=" + itemType +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", image=" + image +
-                ", isFavourite=" + isFavourite +
-                ", isOwned=" + isOwned +
-                ", acquisitionDate=" + acquisitionDate +
-                ", acquisitionLoc='" + acquisitionLoc + '\'' +
-                ", isLent=" + isLent +
-                ", borrowedTo='" + borrowedTo + '\'' +
-                ", expectedReturn=" + expectedReturn +
+        return "Collectible{" +"\n" +
+                "_id=" + id + "\n" +
+                ", _collectionId=" + collectionId +'\n' +
+                ", name='" + name + '\n' +
+                ", description='" + description + '\n' +
+                ", image=" + image +'\n' +
+                ", isFavourite=" + isFavourite +'\n' +
+                ", isOwned=" + isOwned +'\n' +
+                ", acquisitionDate=" + acquisitionDate +'\n' +
+                ", acquisitionLoc='" + acquisitionLoc + '\n' +
+                ", isLent=" + isLent +'\n' +
+                ", borrowedTo='" + borrowedTo + '\n' +
+                ", expectedReturn=" + expectedReturn +'\n' +
                 '}';
+    }
+
+    public static Date getDateFromString(String dateIn){
+
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateIn);
+        } catch (ParseException e){
+            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+            return null;
+        }
+        return date;
     }
 }

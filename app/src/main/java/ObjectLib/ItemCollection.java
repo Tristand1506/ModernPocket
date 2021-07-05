@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
 import UtilLib.DataManager;
@@ -41,6 +43,7 @@ public class ItemCollection {
         if (this.id == null){
             this.id = id;
         }
+        System.out.println("Failed to set new ID");
     }
 
     /*    public int getAccountID(){
@@ -72,6 +75,9 @@ public class ItemCollection {
     }
 
     public List<Collectible> getCollectibles() {
+        if (collectibles==null) {
+            collectibles = new ArrayList<Collectible>();
+        }
         return collectibles;
     }
 
@@ -86,7 +92,7 @@ public class ItemCollection {
         return 0;
     }
         for (Collectible item : collectibles) {
-            if (item.isOwned){
+            if (item.isOwned()){
                 collected++;
             }
         }

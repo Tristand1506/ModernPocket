@@ -76,7 +76,7 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById((R.id.profile_image));
-            collectionName = itemView.findViewById(R.id.collection_name);
+            collectionName = itemView.findViewById(R.id.task_name);
             //favorite = itemView.findViewById(R.id.favorite_btn);
             completion = itemView.findViewById(R.id.coll_completion);
             parentLayout = itemView.findViewById(R.id.parent_layout);

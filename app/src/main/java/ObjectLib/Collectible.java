@@ -162,7 +162,7 @@ public class Collectible {
 
     public void setAcquisitionDate(String acquisitionDate) {
         if (!acquisitionDate.isEmpty()) {
-            this.acquisitionDate = getDateFromString(acquisitionDate);
+            this.acquisitionDate = DataManager.getDateFromString(acquisitionDate);
         }
         else this.acquisitionDate = null;
     }
@@ -245,15 +245,4 @@ public class Collectible {
                 '}';
     }
 
-    public static Date getDateFromString(String dateIn){
-
-        Date date = new Date();
-        try{
-            date = dateFormat.parse(dateIn);
-        } catch (ParseException e){
-            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
-            return null;
-        }
-        return date;
-    }
 }

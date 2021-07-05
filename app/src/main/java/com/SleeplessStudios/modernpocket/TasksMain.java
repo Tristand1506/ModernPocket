@@ -4,6 +4,8 @@ import ObjectLib.ItemCollection;
 import ObjectLib.Task;
 import UtilLib.DataManager;
 import UtilLib.RecyclerViewCollectionAdapter;
+import UtilLib.RecyclerViewTaskAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -42,7 +44,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
         //DataManager.getInstance().RefreshCollection(this);
         //DataManager.getInstance().setActiveCollection(null);
-        //initRecyclerView();
+        initRecyclerView();
 
         drawer = findViewById(R.id.sidebar_main);
 
@@ -212,18 +214,19 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
-    //@Override
-    //protected void onResume() {
-        //super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
         //DataManager.getInstance().RefreshCollection(this);
-        //DataManager.getInstance().setActiveCollection(null);
-        //initRecyclerView();
-    //}
+        DataManager.getInstance().setActiveTask(null);
+        initRecyclerView();
+    }
 
     public void CreateTask()
     {
-        //Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());
-       //DataManager.getInstance().AddOrUpdateCollection(save, getApplicationContext());
+        Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());
+        DataManager.getInstance().AddOrUpdateTask(save);
+        initRecyclerView();
         //DataManager.getInstance().RefreshCollection(getParent());
         dialog.dismiss();
     }
@@ -247,7 +250,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_tasks);
-        RecyclerViewCollectionAdapter adapter = new RecyclerViewCollectionAdapter(this);
+        RecyclerViewTaskAdapter adapter = new RecyclerViewTaskAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

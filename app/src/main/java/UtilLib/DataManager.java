@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.SleeplessStudios.modernpocket.Objectives;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,11 +20,16 @@ import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ObjectLib.Collectible;
 import ObjectLib.ItemCollection;
+import ObjectLib.Objective;
 import ObjectLib.Task;
 
 import static android.util.Base64.URL_SAFE;
@@ -39,11 +45,13 @@ public class DataManager {
     private DatabaseReference collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Collections");
     private DatabaseReference itemDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Items");
     private DatabaseReference taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Tasks");
+    private DatabaseReference objectiveDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Objectives");
     //private StorageReference storageRef = FirebaseStorage.getInstance().getReference("Collection Images");
 
     List<Task> tasks = new ArrayList<Task>();
     List<ItemCollection> collections = new ArrayList<ItemCollection>();
     List<Collectible> items = new ArrayList<Collectible>();
+    List<Objective> objectives = new ArrayList<Objective>();
 
     public DatabaseReference getCollectionDatabase(){
         return collectionDatabase;
@@ -62,7 +70,7 @@ public class DataManager {
                 {
                     ItemCollection coll = snap.getValue(ItemCollection.class);
                     coll.setId(snap.getKey());
-                    System.out.println( coll.toString() );
+                    //System.out.println( coll.toString() );
                     if (coll == null){
                         System.out.println( "error reading object collection");
                     }
@@ -89,7 +97,12 @@ public class DataManager {
                 {
                     Collectible item = snap.getValue(Collectible.class);
                     item.setId(snap.getKey());
-                    item.setFavourite(snap.child("isFavorite").getValue(boolean.class));
+                    try{
+                        item.setFavourite(snap.child("isFavorite").getValue(boolean.class));
+                    }
+                    catch(Exception e){
+                        item.setFavourite(false);
+                    }
                     if (item == null){
                         System.out.println( "error reading object collection");
                     }
@@ -131,6 +144,8 @@ public class DataManager {
     //Active Objects//
     private String activeCollection;
     private String activeItem;
+    private String activeTask;
+    private String activeObjective;
 
     public ItemCollection getActiveCollection() {
         for (ItemCollection coll: collections) {
@@ -157,6 +172,24 @@ public class DataManager {
         }
         return null;
     }
+    public Task getActiveTask(){
+        for (Task task: tasks) {
+            if (task.getId().equals(activeTask)){
+                if (task.getObjectives()!=null) {
+                    task.getObjectives().clear();
+                }
+                for (Objective objective:objectives) {
+                    if (objective.getTaskId().equals(task.getId())){
+                        //System.out.println(item.toString());
+                        task.getObjectives().add(objective);
+                    }
+                }
+                return task;
+            }
+        }
+        return null;
+    }
+
     public void setActiveCollection(ItemCollection ac){
 
         if (ac != null){
@@ -196,7 +229,34 @@ public class DataManager {
         }
         else activeItem = null;
     }
+    public void setActiveTask(Task at){
 
+        if (at != null){
+            List<Objective> in = new ArrayList<Objective>();
+            //System.out.println("Adding active Collections Items for item: " +ac.getId() );
+            for (Objective obj: objectives) {
+                if (obj.getId().equals(at.getId())){
+                    //System.out.println(item.toString());
+                    in.add(obj);
+                }
+            }
+            at.setObjectives(in);
+            for (Task task: tasks) {
+                if (task.getId().equals(at.getId())){
+                    //System.out.println(item.toString());
+                    activeTask = task.getId();
+                }
+            }
+            getActiveTask().setObjectives(in);
+        }
+        else activeTask = null;
+        /*if (activeCollection!=null) {
+            System.out.println("Checking active collection for items");
+            for (Collectible item : activeCollection.getCollectibles()) {
+                //System.out.println(item.toString());
+            }
+        }*/
+    }
 
     public void SaveData(){
         //TODO Save Data
@@ -265,8 +325,23 @@ public class DataManager {
         }
 
     }
-    public void RemoveCollection(ItemCollection collection){
-        collections.remove(collection);
+
+    public void AddOrUpdateTask(Task task) {
+        if (activeTask == null) {
+            task.setId(taskDatabase.push().getKey());
+            taskDatabase.child(task.getId()).child("id").setValue(task.getId());
+            taskDatabase.child(task.getId()).child("taskName").setValue(task.getTaskName());
+            taskDatabase.child(task.getId()).child("date").setValue(task.getDate());
+        } else {
+            taskDatabase.child(getActiveTask().getId()).child("id").setValue(task.getId());
+            taskDatabase.child(getActiveTask().getId()).child("taskName").setValue(task.getTaskName());
+            taskDatabase.child(getActiveTask().getId()).child("date").setValue(task.getDate());
+            //collectionDatabase.child(getActiveCollection().getId()).child("collectibles").setValue(collection.getCollectibles());
+        }
+    }
+
+    public void RemoveCollection(ItemCollection task){
+        collections.remove(task);
     }
 
     public void RefreshActiveCollection(){
@@ -277,6 +352,7 @@ public class DataManager {
         collectionDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Collections");
         itemDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Items");
         taskDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Tasks");
+        objectiveDatabase = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Objectives");
     }
 
     public static String getBitmapAsBase64(Bitmap bitmap) {
@@ -290,7 +366,30 @@ public class DataManager {
         }
         return null;
     }
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public static Date getDateFromString(String dateIn){
 
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateIn);
+        } catch (ParseException e){
+            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+            return null;
+        }
+        return date;
+    }
+    public static boolean validateDateFromString(String dateIn){
+
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateIn);
+            return true;
+        } catch (ParseException e){
+            Log.e("DataBase", "getDateFromString: Failed, invalid format ", e );
+            return false;
+        }
+
+    }
     public List<Collectible> getFavourites()
         {
             List<Collectible> out = new ArrayList<Collectible>();

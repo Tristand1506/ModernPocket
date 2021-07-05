@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import UtilLib.DataManager;
+
 public class Objectives extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton createObjective;
     private ImageButton edit;
@@ -53,6 +55,21 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
         });
 
         dueDate = (EditText) findViewById(R.id.objective_due_date_txt);
+        dueDate.setText(DataManager.getInstance().getActiveTask().getDate());
+        dueDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (DataManager.validateDateFromString(dueDate.getText().toString())){
+                    if (!DataManager.getInstance().getActiveTask().getDate().equals(dueDate.getText().toString())){
+                        ObjectLib.Task in;
+                        in = DataManager.getInstance().getActiveTask();
+                        in.setDate(dueDate.getText().toString());
+                        DataManager.getInstance().AddOrUpdateTask(in);
+                    }
+                }
+                else {dueDate.setText(DataManager.getInstance().getActiveTask().getDate());}
+            }
+        });
 
         taskName = (TextView) findViewById(R.id.editable_taskname_txt);
 
@@ -64,6 +81,8 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
                 openCreateObjective();
             }
         });
+
+        taskName.setText(DataManager.getInstance().getActiveTask().getTaskName());
 
         filterObjectives.setOnClickListener(new View.OnClickListener() {
             @Override

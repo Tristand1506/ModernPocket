@@ -1,27 +1,83 @@
 package ObjectLib;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import UtilLib.DataManager;
 
 public class Task {
 
-    String taskName;
-    String description;
-    List<Objective> objectives;
+    private String id;
+    private String taskName;
+    private Date date;
+    private List<Objective> objectives;
 
-    public float Compleation(){
-        float percCompleation;
-        int completed = 0;
-        for (Objective objective : objectives) {
-            if (objective.isComplete){
-                completed++;
-            }
-        }
-        percCompleation = (float) (objectives.size() / completed) ;
-        return percCompleation;
+    public Task(){
+    }
+    public Task(String name, String date){
+        taskName = name;
+        setDate(date);
     }
 
-    //TODO
-    // image reference
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return id;
+    }
 
+    public String getTaskName() {
+        return taskName;
+    }
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public void setDate(String date) {
+        if (!date.isEmpty()) {
+            this.date = DataManager.getDateFromString(date);
+        }
+        else this.date = null;
+    }
+
+    public void setDateWithDate(Date acquisitionDate) {
+        this.date = acquisitionDate;
+    }
+
+    public String getDate() {
+        if (date != null) {
+            return dateFormat.format(date);
+        }
+        else return null;
+    }
+
+    public List<Objective> getObjectives() {
+        return objectives;
+    }
+    public void setObjectives(List<Objective> objectives) {
+        this.objectives = objectives;
+    }
+
+    public int getCompleation(){
+        float percCompletion;
+        float collected = 0f;
+        if (objectives == null){
+            return 0;
+        }
+        for (Objective item : objectives) {
+            if (item.isComplete()){
+                collected++;
+            }
+        }
+        if (objectives.size() > 0) {
+            percCompletion = (float)(collected / (float)objectives.size());
+            System.out.println("Compleation: "+ collected + "/" + objectives.size() + "\n at: " + percCompletion*100f +"%");
+        }
+        else{percCompletion = 0;}
+        return (int)(percCompletion*100f);
+    }
 
 }

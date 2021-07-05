@@ -193,7 +193,7 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
         }
     }
     private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_lent_items);
         RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

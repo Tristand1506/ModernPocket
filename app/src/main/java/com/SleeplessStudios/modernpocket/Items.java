@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -49,7 +51,34 @@ public class Items extends AppCompatActivity {
             }
         });
 
-        filterItems =  findViewById(R.id.filter_items_btn);
+        filterItems = (ImageButton) findViewById(R.id.filter_items_btn);
+        filterItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu dropDownMenu = new PopupMenu(Items.this, filterItems);
+                final Menu menu = dropDownMenu.getMenu();
+
+                menu.add(0, 0, 0, "Item 1");
+                menu.add(0, 1, 0, "Item 2");
+
+                dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case 0:
+                                // item ID 0 was clicked
+                                return true;
+                            case 1:
+                                // item ID 1 was clicked
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+                dropDownMenu.show();
+            }
+        });
+        
         pieChart =  findViewById(R.id.chart_btn);
         pieChart.setOnClickListener(new View.OnClickListener()
         {

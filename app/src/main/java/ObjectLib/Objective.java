@@ -8,6 +8,13 @@ public class Objective {
     String description;
     boolean isComplete;
 
+    public Objective(){ }
+
+    public Objective(String name, String description){
+       setObjectiveName(name);
+       setDescription(description);
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -19,7 +26,10 @@ public class Objective {
         return taskId;
     }
     public void setTaskId(String taskId) {
-        this.taskId = taskId;
+        //System.out.println("Changing task id of: "+id+"\nNew ID: "+taskId);
+        if (this.taskId == null){
+            this.taskId = taskId;
+        }
     }
 
     public String getObjectiveName() {

@@ -189,7 +189,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         }
     }
     private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_objectives);
         RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

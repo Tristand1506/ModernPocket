@@ -1,10 +1,6 @@
 package com.SleeplessStudios.modernpocket;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +12,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
-import com.google.android.material.navigation.NavigationView;
 
 import UtilLib.DataManager;
 import UtilLib.RecyclerViewItemAdapter;

@@ -120,11 +120,11 @@ public class CreateItem extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, itemTypeList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerChooseItemType.setAdapter(adapter);
-
+        */
         if (DataManager.getInstance().getActiveItem()!=null){
             //System.out.println("Current Account: "+ LoginManager.getInstance().getActiveUser().getUsername());
             PopulateFields(DataManager.getInstance().getActiveItem());
-        }*/
+        }
     }
 
     private void PopulateFields(Collectible activeItem) {
@@ -143,8 +143,6 @@ public class CreateItem extends AppCompatActivity {
     public void backToItems() {
         finish();
     }
-
-
 
     private void askCamPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

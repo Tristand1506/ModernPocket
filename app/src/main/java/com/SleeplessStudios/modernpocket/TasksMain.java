@@ -45,7 +45,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
         //DataManager.getInstance().RefreshCollection(this);
         //DataManager.getInstance().setActiveCollection(null);
         initRecyclerView();
-
+        DataManager.getInstance().setActiveTask(null);
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);

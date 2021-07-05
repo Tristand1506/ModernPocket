@@ -55,9 +55,9 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
             holder.incompleat.setVisibility(View.INVISIBLE);
             holder.compleat.setVisibility(View.INVISIBLE);
             holder.percentage.setVisibility(View.VISIBLE);
-            holder.percentage.setText(holder.completion.getProgress());
+            holder.percentage.setText(holder.completion.getProgress()+"");
         }
-        else if (holder.completion.getProgress()>=100){
+        else if (holder.completion.getProgress()>=99){
             holder.incompleat.setVisibility(View.INVISIBLE);
             holder.compleat.setVisibility(View.VISIBLE);
             holder.percentage.setVisibility(View.INVISIBLE);

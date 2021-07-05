@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 
 import UtilLib.DataManager;
+import UtilLib.RecyclerViewItemAdapter;
+import UtilLib.RecyclerViewObjectiveAdapter;
 
 public class Objectives extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton createObjective;
@@ -33,7 +37,8 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objectives);
-
+        initRecyclerView();
+        DataManager.getInstance().setActiveObjective(null);
         drawer = findViewById(R.id.sidebar_main);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
@@ -112,6 +117,14 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().initData();
+        initRecyclerView();
+        DataManager.getInstance().setActiveObjective(null);
+        taskName.setText(DataManager.getInstance().getActiveTask().getTaskName());
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())
@@ -226,5 +239,11 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
         else {
             super.onBackPressed();
         }
+    }
+    private void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_objectives);
+        RecyclerViewObjectiveAdapter adapter = new RecyclerViewObjectiveAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

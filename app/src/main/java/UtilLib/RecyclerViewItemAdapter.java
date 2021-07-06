@@ -87,12 +87,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 DataManager.getInstance().setActiveItem(load);
                 System.out.println("owned is now " + isChecked + "\nnow updating" );
-                if (isChecked) {
-                    load.setFavourite(isChecked);
-                }
-                else{
-                    load.setFavourite(isChecked);
-                }
+                load.setFavourite(isChecked);
                 System.out.println(load.toString());
                 DataManager.getInstance().AddOrUpdateItem(load);
                 DataManager.getInstance().setActiveItem(null);

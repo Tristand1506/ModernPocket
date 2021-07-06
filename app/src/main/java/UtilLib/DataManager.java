@@ -137,10 +137,39 @@ public class DataManager {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        objectiveDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (objectives!=null) {
+                    objectives.clear();
+                }
+                for (DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    Objective objective = snap.getValue(Objective.class);
+                    objective.setId(snap.getKey());
+                    try{
+                        objective.setComplete(snap.child("isComplete").getValue(boolean.class));
+                    }
+                    catch (Exception e){
+                        objective.setComplete(false);
+                    }
+
+                    if (objective == null){
+                        System.out.println( "error reading object collection");
+                    }
+                    else objectives.add(objective);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
-
-
-
+    
     //Active Objects//
     private String activeCollection;
     private String activeItem;
@@ -179,12 +208,23 @@ public class DataManager {
                     task.getObjectives().clear();
                 }
                 for (Objective objective:objectives) {
+                    String oID = objective.getTaskId();
+                    String tID = task.getId();
+                    System.out.println("Task ID: " + tID + "\nObjective ID: "+ oID);
                     if (objective.getTaskId().equals(task.getId())){
                         //System.out.println(item.toString());
                         task.getObjectives().add(objective);
                     }
                 }
                 return task;
+            }
+        }
+        return null;
+    }
+    public Objective getActiveObjective() {
+        for (Objective objective: objectives) {
+            if (objective.getId().equals(activeObjective)){
+                return objective;
             }
         }
         return null;
@@ -230,12 +270,11 @@ public class DataManager {
         else activeItem = null;
     }
     public void setActiveTask(Task at){
-
         if (at != null){
             List<Objective> in = new ArrayList<Objective>();
             //System.out.println("Adding active Collections Items for item: " +ac.getId() );
             for (Objective obj: objectives) {
-                if (obj.getId().equals(at.getId())){
+                if (obj.getTaskId().equals(at.getId())){
                     //System.out.println(item.toString());
                     in.add(obj);
                 }
@@ -256,6 +295,17 @@ public class DataManager {
                 //System.out.println(item.toString());
             }
         }*/
+    }
+    public void setActiveObjective(Objective inObjective){
+        if (inObjective != null){
+            for (Objective objective:objectives) {
+                if (objective.getId().equals(inObjective.getId())){
+                    //System.out.println(item.toString());
+                    activeObjective = objective.getId();
+                }
+            }
+        }
+        else activeObjective = null;
     }
 
     public void SaveData(){
@@ -339,13 +389,28 @@ public class DataManager {
             //collectionDatabase.child(getActiveCollection().getId()).child("collectibles").setValue(collection.getCollectibles());
         }
     }
-
-    public void RemoveCollection(ItemCollection task){
-        collections.remove(task);
+    public void AddOrUpdateObjective(Objective objective) {
+        if (activeObjective == null) {
+            objective.setId(objectiveDatabase.push().getKey());
+            objectiveDatabase.child(objective.getId()).child("id").setValue(objective.getId());
+            objectiveDatabase.child(objective.getId()).child("taskId").setValue(getActiveTask().getId());
+            objectiveDatabase.child(objective.getId()).child("objectiveName").setValue(objective.getObjectiveName());
+            objectiveDatabase.child(objective.getId()).child("description").setValue(objective.getDescription());
+            objectiveDatabase.child(objective.getId()).child("isComplete").setValue(objective.isComplete());
+        } else {
+            objectiveDatabase.child(getActiveObjective().getId()).child("id").setValue(getActiveObjective().getId());
+            objectiveDatabase.child(getActiveObjective().getId()).child("taskId").setValue(getActiveTask().getId());
+            objectiveDatabase.child(getActiveObjective().getId()).child("objectiveName").setValue(objective.getObjectiveName());
+            objectiveDatabase.child(getActiveObjective().getId()).child("description").setValue(objective.getDescription());
+            objectiveDatabase.child(getActiveObjective().getId()).child("isComplete").setValue(objective.isComplete());
+        }
     }
 
     public void RefreshActiveCollection(){
         getActiveCollection();
+    }
+    public void RefreshActiveTask(){
+        getActiveTask();
     }
 
     public void initData(){
@@ -390,16 +455,42 @@ public class DataManager {
         }
 
     }
-    public List<Collectible> getFavourites()
+    public List<Collectible> getFavourites() {
+        List<Collectible> out = new ArrayList<Collectible>();
+        for (Collectible item : items)
         {
-            List<Collectible> out = new ArrayList<Collectible>();
-            for (Collectible item : items)
+            if (item.isFavourite())
             {
-                if (item.isFavourite())
-                {
-                    out.add(item);
+                out.add(item);
+            }
+        }
+        return out;
+    }
+
+    public void InitCollections(){
+        for (int i = 0 ; i < collections.size(); i++) {
+            List<Collectible> in = new ArrayList<Collectible>();
+            for (Collectible item : items) {
+                if (item.getCollectionId().equals(collections.get(i).getId())){
+                    //System.out.println(item.toString());
+                    in.add(item);
                 }
             }
-            return out;
+            collections.get(i).setCollectibles(in);
         }
+    }
+
+    public void InitTasks(){
+        for (int i = 0 ; i < tasks.size(); i++) {
+            List<Objective> in = new ArrayList<Objective>();
+            for (Objective obj : objectives) {
+                if (obj.getTaskId().equals(tasks.get(i).getId())){
+                    //System.out.println(item.toString());
+                    in.add(obj);
+                }
+            }
+            tasks.get(i).setObjectives(in);
+        }
+    }
 }
+

@@ -43,8 +43,10 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         ItemCollection load = DataManager.getInstance().collections.get(position);
         holder.image.setImageBitmap(load.getImageBitmap());
         holder.collectionName.setText(load.getCollectionName());
-        System.out.println("Loading progress of " + load.getCollectionName() + "\nProgress at: " + load.getCompletion()*100  );
-        holder.completion.setProgress(load.getCompletion());
+        System.out.println("Loading progress of " + load.getCollectionName() + "\nProgress at: " + load.getCompletion() );
+        int perc = load.getCompletion();
+        holder.completion.setProgress(perc);
+        System.out.println("Progress bar at: " + holder.completion.getProgress());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

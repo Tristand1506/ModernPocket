@@ -29,6 +29,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections_main);
+        DataManager.getInstance().InitCollections();
         //DataManager.getInstance().RefreshCollection(this);
         DataManager.getInstance().setActiveCollection(null);
         initRecyclerView();
@@ -67,6 +68,7 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     @Override
     protected void onResume() {
         super.onResume();
+        DataManager.getInstance().InitCollections();
         //DataManager.getInstance().RefreshCollection(this);
         DataManager.getInstance().setActiveCollection(null);
         initRecyclerView();

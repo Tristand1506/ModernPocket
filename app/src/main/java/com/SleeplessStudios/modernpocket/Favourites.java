@@ -56,18 +56,18 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                 PopupMenu dropDownMenu = new PopupMenu(Favourites.this, filter);
                 final Menu menu = dropDownMenu.getMenu();
 
-                menu.add(0, 0, 0, "Item 1");
-                menu.add(0, 1, 0, "Item 2");
+                menu.add(0, 0, 0, "Alphabetical");
+                menu.add(0, 1, 0, "Lent Out");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
-                                // item ID 0 was clicked
+                                // alphabetical was clicked
                                 return true;
                             case 1:
-                                // item ID 1 was clicked
+                                // lent out was clicked
                                 return true;
                         }
                         return false;

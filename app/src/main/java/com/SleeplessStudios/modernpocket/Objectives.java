@@ -93,18 +93,18 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
                 PopupMenu dropDownMenu = new PopupMenu(Objectives.this, filterObjectives);
                 final Menu menu = dropDownMenu.getMenu();
 
-                menu.add(0, 0, 0, "Item 1");
-                menu.add(0, 1, 0, "Item 2");
+                menu.add(0, 0, 0, "Alphabetical");
+                menu.add(0, 1, 0, "Completion");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
-                                // item ID 0 was clicked
+                                // alphabetical was clicked
                                 return true;
                             case 1:
-                                // item ID 1 was clicked
+                                // completion was clicked
                                 return true;
                         }
                         return false;

@@ -1,10 +1,13 @@
 package com.SleeplessStudios.modernpocket;
 
+import ObjectLib.Collectible;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +15,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import UtilLib.DataManager;
 import UtilLib.RecyclerViewItemAdapter;
@@ -23,6 +29,7 @@ public class Items extends AppCompatActivity {
     private ImageButton pieChart;
     private TextView collectionName;
 
+    Chart chart = new Chart();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +59,22 @@ public class Items extends AppCompatActivity {
                 PopupMenu dropDownMenu = new PopupMenu(Items.this, filterItems);
                 final Menu menu = dropDownMenu.getMenu();
 
-                menu.add(0, 0, 0, "Item 1");
-                menu.add(0, 1, 0, "Item 2");
+                menu.add(0, 0, 0, "Alphabetical");
+                menu.add(0, 1, 0, "Owned");
+                menu.add(0, 2, 0, "Lent Out");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
-                                // item ID 0 was clicked
+                                // alphabetical was clicked
                                 return true;
                             case 1:
-                                // item ID 1 was clicked
+                                // owned was clicked
+                                return true;
+                            case 2:
+                                // lent out was clicked
                                 return true;
                         }
                         return false;

@@ -55,18 +55,22 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
                 PopupMenu dropDownMenu = new PopupMenu(LentItems.this, filter);
                 final Menu menu = dropDownMenu.getMenu();
 
-                menu.add(0, 0, 0, "Item 1");
-                menu.add(0, 1, 0, "Item 2");
+                menu.add(0, 0, 0, "Alphabetical");
+                menu.add(0, 1, 0, "Favourites");
+                menu.add(0, 2, 0, "Return Date");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
-                                // item ID 0 was clicked
+                                // alphabetical was clicked
                                 return true;
                             case 1:
-                                // item ID 1 was clicked
+                                // favourites was clicked
+                                return true;
+                            case 2:
+                                // return date was clicked
                                 return true;
                         }
                         return false;

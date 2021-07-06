@@ -39,8 +39,8 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
     private ImageButton sidebar;
     private DrawerLayout drawer;
 
-    private int value = 1;
-    private static Hashtable<String, Integer> table = new Hashtable();
+    private float value = 1f;
+    private static Hashtable<String, Float> table = new Hashtable();
     public static HashMap items = new HashMap();
 
     private PieChart pieChart;
@@ -197,8 +197,8 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
             }
             else if(items.containsKey(item.getName()))
             {
-                int tempValue = Integer.parseInt(items.get(item.getName()).toString());
-                items.replace(item.getName(), tempValue +1);
+                float tempValue = Float.parseFloat(items.get(item.getName()).toString());
+                items.replace(item.getName(), tempValue +1f);
             }
         }
         table.putAll(items);
@@ -232,15 +232,11 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
 
         Set<String> keys = table.keySet();
 
-        //entries.add(new PieEntry(0.2f, "key"));
-        //entries.add(new PieEntry(0.5f, "stinky"));
-        //entries.add(new PieEntry(0.3f, "yes"));
-
         for (String key: keys)
         {
             entries.add(new PieEntry(table.get(key)/table.size(), key));
             System.out.println(key);
-            System.out.println(table.get(key)/table.size());
+            System.out.println(table.get(key) + "/" + table.size());
         }
 
         ArrayList<Integer> colors = new ArrayList<>();
@@ -265,5 +261,8 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
 
         pieChart.setData(data);
         pieChart.invalidate();
+
+        items.clear();
+        table.clear();
     }
 }

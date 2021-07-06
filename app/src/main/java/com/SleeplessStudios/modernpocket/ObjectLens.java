@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.navigation.NavigationView;
 
 import android.graphics.Bitmap;
@@ -24,7 +25,13 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+//import okhttp3.Request;
+import okhttp3.RequestBody;
+//import okhttp3.Response;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,8 +49,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ObjectLens extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -59,6 +69,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     private String title, link, displayed_link, snippet;
 
     private String TAG = "ObjectLens";
+    OkHttpClient client = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,7 +245,11 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
             @Override
             public void onSuccess(List<FirebaseVisionImageLabel> firebaseVisionImageLabels) {
                 String searchQuery = firebaseVisionImageLabels.get(0).getText();
-                searchData(searchQuery);
+                try {
+                    searchData(searchQuery);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -244,13 +259,37 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
             }
         });
     }
-    private void searchData(String searchQuery) {
+
+    private void searchData(String searchQuery) throws IOException {
         //not using serpapi, using zenserp
 
         String apiKey = "apikey=355635e0-ddb5-11eb-abde-cdaf48b4f10b&q=";
         String url = "https://app.zenserp.com/api/v2/search.json?" + apiKey + searchQuery.trim() + "&device=mobile&search_engine=google.co.za&location=FK9%2CScotland%2CUnited%20Kingdom&hl=en";
+        //USVString
         //String apiKey = "Enter your API key here";
         //String url = "https://serpapi.com/search.json?q=" + searchQuery.trim() + "&location=Delhi,India&hl=en&gl=us&google_domain=google.com&api_key=" + apiKey;
+
+        /*MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "{\n" +
+                "    \"q\": \"searchQuery.trim()\",\n" +
+                "    \"domain\": \"google.com\"\n" +
+                "    \"loc\": \"Cape Town,Western Cape,South Africa\"\n" +
+                "    \"lang\": \"en\"\n" +
+                "    \"device\": \"mobile\"\n" +
+                "    \"serp_type\": \"web\"\n" +
+                "    \"page\": \"1\"\n" +
+                "    \"verbatim\": \"0\"\n" +
+                "}");
+
+        Request request = new Request().Builder()
+            .url("https://api.serphouse.com/serp/live")
+            .post(body)
+            .addHeader("accept", "application/json")
+            .addHeader("content-type", "application/json")
+            .addHeader("authorization", "Bearer Q85iAOTYmwNWiPOob8LFs4gOYN553LqIOWQLw4Qj9NrBJrY5nxVmzKkR14dp")
+            .build();
+
+        Response response = client.newCall(request).execute();*/
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(ObjectLens.this);
@@ -260,7 +299,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
                 Log.e(TAG, "response received");
                 try {
                     // on below line we are extracting data from our json.
-                    JSONArray organicResultsArray = response.getJSONArray("organic_results");
+                    JSONArray organicResultsArray = response.getJSONArray("organic");
                     for (int i = 0; i < organicResultsArray.length(); i++) {
                         JSONObject organicObj = organicResultsArray.getJSONObject(i);
                         if (organicObj.has("title")) {

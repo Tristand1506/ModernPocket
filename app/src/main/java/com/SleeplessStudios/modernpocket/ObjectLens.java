@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.navigation.NavigationView;
 
@@ -69,7 +70,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     private String title, link, displayed_link, snippet;
 
     private String TAG = "ObjectLens";
-    OkHttpClient client = new OkHttpClient();
+    public static int TIMEOUT_MS=10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +103,12 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
         dataModalArrayList = new ArrayList<>();
 
         // initializing our adapter class.
-        RVLensAdapter adapter = new RVLensAdapter(dataModalArrayList, ObjectLens.this);
+        searchResultsRVAdapter = new RVLensAdapter(dataModalArrayList, ObjectLens.this);
 
         // layout manager for our recycler view.
-        LinearLayoutManager manager = new LinearLayoutManager(ObjectLens.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager manager = new LinearLayoutManager(ObjectLens.this, LinearLayoutManager.VERTICAL, false);
         resultRV.setLayoutManager(manager);
-        resultRV.setAdapter(adapter);
+        resultRV.setAdapter(searchResultsRVAdapter);
 
         snap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,45 +262,27 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     }
 
     private void searchData(String searchQuery) throws IOException {
-        //not using serpapi, using zenserp
+        //not using serpapi, using serphouse
 
-        String apiKey = "apikey=355635e0-ddb5-11eb-abde-cdaf48b4f10b&q=";
-        String url = "https://app.zenserp.com/api/v2/search.json?" + apiKey + searchQuery.trim() + "&device=mobile&search_engine=google.co.za&location=FK9%2CScotland%2CUnited%20Kingdom&hl=en";
-        //USVString
-        //String apiKey = "Enter your API key here";
-        //String url = "https://serpapi.com/search.json?q=" + searchQuery.trim() + "&location=Delhi,India&hl=en&gl=us&google_domain=google.com&api_key=" + apiKey;
-
-        /*MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\n" +
-                "    \"q\": \"searchQuery.trim()\",\n" +
-                "    \"domain\": \"google.com\"\n" +
-                "    \"loc\": \"Cape Town,Western Cape,South Africa\"\n" +
-                "    \"lang\": \"en\"\n" +
-                "    \"device\": \"mobile\"\n" +
-                "    \"serp_type\": \"web\"\n" +
-                "    \"page\": \"1\"\n" +
-                "    \"verbatim\": \"0\"\n" +
-                "}");
-
-        Request request = new Request().Builder()
-            .url("https://api.serphouse.com/serp/live")
-            .post(body)
-            .addHeader("accept", "application/json")
-            .addHeader("content-type", "application/json")
-            .addHeader("authorization", "Bearer Q85iAOTYmwNWiPOob8LFs4gOYN553LqIOWQLw4Qj9NrBJrY5nxVmzKkR14dp")
-            .build();
-
-        Response response = client.newCall(request).execute();*/
+        String apiKey = "&api_token=Q85iAOTYmwNWiPOob8LFs4gOYN553LqIOWQLw4Qj9NrBJrY5nxVmzKkR14dp";
+        String url = "https://api.serphouse.com/serp/live?q=" + searchQuery.trim() + apiKey + "&domain=google.com&loc=Cape%20Town%2CWestern%20Cape%2CSouth%20Africa&hl=en";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(ObjectLens.this);
+
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
                 Log.e(TAG, "response received");
                 try {
+
+                    JSONObject results = response.getJSONObject("results").getJSONObject("results");
+
                     // on below line we are extracting data from our json.
-                    JSONArray organicResultsArray = response.getJSONArray("organic");
+                    JSONArray organicResultsArray = results.getJSONArray("organic");
+                    System.out.println(organicResultsArray);
                     for (int i = 0; i < organicResultsArray.length(); i++) {
                         JSONObject organicObj = organicResultsArray.getJSONObject(i);
                         if (organicObj.has("title")) {
@@ -332,7 +315,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
                 Log.e(TAG, "error finding search results: \n" + error);
             }
         });
-        // adding json object request to our queue.
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         queue.add(jsonObjectRequest);
     }
 

@@ -36,7 +36,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_favourites,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_items,parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -45,6 +45,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
         Collectible load = DataManager.getInstance().getActiveCollection().getCollectibles().get(position);
+        System.out.println("loading item: "+ load.getName() );
         holder.image.setImageBitmap(load.getImageBitmap());
         holder.itemName.setText(load.getName());
         System.out.println("Favorite: " + load.isFavourite() + "\nIs Owned: "+load.isOwned());

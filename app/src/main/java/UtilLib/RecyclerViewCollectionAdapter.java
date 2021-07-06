@@ -51,7 +51,7 @@ public class RecyclerViewCollectionAdapter extends RecyclerView.Adapter<Recycler
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Chekking Active Item at -"+position+"- \n" + DataManager.getInstance().collections.get(position) );
+                System.out.println("Chekking Active Item at -"+position+"- \n" + DataManager.getInstance().collections.get(position));
                 DataManager.getInstance().setActiveCollection(load);
                 Intent intent = new Intent(mContext, Items.class);
                 mContext.startActivity(intent);

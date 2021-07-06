@@ -97,10 +97,10 @@ public class ItemCollection {
             }
         }
         if (collectibles.size() > 0) {
-            percCompletion = (float)(collected / (float)collectibles.size());
+            percCompletion = (collected / (float)collectibles.size());
             System.out.println("Compleation: "+ collected + "/" + collectibles.size() + "\n at: " + percCompletion*100f +"%");
         }
-        else{percCompletion = 0;}
+        else{return 0;}
         return (int)(percCompletion*100f);
     }
 

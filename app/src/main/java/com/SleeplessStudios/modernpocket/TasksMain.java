@@ -41,7 +41,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_main);
-
+        DataManager.getInstance().InitTasks();
         //DataManager.getInstance().RefreshCollection(this);
         //DataManager.getInstance().setActiveCollection(null);
         initRecyclerView();
@@ -77,6 +77,15 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
                 OpenTaskDialog();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DataManager.getInstance().InitTasks();
+        //DataManager.getInstance().RefreshCollection(this);
+        DataManager.getInstance().setActiveTask(null);
+        initRecyclerView();
     }
 
     public void OpenTaskDialog()
@@ -213,15 +222,6 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
     {
 
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //DataManager.getInstance().RefreshCollection(this);
-        DataManager.getInstance().setActiveTask(null);
-        initRecyclerView();
-    }
-
     public void CreateTask()
     {
         Task save = new Task(taskName.getText().toString(), taskDueDate.getText().toString());

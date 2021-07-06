@@ -169,9 +169,7 @@ public class DataManager {
             }
         });
     }
-
-
-
+    
     //Active Objects//
     private String activeCollection;
     private String activeItem;
@@ -408,10 +406,6 @@ public class DataManager {
         }
     }
 
-    public void RemoveCollection(ItemCollection task){
-        collections.remove(task);
-    }
-
     public void RefreshActiveCollection(){
         getActiveCollection();
     }
@@ -461,16 +455,42 @@ public class DataManager {
         }
 
     }
-    public List<Collectible> getFavourites()
+    public List<Collectible> getFavourites() {
+        List<Collectible> out = new ArrayList<Collectible>();
+        for (Collectible item : items)
         {
-            List<Collectible> out = new ArrayList<Collectible>();
-            for (Collectible item : items)
+            if (item.isFavourite())
             {
-                if (item.isFavourite())
-                {
-                    out.add(item);
+                out.add(item);
+            }
+        }
+        return out;
+    }
+
+    public void InitCollections(){
+        for (int i = 0 ; i < collections.size(); i++) {
+            List<Collectible> in = new ArrayList<Collectible>();
+            for (Collectible item : items) {
+                if (item.getCollectionId().equals(collections.get(i).getId())){
+                    //System.out.println(item.toString());
+                    in.add(item);
                 }
             }
-            return out;
+            collections.get(i).setCollectibles(in);
         }
+    }
+
+    public void InitTasks(){
+        for (int i = 0 ; i < tasks.size(); i++) {
+            List<Objective> in = new ArrayList<Objective>();
+            for (Objective obj : objectives) {
+                if (obj.getTaskId().equals(tasks.get(i).getId())){
+                    //System.out.println(item.toString());
+                    in.add(obj);
+                }
+            }
+            tasks.get(i).setObjectives(in);
+        }
+    }
 }
+

@@ -24,7 +24,6 @@ import java.util.Date;
 import ObjectLib.Collectible;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewItemAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewCollectionAdapter";
     private Context mContext;
@@ -37,7 +36,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_items,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_favourites,parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -116,9 +115,9 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
             owned = itemView.findViewById(R.id.item_checkbox);
             lent = itemView.findViewById(R.id.item_lent_btn);
             //favorite = itemView.findViewById(R.id.favorite_btn);
-
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
     }
 }
+

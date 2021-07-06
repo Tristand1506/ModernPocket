@@ -1,6 +1,7 @@
 package com.SleeplessStudios.modernpocket;
 
 import UtilLib.DataManager;
+import UtilLib.RecyclerViewFavouriteAdapter;
 import UtilLib.RecyclerViewItemAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -189,8 +190,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         }
     }
     private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
-        RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_fav_items);
+        RecyclerViewFavouriteAdapter adapter = new RecyclerViewFavouriteAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

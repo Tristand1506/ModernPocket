@@ -33,16 +33,17 @@
         android:background="#00FFFFFF"
         tools:src="@drawable/star_hollow" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/item_lent_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="#00FFFFFF"
-        tools:src="@drawable/lent_icon" />
+        android:visibility="visible"
+        android:src="@drawable/lent_icon" />
 
     <CheckBox
         android:id="@+id/item_checkbox"

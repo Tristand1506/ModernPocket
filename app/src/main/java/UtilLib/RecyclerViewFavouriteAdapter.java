@@ -37,7 +37,7 @@ public class RecyclerViewFavouriteAdapter extends RecyclerView.Adapter<RecyclerV
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_items,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_favourites,parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -54,6 +54,7 @@ public class RecyclerViewFavouriteAdapter extends RecyclerView.Adapter<RecyclerV
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 DataManager.getInstance().setActiveItem(load);
+                DataManager.getInstance().setActiveCollectionFromId(load.getCollectionId());
                 System.out.println("owned is now " + isChecked + "\nnow updating" );
                 load.setFavourite(isChecked);
                 System.out.println(load.toString());

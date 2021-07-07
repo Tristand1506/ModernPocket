@@ -49,15 +49,15 @@ public class Collectible {
         setAcquisitionDate(date);
         setAcquisitionLoc(loc);
     }*/
-    public Collectible(String name, String description, String date, String loc, Bitmap img) {
+    public Collectible(String name, String description, String date, String loc, Bitmap img, String borrowed, String returnDate) {
         this.name = name;
         this.description = description;
         image = img;
-        if (date!=null || !loc.trim().isEmpty()) {
-            isOwned = true;
-        }
         setAcquisitionDate(date);
         setAcquisitionLoc(loc);
+
+        setBorrowedTo(borrowed);
+        setExpectedReturn(returnDate);
     }
 
     private String id;
@@ -153,20 +153,19 @@ public class Collectible {
     }
 
     private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
     public String getAcquisitionDate() {
         if (acquisitionDate != null) {
             return dateFormat.format(acquisitionDate);
         }
         else return null;
     }
-
     public void setAcquisitionDate(String acquisitionDate) {
         if (!acquisitionDate.isEmpty()) {
             this.acquisitionDate = DataManager.getDateFromString(acquisitionDate);
         }
         else this.acquisitionDate = null;
     }
-
     public void setAcquisitionDateWithDate(Date acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
@@ -183,7 +182,7 @@ public class Collectible {
     }
 
     //loaner data
-    private boolean isLent;
+   // private boolean isLent;
     private String borrowedTo;
     private Date expectedReturn;
 
@@ -191,23 +190,25 @@ public class Collectible {
     // Loaner Gets and Sets
     ///////////////////////
     public boolean isLent() {
-        return isLent;
+        if (borrowedTo != null || expectedReturn != null) {
+            return true;
+        }
+        else return  false;
     }
-
-    public void setLent(boolean isLent) {
+/*    public void setLent(boolean isLent) {
         if (!isOwned){
             this.isLent = false;
         }
         else {
             this.isLent = isLent;
         }
-    }
+    }*/
 
     public String getBorrowedTo() {
         return borrowedTo;
     }
     public void setBorrowedTo(String borrowedTo) {
-        if (!isOwned){
+        if (!isOwned() || borrowedTo.isEmpty()){
             this.borrowedTo = null;
         }
         else {
@@ -215,16 +216,27 @@ public class Collectible {
         }
     }
 
-    public Date getExpectedReturn() {
-        return expectedReturn;
+    public String getExpectedReturn() {
+        if (expectedReturn==null){
+            return null;
+        }
+        else return dateFormat.format(expectedReturn);
     }
-    public void setExpectedReturn(Date expectedReturn) {
-        if (!isOwned){
+    public void setExpectedReturn(String expectedReturn) {
+        if (!isOwned()){
             this.expectedReturn = null;
+            return;
         }
-        else {
-            this.expectedReturn = expectedReturn;
+        if (!expectedReturn.isEmpty()) {
+            this.expectedReturn = DataManager.getDateFromString(expectedReturn);
         }
+        else this.expectedReturn = null;
+    }
+    public void setExpectedReturnWithDate(String expectedReturn) {
+        if (!expectedReturn.isEmpty()) {
+            this.expectedReturn = DataManager.getDateFromString(expectedReturn);
+        }
+        else this.expectedReturn = null;
     }
 
     @Override
@@ -239,7 +251,7 @@ public class Collectible {
                 ", isOwned=" + isOwned +'\n' +
                 ", acquisitionDate=" + acquisitionDate +'\n' +
                 ", acquisitionLoc='" + acquisitionLoc + '\n' +
-                ", isLent=" + isLent +'\n' +
+                ", isLent=" + isLent() +'\n' +
                 ", borrowedTo='" + borrowedTo + '\n' +
                 ", expectedReturn=" + expectedReturn +'\n' +
                 '}';

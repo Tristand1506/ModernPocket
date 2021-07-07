@@ -2,6 +2,8 @@ package com.SleeplessStudios.modernpocket;
 
 import UtilLib.DataManager;
 import UtilLib.RecyclerViewItemAdapter;
+import UtilLib.RecyclerViewLentsAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -197,8 +199,8 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
         }
     }
     private void initRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
-        RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_lent_items);
+        RecyclerViewLentsAdapter adapter = new RecyclerViewLentsAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -93,6 +93,24 @@ public class CreateItem extends AppCompatActivity {
 
         photo = (CircleImageView) findViewById(R.id.item_image_img);
 
+        addAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int add = Integer.parseInt(amount.getText().toString())+1;
+                amount.setText(add+"");
+            }
+        });
+        lessAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int add = Integer.parseInt(amount.getText().toString())-1;
+
+                if (add<1){
+                    amount.setText(1+"");
+                }
+                else amount.setText(add+"");
+            }
+        });
         discardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,13 +124,23 @@ public class CreateItem extends AppCompatActivity {
             {
                 BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
                 Bitmap photoIn = bd.getBitmap();
-                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(),acquireDate.getText().toString(), acquireLoc.getText().toString() ,photoIn);
-                DataManager.getInstance().AddOrUpdateItem(in);
+                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(),acquireDate.getText().toString(), acquireLoc.getText().toString() ,photoIn,lentTo.getText().toString(), returnDate.getText().toString());
+                if (DataManager.getInstance().getActiveItem()==null) {
+                    for (int i = 0; i < Integer.parseInt(amount.getText().toString()); i++) {
+                        DataManager.getInstance().AddOrUpdateItem(in);
+                    }
+                }
+                else {
+                    in.setFavourite(DataManager.getInstance().getActiveItem().isFavourite());
+                    DataManager.getInstance().AddOrUpdateItem(in);
+                }
+
                 DataManager.getInstance().RefreshActiveCollection();
                 backToItems();
+
             }
         });
-
+        amount.setText("1");
        /* //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);
         //array for spinner
@@ -131,13 +159,19 @@ public class CreateItem extends AppCompatActivity {
         name.setText(activeItem.getName());
         description.setText(activeItem.getDescription());
         photo.setImageBitmap(activeItem.getImageBitmap());
+        amountHeading.setVisibility(View.INVISIBLE);
+        amount.setVisibility(View.INVISIBLE);
+        addAmount.setVisibility(View.INVISIBLE);
+        lessAmount.setVisibility(View.INVISIBLE);
         if (activeItem.isOwned()) {
             acquireDate.setText(activeItem.getAcquisitionDate());
             acquireLoc.setText(activeItem.getAcquisitionLoc());
         }
+        if (activeItem.isLent()){
+            lentTo.setText(activeItem.getBorrowedTo());
+            returnDate.setText(activeItem.getExpectedReturn());
+        }
 
-        //todo
-        // lent and return
     }
 
     public void backToItems() {

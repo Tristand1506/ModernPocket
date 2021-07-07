@@ -258,6 +258,33 @@ public class DataManager {
             }
         }*/
     }
+    public void setActiveCollectionFromId(String ac){
+
+        if (ac != null){
+            List<Collectible> in = new ArrayList<Collectible>();
+            //System.out.println("Adding active Collections Items for item: " +ac.getId() );
+            for (Collectible item:items) {
+                if (item.getCollectionId().equals(ac)){
+                    //System.out.println(item.toString());
+                    in.add(item);
+                }
+            }
+            for (ItemCollection coll: collections) {
+                if (coll.getId().equals(ac)){
+                    //System.out.println(item.toString());
+                    activeCollection = coll.getId();
+                }
+            }
+            getActiveCollection().setCollectibles(in);
+        }
+        else activeCollection = null;
+        /*if (activeCollection!=null) {
+            System.out.println("Checking active collection for items");
+            for (Collectible item : activeCollection.getCollectibles()) {
+                //System.out.println(item.toString());
+            }
+        }*/
+    }
     public void setActiveItem(Collectible inItem){
         if (inItem != null){
             for (Collectible item:items) {
@@ -344,6 +371,7 @@ public class DataManager {
     public void AddOrUpdateItem(Collectible item){
         if (activeItem == null) {
             item.setId(itemDatabase.push().getKey());
+            System.out.println("Adding Item :"+ item.toString());
             itemDatabase.child(item.getId()).child("id").setValue(item.getId());
             itemDatabase.child(item.getId()).child("collectionId").setValue(getActiveCollection().getId());
             itemDatabase.child(item.getId()).child("name").setValue(item.getName());
@@ -354,22 +382,23 @@ public class DataManager {
             itemDatabase.child(item.getId()).child("acquisitionDate").setValue(item.getAcquisitionDate());
             itemDatabase.child(item.getId()).child("acquisitionLoc").setValue(item.getAcquisitionLoc());
 
-            itemDatabase.child(item.getId()).child("isLent").setValue(item.isLent());
+            //itemDatabase.child(item.getId()).child("isLent").setValue(item.isLent());
             itemDatabase.child(item.getId()).child("borrowedTo").setValue(item.getBorrowedTo());
             itemDatabase.child(item.getId()).child("expectedReturn").setValue(item.getExpectedReturn());
         }
         else{
+            System.out.println("Updating Item :"+ item.toString());
             itemDatabase.child(getActiveItem().getId()).child("id").setValue(getActiveItem().getId());
             itemDatabase.child(getActiveItem().getId()).child("collectionId").setValue(getActiveCollection().getId());
             itemDatabase.child(getActiveItem().getId()).child("name").setValue(item.getName());
             itemDatabase.child(getActiveItem().getId()).child("description").setValue(item.getDescription());
             itemDatabase.child(getActiveItem().getId()).child("image").setValue(item.getImage());
-            itemDatabase.child(getActiveItem().getId()).child("isFavorite").setValue(getActiveItem().isFavourite());
+            itemDatabase.child(getActiveItem().getId()).child("isFavorite").setValue(item.isFavourite());
 
             itemDatabase.child(getActiveItem().getId()).child("acquisitionDate").setValue(item.getAcquisitionDate());
             itemDatabase.child(getActiveItem().getId()).child("acquisitionLoc").setValue(item.getAcquisitionLoc());
 
-            itemDatabase.child(getActiveItem().getId()).child("isLent").setValue(item.isLent());
+            //itemDatabase.child(getActiveItem().getId()).child("isLent").setValue(item.isLent());
             itemDatabase.child(getActiveItem().getId()).child("borrowedTo").setValue(item.getBorrowedTo());
             itemDatabase.child(getActiveItem().getId()).child("expectedReturn").setValue(item.getExpectedReturn());
         }
@@ -460,6 +489,17 @@ public class DataManager {
         for (Collectible item : items)
         {
             if (item.isFavourite())
+            {
+                out.add(item);
+            }
+        }
+        return out;
+    }
+    public List<Collectible> getLent() {
+        List<Collectible> out = new ArrayList<Collectible>();
+        for (Collectible item : items)
+        {
+            if (item.isLent())
             {
                 out.add(item);
             }

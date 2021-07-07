@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,7 +52,13 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
         System.out.println("Favorite: " + load.isFavourite() + "\nIs Owned: "+load.isOwned());
         holder.owned.setChecked(load.isOwned());
         holder.favorite.setChecked(load.isFavourite());
-        holder.lent.setEnabled(load.isLent());
+        if (load.isLent()){
+            holder.lent.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.lent.setVisibility(View.INVISIBLE);
+        }
+
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +113,7 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
         TextView itemName;
         CheckBox favorite;
         CheckBox owned;
-        ImageButton lent;
+        ImageView lent;
         RelativeLayout parentLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

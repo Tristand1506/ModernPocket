@@ -125,7 +125,10 @@ public class CreateItem extends AppCompatActivity {
             {
                 BitmapDrawable bd = (BitmapDrawable) photo.getDrawable();
                 Bitmap photoIn = bd.getBitmap();
-                Collectible in = new Collectible(name.getText().toString(), description.getText().toString(),acquireDate.getText().toString(), acquireLoc.getText().toString() ,photoIn,lentTo.getText().toString(), returnDate.getText().toString());
+                Collectible in = new Collectible(
+                        name.getText().toString(), description.getText().toString(),
+                        acquireDate.getText().toString(), acquireLoc.getText().toString(),
+                        photoIn,lentTo.getText().toString(), returnDate.getText().toString());
                 if (DataManager.getInstance().getActiveItem()==null) {
                     for (int i = 0; i < Integer.parseInt(amount.getText().toString()); i++) {
                         DataManager.getInstance().AddOrUpdateItem(in);
@@ -150,15 +153,6 @@ public class CreateItem extends AppCompatActivity {
                 lentTo.setText(null);
             }
         });
-        saveItem.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-            }
-        });
-
         amount.setText("1");
        /* //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);

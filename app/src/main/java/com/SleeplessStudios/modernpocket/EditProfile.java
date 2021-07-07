@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,6 +35,7 @@ public class EditProfile extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoginManager.getInstance().initUsers();
         setContentView(R.layout.activity_edit_profile);
 
         drawer = findViewById(R.id.sidebar_main);
@@ -72,6 +74,8 @@ public class EditProfile extends AppCompatActivity implements NavigationView.OnN
             {
                 UserAcount in = new UserAcount(LoginManager.getInstance().getAccountFromEmail( LoginManager.getActiveUser().getEmail()).getUsername(),LoginManager.getActiveUser().getEmail(),phone.getText().toString(),gender.getText().toString());
                 LoginManager.getInstance().UpdateUserData(in);
+                Toast.makeText(EditProfile.this, "Profile Updated",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

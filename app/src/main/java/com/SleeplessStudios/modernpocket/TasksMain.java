@@ -17,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,6 +36,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
     private AlertDialog dialog;
     private EditText taskName;
     private EditText taskDueDate;
+    private ImageButton filter;
     private Button create;
     private Button cancel;
 
@@ -75,6 +78,34 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
             public void onClick(View v)
             {
                 OpenTaskDialog();
+            }
+        });
+
+        filter = (ImageButton) findViewById(R.id.filter_tasks_btn);
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu dropDownMenu = new PopupMenu(TasksMain.this, filter);
+                final Menu menu = dropDownMenu.getMenu();
+
+                menu.add(0, 0, 0, "Alphabetical");
+                menu.add(0, 1, 0, "Completion");
+
+                dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case 0:
+                                // alphabetical was clicked
+                                return true;
+                            case 1:
+                                // completion was clicked
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+                dropDownMenu.show();
             }
         });
     }

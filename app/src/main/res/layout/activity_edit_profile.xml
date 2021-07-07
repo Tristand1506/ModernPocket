@@ -23,15 +23,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/save_profile_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_gender_txt"
+                app:srcCompat="@drawable/burger_bar"
+                tools:text="Save" />
+
             <EditText
                 android:id="@+id/edit_email_txt"
                 android:layout_width="377dp"
                 android:layout_height="47dp"
                 android:ems="10"
-                android:textColorHint="@color/text_grey"
                 android:fontFamily="@font/segoeuisl"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
+                android:textColorHint="@color/text_grey"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.47"
@@ -45,8 +58,8 @@
                 android:ems="10"
                 android:fontFamily="@font/segoeuisl"
                 android:inputType="number"
-                android:textColorHint="@color/text_grey"
                 android:textColor="@color/black"
+                android:textColorHint="@color/text_grey"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.444"
@@ -58,50 +71,15 @@
                 android:layout_width="374dp"
                 android:layout_height="45dp"
                 android:ems="10"
-                android:textColorHint="@color/text_grey"
                 android:fontFamily="@font/segoeuisl"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
+                android:textColorHint="@color/text_grey"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.432"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_gender_headertxt" />
-
-            <EditText
-                android:id="@+id/edit_DOB_txt"
-                android:layout_width="374dp"
-                android:layout_height="46dp"
-                android:ems="10"
-                android:textColorHint="@color/text_grey"
-                android:fontFamily="@font/segoeuisl"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.378"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_DOB_headertxt" />
-
-            <ImageView
-                android:id="@+id/profile_topbar_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/profile_topbar" />
-
-            <ImageView
-                android:id="@+id/profile_bg_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="96dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.542"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/profile_box" />
 
             <ImageButton
                 android:id="@+id/profile_avatar_btn"
@@ -127,6 +105,26 @@
                 app:layout_constraintTop_toTopOf="@+id/profile_topbar_img"
                 app:layout_constraintVertical_bias="0.271"
                 app:srcCompat="@drawable/burger_bar" />
+
+            <ImageView
+                android:id="@+id/profile_topbar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_topbar" />
+
+            <ImageView
+                android:id="@+id/profile_bg_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.542"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_box" />
 
             <TextView
                 android:id="@+id/profile_username_txt"
@@ -181,19 +179,6 @@
                 app:layout_constraintHorizontal_bias="0.043"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_email_txt" />
-
-            <TextView
-                android:id="@+id/profile_DOB_headertxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/segoeuisl"
-                android:text="Date of Birth"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_gender_txt" />
 
             <TextView
                 android:id="@+id/profile_txt"

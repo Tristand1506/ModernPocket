@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -18,10 +19,10 @@ import com.google.android.material.navigation.NavigationView;
 public class EditProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton avatar;
     private ImageButton sidebar;
+    private Button save;
     private EditText email;
     private EditText phone;
     private EditText gender;
-    private EditText DOB;
     private DrawerLayout drawer;
 
 
@@ -51,7 +52,17 @@ public class EditProfile extends AppCompatActivity implements NavigationView.OnN
         email = (EditText) findViewById(R.id.edit_email_txt);
         phone = (EditText) findViewById(R.id.edit_phone_txt);
         gender = (EditText) findViewById(R.id.edit_gender_txt);
-        DOB = (EditText) findViewById(R.id.edit_DOB_txt);
+
+        save = (Button) findViewById(R.id.save_profile_btn);
+        save.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
+
     }
 
     @Override

@@ -13,14 +13,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import ObjectLib.UserAcount;
+import UtilLib.LoginManager;
 
 public class EditProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ImageButton avatar;
     private ImageButton sidebar;
     private Button save;
-    private EditText email;
+    private TextView email;
+    private TextView user;
     private EditText phone;
     private EditText gender;
     private DrawerLayout drawer;
@@ -49,17 +54,24 @@ public class EditProfile extends AppCompatActivity implements NavigationView.OnN
             }
         });
 
-        email = (EditText) findViewById(R.id.edit_email_txt);
+        email = findViewById(R.id.edit_email_txt);
         phone = (EditText) findViewById(R.id.edit_phone_txt);
         gender = (EditText) findViewById(R.id.edit_gender_txt);
-
+        user = findViewById(R.id.profile_username_txt);
         save = (Button) findViewById(R.id.save_profile_btn);
+
+        user.setText(LoginManager.getInstance().getAccountFromEmail(LoginManager.getActiveUser().getEmail()).getUsername());
+        email.setText(LoginManager.getInstance().getAccountFromEmail(LoginManager.getActiveUser().getEmail()).getEmail());
+        phone.setText(LoginManager.getInstance().getAccountFromEmail(LoginManager.getActiveUser().getEmail()).getPhone());
+        gender.setText(LoginManager.getInstance().getAccountFromEmail(LoginManager.getActiveUser().getEmail()).getGender());
+
         save.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-
+                UserAcount in = new UserAcount(LoginManager.getInstance().getAccountFromEmail( LoginManager.getActiveUser().getEmail()).getUsername(),LoginManager.getActiveUser().getEmail(),phone.getText().toString(),gender.getText().toString());
+                LoginManager.getInstance().UpdateUserData(in);
             }
         });
 

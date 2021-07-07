@@ -7,6 +7,7 @@ import UtilLib.RecyclerViewCollectionAdapter;
 import UtilLib.RecyclerViewTaskAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,14 +94,19 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
                 menu.add(0, 1, 0, "Completion");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
                                 // alphabetical was clicked
+                                DataManager.getInstance().SortTaskByFilter(DataManager.NAME);
+                                initRecyclerView();
                                 return true;
                             case 1:
                                 // completion was clicked
+                                DataManager.getInstance().SortTaskByFilter(DataManager.COMPLEATION);
+                                initRecyclerView();
                                 return true;
                         }
                         return false;

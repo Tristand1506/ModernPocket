@@ -143,6 +143,13 @@ public class CreateItem extends AppCompatActivity {
         });
 
         returnedItem = (Button) findViewById(R.id.item_returned_btn);
+        returnedItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnDate.setText(null);
+                lentTo.setText(null);
+            }
+        });
         saveItem.setOnClickListener(new View.OnClickListener()
         {
             @Override

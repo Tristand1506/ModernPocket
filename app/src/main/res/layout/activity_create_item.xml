@@ -267,12 +267,13 @@
                 android:id="@+id/item_returned_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
                 android:background="@null"
                 android:backgroundTint="@color/off_white"
                 android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_return_date_txt"
                 app:srcCompat="@drawable/plus"
-                tools:layout_editor_absoluteX="55dp"
                 tools:text="Returned" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

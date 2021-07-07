@@ -23,6 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/profile_topbar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_topbar" />
+
             <Button
                 android:id="@+id/save_profile_btn"
                 android:layout_width="wrap_content"
@@ -34,6 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_gender_txt"
                 app:srcCompat="@drawable/burger_bar"
+                android:text="Save"
                 tools:text="Save" />
 
             <TextView
@@ -50,6 +60,17 @@
                 app:layout_constraintHorizontal_bias="0.47"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_email_headertxt" />
+
+            <ImageView
+                android:id="@+id/profile_bg_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.542"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_box" />
 
             <EditText
                 android:id="@+id/edit_phone_txt"
@@ -105,26 +126,6 @@
                 app:layout_constraintTop_toTopOf="@+id/profile_topbar_img"
                 app:layout_constraintVertical_bias="0.271"
                 app:srcCompat="@drawable/burger_bar" />
-
-            <ImageView
-                android:id="@+id/profile_topbar_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/profile_topbar" />
-
-            <ImageView
-                android:id="@+id/profile_bg_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="96dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.542"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/profile_box" />
 
             <TextView
                 android:id="@+id/profile_username_txt"

@@ -64,17 +64,21 @@ public class Items extends AppCompatActivity {
                 menu.add(0, 2, 0, "Lent Out");
 
                 dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case 0:
                                 // alphabetical was clicked
+                                initRecyclerView(DataManager.NAME);
                                 return true;
                             case 1:
                                 // owned was clicked
+                                initRecyclerView(DataManager.OWNED);
                                 return true;
                             case 2:
                                 // lent out was clicked
+                                initRecyclerView(DataManager.LENT);
                                 return true;
                         }
                         return false;
@@ -142,6 +146,12 @@ public class Items extends AppCompatActivity {
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
         RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    private void initRecyclerView(String filter){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_items);
+        RecyclerViewItemAdapter adapter = new RecyclerViewItemAdapter(this,filter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

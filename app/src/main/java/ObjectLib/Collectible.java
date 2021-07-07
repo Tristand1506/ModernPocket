@@ -144,7 +144,7 @@ public class Collectible {
     ///////////////////////
 
 
-    public boolean isOwned() {
+    public Boolean isOwned() {
         if (getAcquisitionDate() != null || getAcquisitionLoc() != null) {
 
             return true;
@@ -189,7 +189,7 @@ public class Collectible {
     ///////////////////////
     // Loaner Gets and Sets
     ///////////////////////
-    public boolean isLent() {
+    public Boolean isLent() {
         if (borrowedTo != null || expectedReturn != null) {
             return true;
         }

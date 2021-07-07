@@ -2,28 +2,26 @@ package UtilLib;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.util.Log;
 
-import com.SleeplessStudios.modernpocket.Objectives;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 
 import java.io.ByteArrayOutputStream;
 import android.util.Base64;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +37,12 @@ public class DataManager {
     // Singleton DataManager
     private static final DataManager Data = new DataManager();
     public static DataManager getInstance() {return Data;}
+
+    public static final String NAME = "name";
+    public static final String COMPLEATION = "comp";
+    public static final String OWNED = "own";
+    public static final String LENT = "lent";
+    public static final String RETURN = "return";
 
     private String TAG = "DataManger";
 
@@ -193,6 +197,39 @@ public class DataManager {
         }
         return null;
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ItemCollection getActiveCollection(String filter) {
+        for (ItemCollection coll: collections) {
+            if (coll.getId().equals(activeCollection)){
+                if (coll.getCollectibles()!=null) {
+                    coll.getCollectibles().clear();
+                }
+                for (Collectible item:items) {
+                    if (item.getCollectionId().equals(coll.getId())){
+                        //System.out.println(item.toString());
+                        coll.getCollectibles().add(item);
+                    }
+                }
+                coll.getCollectibles().sort(new Comparator<Collectible>() {
+                    @Override
+                    public int compare(Collectible i1, Collectible i2) {
+                        switch (filter) {
+                            case NAME:
+                                return i1.getName().compareTo(i2.getName());
+                            case OWNED:
+                                return i1.isOwned().compareTo(i2.isOwned());
+                            case LENT:
+                                return i1.isLent().compareTo(i2.isLent());
+                            default:
+                                return 0;
+                        }
+                    }
+                });
+                return coll;
+            }
+        }
+        return null;
+    }
     public Collectible getActiveItem() {
         for (Collectible item: items) {
             if (item.getId().equals(activeItem)){
@@ -216,6 +253,40 @@ public class DataManager {
                         task.getObjectives().add(objective);
                     }
                 }
+                return task;
+            }
+        }
+        return null;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Task getActiveTask(String filter){
+        for (Task task: tasks) {
+            if (task.getId().equals(activeTask)){
+                if (task.getObjectives()!=null) {
+                    task.getObjectives().clear();
+                }
+                for (Objective objective:objectives) {
+                    String oID = objective.getTaskId();
+                    String tID = task.getId();
+                    System.out.println("Task ID: " + tID + "\nObjective ID: "+ oID);
+                    if (objective.getTaskId().equals(task.getId())){
+                        //System.out.println(item.toString());
+                        task.getObjectives().add(objective);
+                    }
+                }
+                task.getObjectives().sort(new Comparator<Objective>() {
+                    @Override
+                    public int compare(Objective i1, Objective i2) {
+                        switch (filter) {
+                            case NAME:
+                                return i1.getObjectiveName().compareTo(i2.getObjectiveName());
+                            case OWNED:
+                                return i1.isComplete().compareTo(i2.isComplete());
+                            default:
+                                return 0;
+                        }
+                    }
+                });
                 return task;
             }
         }
@@ -519,7 +590,6 @@ public class DataManager {
             collections.get(i).setCollectibles(in);
         }
     }
-
     public void InitTasks(){
         for (int i = 0 ; i < tasks.size(); i++) {
             List<Objective> in = new ArrayList<Objective>();
@@ -532,5 +602,77 @@ public class DataManager {
             tasks.get(i).setObjectives(in);
         }
     }
+
+    //Sort
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void SortCollectionsByFilter(String _filter){
+        collections.sort(new Comparator<ItemCollection>() {
+            @Override
+            public int compare(ItemCollection i1, ItemCollection i2) {
+                switch (_filter) {
+                    case NAME:
+                        return i1.getCollectionName().compareTo(i2.getCollectionName());
+                    case COMPLEATION:
+                        return i2.getCompletion() - i1.getCompletion();
+                    default:
+                        return 0;
+                }
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void SortItemsByFilter(String _filter){
+        getActiveCollection().getCollectibles().sort(new Comparator<Collectible>() {
+            @Override
+            public int compare(Collectible i1, Collectible i2) {
+                switch (_filter) {
+                    case NAME:
+                        return i1.getName().compareTo(i2.getName());
+                    case OWNED:
+                        return i2.isOwned().compareTo(i1.isOwned());
+                    case LENT:
+                        return i2.isLent().compareTo(i1.isLent());
+                    default:
+                        return 0;
+                }
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void SortTaskByFilter(String _filter){
+        tasks.sort(new Comparator<Task>() {
+            @Override
+            public int compare(Task i1, Task i2) {
+                switch (_filter) {
+                    case NAME:
+                        return i1.getTaskName().compareTo(i2.getTaskName());
+                    case COMPLEATION:
+                        return i2.getCompletion() - i1.getCompletion();
+                    default:
+                        return 0;
+                }
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void SortObjectivesByFilter(String _filter){
+        getActiveTask().getObjectives().sort(new Comparator<Objective>() {
+            @Override
+            public int compare(Objective i1, Objective i2) {
+                switch (_filter) {
+                    case NAME:
+                        return i1.getObjectiveName().compareTo(i2.getObjectiveName());
+                    case OWNED:
+                        return i1.isComplete().compareTo(i2.isComplete());
+                    default:
+                        return 0;
+                }
+            }
+        });
+    }
+
 }
 

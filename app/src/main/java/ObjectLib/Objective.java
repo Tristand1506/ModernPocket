@@ -46,7 +46,7 @@ public class Objective {
         this.description = description;
     }
 
-    public boolean isComplete() {
+    public Boolean isComplete() {
         return isComplete;
     }
     public void setComplete(boolean complete) {

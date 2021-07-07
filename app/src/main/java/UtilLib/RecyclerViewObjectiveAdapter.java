@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.SleeplessStudios.modernpocket.CreateItem;
@@ -28,9 +30,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewObjectiveAdapter extends RecyclerView.Adapter<RecyclerViewObjectiveAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewObjectiveAdapter";
     private Context mContext;
+    private String filter;
 
     public RecyclerViewObjectiveAdapter(Context mContext) {
 
+        this.mContext = mContext;
+    }
+    public RecyclerViewObjectiveAdapter(Context mContext, String filter) {
+        this.filter = filter;
         this.mContext = mContext;
     }
 
@@ -42,10 +49,17 @@ public class RecyclerViewObjectiveAdapter extends RecyclerView.Adapter<RecyclerV
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
-        Objective load = DataManager.getInstance().getActiveTask().getObjectives().get(position);
+        Objective load;
+        if (filter !=null ){
+            load = DataManager.getInstance().getActiveTask(filter).getObjectives().get(position);
+        }
+        else {
+            load = DataManager.getInstance().getActiveTask().getObjectives().get(position);
+        }
         holder.objectiveName.setText(load.getObjectiveName());
         //System.out.println("Favorite: " + load.isFavourite() + "\nIs Owned: "+load.isOwned());
         holder.complete.setChecked(load.isComplete());

@@ -61,7 +61,7 @@ public class Task {
         this.objectives = objectives;
     }
 
-    public int getCompleation(){
+    public int getCompletion(){
         float percCompletion;
         float collected = 0f;
         if (objectives == null){

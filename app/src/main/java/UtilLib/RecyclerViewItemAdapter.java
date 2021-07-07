@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.SleeplessStudios.modernpocket.CreateItem;
@@ -28,9 +30,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewItemAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewCollectionAdapter";
     private Context mContext;
-
+    private String filter;
     public RecyclerViewItemAdapter(Context mContext) {
 
+        this.mContext = mContext;
+    }
+    public RecyclerViewItemAdapter(Context mContext, String Filter) {
+        this.filter = Filter;
         this.mContext = mContext;
     }
 
@@ -42,10 +48,17 @@ public class RecyclerViewItemAdapter extends RecyclerView.Adapter<RecyclerViewIt
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d(TAG, "onBindViewHolder: called.");
-        Collectible load = DataManager.getInstance().getActiveCollection().getCollectibles().get(position);
+        Collectible load;
+        if (filter!=null){
+            load = DataManager.getInstance().getActiveCollection(filter).getCollectibles().get(position);
+        }
+        else {
+            load = DataManager.getInstance().getActiveCollection().getCollectibles().get(position);
+        }
         System.out.println("loading item: "+ load.getName() );
         holder.image.setImageBitmap(load.getImageBitmap());
         holder.itemName.setText(load.getName());

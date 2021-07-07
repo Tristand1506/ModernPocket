@@ -26,15 +26,6 @@ public class ItemCollection {
         this.image = image;
     }
 
-/*    public ItemCollection(String _id, String collectionName, String description, Integer _accountID, Bitmap image) {
-        setID(_id);
-        set_accountID(_accountID);
-        setCollectionName(collectionName);
-        setDescription(description);
-        this.image = image;
-        //this.collectibles = collectibles;
-    }*/
-
     public String getId() {
         return id;
     }
@@ -45,15 +36,6 @@ public class ItemCollection {
         }
         System.out.println("Failed to set new ID");
     }
-
-    /*    public int getAccountID(){
-        return _accountID;
-    }
-    public void set_accountID(int id){
-        if (_accountID == null){
-            _accountID = id;
-        }
-    }*/
 
     public String getCollectionName() {
         return collectionName;
@@ -85,7 +67,7 @@ public class ItemCollection {
         this.collectibles = collectibles;
     }
 
-    public int getCompletion(){
+    public Integer getCompletion(){
     float percCompletion;
     float collected = 0f;
     if (collectibles == null){

@@ -102,9 +102,11 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
                         switch (item.getItemId()) {
                             case 0:
                                 // alphabetical was clicked
+                                initRecyclerView(DataManager.NAME);
                                 return true;
                             case 1:
                                 // completion was clicked
+                                initRecyclerView(DataManager.COMPLEATION);
                                 return true;
                         }
                         return false;
@@ -241,6 +243,12 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_objectives);
         RecyclerViewObjectiveAdapter adapter = new RecyclerViewObjectiveAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    private void initRecyclerView(String filter){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_objectives);
+        RecyclerViewObjectiveAdapter adapter = new RecyclerViewObjectiveAdapter(this,filter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

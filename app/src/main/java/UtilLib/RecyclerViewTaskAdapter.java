@@ -13,12 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.SleeplessStudios.modernpocket.Items;
 import com.SleeplessStudios.modernpocket.Objectives;
 import com.SleeplessStudios.modernpocket.R;
 
 import ObjectLib.Task;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTaskAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewCollectionAdapter";
@@ -43,8 +41,8 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
         //Log.d(TAG, "onBindViewHolder: called.");
         Task load = DataManager.getInstance().tasks.get(position);
         holder.taskName.setText(load.getTaskName());
-        System.out.println("Loading progress of " + load.getTaskName() + "\nProgress at: " + load.getCompleation() *100  );
-        int perc =load.getCompleation();
+        System.out.println("Loading progress of " + load.getTaskName() + "\nProgress at: " + load.getCompletion() *100  );
+        int perc =load.getCompletion();
         holder.completion.setProgress(perc);
         if (holder.completion.getProgress()<=0){
             holder.incompleat.setVisibility(View.VISIBLE);

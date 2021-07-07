@@ -70,7 +70,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     private String title, link, displayed_link, snippet;
 
     private String TAG = "ObjectLens";
-    public static int TIMEOUT_MS=10000;
+    //public static int TIMEOUT_MS=10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

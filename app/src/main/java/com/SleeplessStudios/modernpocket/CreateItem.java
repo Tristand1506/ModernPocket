@@ -59,6 +59,7 @@ public class CreateItem extends AppCompatActivity {
     private AlertDialog dialog;
     private Button takePhoto;
     private Button libraryPhoto;
+    private Button returnedItem;
     private int GET_FROM_GALLERY = 1;
 
     @Override
@@ -140,6 +141,17 @@ public class CreateItem extends AppCompatActivity {
 
             }
         });
+
+        returnedItem = (Button) findViewById(R.id.item_returned_btn);
+        saveItem.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
+
         amount.setText("1");
        /* //spinner
         spinnerChooseItemType = findViewById(R.id.chooseitemtype_spinner);

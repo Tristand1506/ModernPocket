@@ -78,6 +78,7 @@ public class LoginManager {
     }
 
     public void UpdateUserData(UserAcount acc){
+        System.out.println("Finding User: "+getActiveUser().getUid() );
         userData.child(getActiveUser().getUid()).child("email").setValue(acc.getEmail());
         userData.child(getActiveUser().getUid()).child("username").setValue(acc.getUsername());
         userData.child(getActiveUser().getUid()).child("gender").setValue(acc.getGender());

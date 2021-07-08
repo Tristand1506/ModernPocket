@@ -14,6 +14,8 @@ public class UserAcount {
     public UserAcount(String username, String email, String phone, String gender) {
         setEmail(email);
         setUsername(username);
+        setPhone(phone);
+        setGender(gender);
     }
 
     public void setUsername(String username) {

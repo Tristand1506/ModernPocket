@@ -112,6 +112,7 @@ public class Items extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         DataManager.getInstance().initData();
+        DataManager.getInstance().getActiveCollection();
         initRecyclerView();
         DataManager.getInstance().setActiveItem(null);
         collectionName.setText(DataManager.getInstance().getActiveCollection().getCollectionName());

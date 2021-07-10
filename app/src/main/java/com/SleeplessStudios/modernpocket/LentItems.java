@@ -176,9 +176,9 @@ public class LentItems extends AppCompatActivity implements NavigationView.OnNav
 
     public void Logout()
     {
+        LoginManager.getInstance().LogOut();
         Intent intent = new Intent(this, LandingPage.class);
         startActivity(intent);
-        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openRate()

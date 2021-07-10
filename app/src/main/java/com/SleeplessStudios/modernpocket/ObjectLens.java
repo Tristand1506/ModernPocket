@@ -220,9 +220,9 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
 
     public void Logout()
     {
+        LoginManager.getInstance().LogOut();
         Intent intent = new Intent(this, LandingPage.class);
         startActivity(intent);
-        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openHelp()

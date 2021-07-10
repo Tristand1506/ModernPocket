@@ -2,12 +2,14 @@ package com.SleeplessStudios.modernpocket;
 
 import UtilLib.DataModal;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,6 +63,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private DrawerLayout drawer;
     private ImageButton sidebar;
+    private ProgressBar loading;
 
     private ImageView img;
     private Button snap, searchResultsBtn;
@@ -98,6 +102,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
         snap = (Button) findViewById(R.id.snapbtn);
         searchResultsBtn = findViewById(R.id.idBtnSearchResults);
         resultRV = findViewById(R.id.idRVSearchResults);
+        loading = (ProgressBar) findViewById(R.id.loading);
 
         // initializing our array list
         dataModalArrayList = new ArrayList<>();
@@ -119,9 +124,12 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
         });
 
         searchResultsBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 // calling a method to get search results.
+                loading.setVisibility(View.VISIBLE);
+                //loading.setProgress(10, true);
                 getResults();
             }
         });
@@ -264,8 +272,9 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
     private void searchData(String searchQuery) throws IOException {
         //not using serpapi, using serphouse
 
-        String apiKey = "&api_token=Q85iAOTYmwNWiPOob8LFs4gOYN553LqIOWQLw4Qj9NrBJrY5nxVmzKkR14dp";
-        String url = "https://api.serphouse.com/serp/live?q=" + searchQuery.trim() + apiKey + "&domain=google.com&loc=Cape%20Town%2CWestern%20Cape%2CSouth%20Africa&hl=en";
+        //String apiKey = "&api_token=Q85iAOTYmwNWiPOob8LFs4gOYN553LqIOWQLw4Qj9NrBJrY5nxVmzKkR14dp";
+        String apiKey = "apikey=e1739ac0-e172-11eb-b293-0d9a803019c7&q=";
+        String url = "https://app.zenserp.com/api/v2/search?" + apiKey + searchQuery.trim() + "&search_engine=google.com&location=Cape%20Town%2CWestern%20Cape%2CSouth%20Africa&hl=en";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(ObjectLens.this);
@@ -278,32 +287,36 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
                 Log.e(TAG, "response received");
                 try {
 
-                    JSONObject results = response.getJSONObject("results").getJSONObject("results");
+                    //JSONObject results = response.getJSONObject("results").getJSONObject("results");
+                    //JSONObject results = response.getJSONObject("knowledge_graph").getJSONObject("knowledge_graph");
 
-                    // on below line we are extracting data from our json.
-                    JSONArray organicResultsArray = results.getJSONArray("organic");
+                    // extracting data from our json.
+                    JSONArray organicResultsArray = response.getJSONArray("organic");
+
                     System.out.println(organicResultsArray);
                     for (int i = 0; i < organicResultsArray.length(); i++) {
                         JSONObject organicObj = organicResultsArray.getJSONObject(i);
                         if (organicObj.has("title")) {
                             title = organicObj.getString("title");
                         }
-                        if (organicObj.has("link")) {
-                            link = organicObj.getString("link");
+                        if (organicObj.has("url")) {
+                            link = organicObj.getString("url");
                         }
-                        if (organicObj.has("displayed_link")) {
-                            displayed_link = organicObj.getString("displayed_link");
+                        if (organicObj.has("destination")) {
+                            displayed_link = organicObj.getString("destination");
                         }
-                        if (organicObj.has("snippet")) {
-                            snippet = organicObj.getString("snippet");
+                        if (organicObj.has("description")) {
+                            snippet = organicObj.getString("description");
                         }
                         // on below line we are adding data to our array list.
                         dataModalArrayList.add(new DataModal(title, link, displayed_link, snippet));
                     }
                     // notifying our adapter class
                     // on data change in array list.
+                    loading.setVisibility(View.INVISIBLE);
                     searchResultsRVAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
+                    loading.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                 }
             }
@@ -311,11 +324,12 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
             @Override
             public void onErrorResponse(VolleyError error) {
                 // displaying error message.
+                loading.setVisibility(View.VISIBLE);
                 Toast.makeText(ObjectLens.this, "No results found for this search query", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "error finding search results: \n" + error);
             }
         });
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(50 * 1000, 1, 1.0f));
         queue.add(jsonObjectRequest);
     }
 

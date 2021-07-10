@@ -1,5 +1,6 @@
 package com.SleeplessStudios.modernpocket;
 
+import UtilLib.LoginManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -148,8 +149,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
 
     public void Logout()
     {
-        Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
+        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openRate()

@@ -1,6 +1,7 @@
 package com.SleeplessStudios.modernpocket;
 
 import UtilLib.DataModal;
+import UtilLib.LoginManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -219,8 +220,7 @@ public class ObjectLens extends AppCompatActivity implements NavigationView.OnNa
 
     public void Logout()
     {
-        Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
+        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openHelp()

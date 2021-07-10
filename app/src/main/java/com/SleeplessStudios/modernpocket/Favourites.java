@@ -1,6 +1,7 @@
 package com.SleeplessStudios.modernpocket;
 
 import UtilLib.DataManager;
+import UtilLib.LoginManager;
 import UtilLib.RecyclerViewFavouriteAdapter;
 import UtilLib.RecyclerViewItemAdapter;
 import androidx.annotation.NonNull;
@@ -170,8 +171,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
     public void Logout()
     {
-        Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
+        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openHelp()

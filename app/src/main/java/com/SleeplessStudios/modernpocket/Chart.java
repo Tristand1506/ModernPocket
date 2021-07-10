@@ -3,6 +3,7 @@ package com.SleeplessStudios.modernpocket;
 import ObjectLib.Collectible;
 import ObjectLib.ItemCollection;
 import UtilLib.DataManager;
+import UtilLib.LoginManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -162,8 +163,7 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
 
     public void Logout()
     {
-        Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
+        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openRate()

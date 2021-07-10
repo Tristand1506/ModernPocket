@@ -3,6 +3,7 @@ package com.SleeplessStudios.modernpocket;
 import ObjectLib.ItemCollection;
 import ObjectLib.Task;
 import UtilLib.DataManager;
+import UtilLib.LoginManager;
 import UtilLib.RecyclerViewCollectionAdapter;
 import UtilLib.RecyclerViewTaskAdapter;
 
@@ -252,8 +253,7 @@ public class TasksMain extends AppCompatActivity implements NavigationView.OnNav
 
     public void Logout()
     {
-        Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
+        LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------
     public void openHelp()

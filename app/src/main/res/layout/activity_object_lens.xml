@@ -93,28 +93,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-        android:id="@+id/topbar_lens_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_sidebar" />
-
-        <ImageView
-            android:id="@+id/lens_ribbon_img"
-            android:layout_width="82dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="50dp"
-            android:scaleType="fitStart"
-            app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/lens_ribbon" />
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/off_white">
 
         <ImageButton
             android:id="@+id/burgerbar_lens_btn"
@@ -129,22 +109,43 @@
             app:layout_constraintVertical_bias="0.487"
             app:srcCompat="@drawable/burger_bar" />
 
-    <TextView
-        android:id="@+id/lens_top_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OBJECT LENS"
-        android:fontFamily="@font/segoeuisl"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
-        app:layout_constraintEnd_toStartOf="@+id/burgerbar_lens_btn"
-        app:layout_constraintStart_toEndOf="@+id/lens_ribbon_img"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/topbar_lens_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_sidebar" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/lens_ribbon_img"
+            android:layout_width="82dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lens_ribbon" />
+
+        <TextView
+            android:id="@+id/lens_top_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoeuisl"
+            android:text="OBJECT LENS"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/topbar_lens_img"
+            app:layout_constraintEnd_toStartOf="@+id/burgerbar_lens_btn"
+            app:layout_constraintStart_toEndOf="@+id/lens_ribbon_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
 

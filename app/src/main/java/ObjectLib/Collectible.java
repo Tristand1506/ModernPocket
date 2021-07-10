@@ -19,36 +19,6 @@ public class Collectible {
     public Collectible(){
 
     }
-/*
-    public Collectible(int id, String name, int type, String description, Date date, Location loc, Bitmap img, boolean isFavourite, boolean isOwned, int coll) {
-        this.name = name;
-        this.description = description;
-        this.isFavourite = isFavourite;
-        this.isOwned = isOwned;
-        setAcquisitionDate(acquisitionDate);
-        setAcquisitionLoc(acquisitionLoc);
-    }
-*/
-/*    public Collectible(String id, String name, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned, String coll) {
-        this.id = id;
-        collectionId = coll;
-        this.name = name;
-        this.description = description;
-        this.isFavourite = isFavourite;
-        this.isOwned = isOwned;
-        image = img;
-        setAcquisitionDate(date);
-        setAcquisitionLoc(loc);
-    }
-    public Collectible(String name, String description, Date date, String loc, Bitmap img, boolean isFavourite, boolean isOwned) {
-        this.name = name;
-        this.description = description;
-        this.isFavourite = isFavourite;
-        this.isOwned = isOwned;
-        image = img;
-        setAcquisitionDate(date);
-        setAcquisitionLoc(loc);
-    }*/
     public Collectible(String name, String description, String date, String loc, Bitmap img, String borrowed, String returnDate) {
         this.name = name;
         this.description = description;

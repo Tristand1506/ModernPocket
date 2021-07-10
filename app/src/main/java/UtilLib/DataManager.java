@@ -439,9 +439,13 @@ public class DataManager {
         }
 
     }
-    public void AddOrUpdateItem(Collectible item){
+    public void AddOrUpdateItem(Collectible in){
+        Collectible item = new Collectible();
+        item = in;
         if (activeItem == null) {
-            item.setId(itemDatabase.push().getKey());
+            String key = itemDatabase.push().getKey();
+            System.out.println("New key generated: " + key);
+            item.setId(key);
             System.out.println("Adding Item :"+ item.toString());
             itemDatabase.child(item.getId()).child("id").setValue(item.getId());
             itemDatabase.child(item.getId()).child("collectionId").setValue(getActiveCollection().getId());

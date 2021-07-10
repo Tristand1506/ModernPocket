@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.*;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -74,6 +75,7 @@ public class LoginManager {
     }
 
     public static FirebaseUser getActiveUser(){
+        Log.e("LoginManager", FirebaseAuth.getInstance().getCurrentUser().getUid());
     return FirebaseAuth.getInstance().getCurrentUser();
     }
 
@@ -90,6 +92,7 @@ public class LoginManager {
 
     public void LogOut(){
         FirebaseAuth.getInstance().signOut();
+        DataManager.getInstance().ClearData();
     }
 
 }

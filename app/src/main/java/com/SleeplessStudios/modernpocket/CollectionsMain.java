@@ -201,8 +201,9 @@ public class CollectionsMain extends AppCompatActivity implements NavigationView
     public void Logout()
     {
         Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
         LoginManager.getInstance().LogOut();
+        startActivity(intent);
+
     }
     //-----------------------TO DO--------------------------------------
     public void openHelp()

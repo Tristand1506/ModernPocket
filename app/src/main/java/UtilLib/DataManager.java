@@ -677,6 +677,122 @@ public class DataManager {
             }
         });
     }
+    public void ClearData(){
+        tasks.clear();
+        collections.clear();
+        items.clear();
+        objectives.clear();
+    }
+    public void AttachListenrs(){
+        collectionDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (collections!=null) {
+                    collections.clear();
+                }
+                for (DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    ItemCollection coll = snap.getValue(ItemCollection.class);
+                    coll.setId(snap.getKey());
+                    //System.out.println( coll.toString() );
+                    if (coll == null){
+                        System.out.println( "error reading object collection");
+                    }
+                    else collections.add(coll);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        itemDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (items!=null) {
+                    items.clear();
+                }
+                for (DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    Collectible item = snap.getValue(Collectible.class);
+                    item.setId(snap.getKey());
+                    try{
+                        item.setFavourite(snap.child("isFavorite").getValue(boolean.class));
+                    }
+                    catch(Exception e){
+                        item.setFavourite(false);
+                    }
+                    if (item == null){
+                        System.out.println( "error reading object collection");
+                    }
+                    else items.add(item);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        taskDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (tasks!=null) {
+                    tasks.clear();
+                }
+                for (DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    Task task = snap.getValue(Task.class);
+                    tasks.add(task);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+        objectiveDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (objectives!=null) {
+                    objectives.clear();
+                }
+                for (DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    Objective objective = snap.getValue(Objective.class);
+                    objective.setId(snap.getKey());
+                    try{
+                        objective.setComplete(snap.child("isComplete").getValue(boolean.class));
+                    }
+                    catch (Exception e){
+                        objective.setComplete(false);
+                    }
+
+                    if (objective == null){
+                        System.out.println( "error reading object collection");
+                    }
+                    else objectives.add(objective);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
 
 }
 

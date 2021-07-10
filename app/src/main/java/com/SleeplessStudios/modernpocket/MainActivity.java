@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DataManager.getInstance().initData();
+        DataManager.getInstance().AttachListenrs();
+        DataManager.getInstance().initData();
         DataManager.getInstance().setActiveCollection(null);
         drawer = findViewById(R.id.sidebar_main);
 
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
+        DataManager.getInstance().initData();
         DataManager.getInstance().setActiveCollection(null);
     }
 
@@ -202,8 +206,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void Logout()
     {
         Intent intent = new Intent(this, LandingPage.class);
-        startActivity(intent);
         LoginManager.getInstance().LogOut();
+        startActivity(intent);
     }
 //-----------------------TO DO--------------------------------------
     public void openRate()

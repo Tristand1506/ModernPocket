@@ -218,6 +218,8 @@ public class Objectives extends AppCompatActivity implements NavigationView.OnNa
 
     public void Logout()
     {
+        Intent intent = new Intent(this, LandingPage.class);
+        startActivity(intent);
         LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------

@@ -163,6 +163,8 @@ public class Chart extends AppCompatActivity implements NavigationView.OnNavigat
 
     public void Logout()
     {
+        Intent intent = new Intent(this, LandingPage.class);
+        startActivity(intent);
         LoginManager.getInstance().LogOut();
     }
     //-----------------------TO DO--------------------------------------

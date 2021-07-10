@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 
 public class CreateItem extends AppCompatActivity {
     private ImageButton saveItem;
@@ -130,8 +132,16 @@ public class CreateItem extends AppCompatActivity {
                         acquireDate.getText().toString(), acquireLoc.getText().toString(),
                         photoIn,lentTo.getText().toString(), returnDate.getText().toString());
                 if (DataManager.getInstance().getActiveItem()==null) {
+                    System.out.println("Printing multiple items "+ amount.getText().toString() );
+                    Handler hand = new Handler();
                     for (int i = 0; i < Integer.parseInt(amount.getText().toString()); i++) {
-                        DataManager.getInstance().AddOrUpdateItem(in);
+                        int copy = i + 1;
+                        Collectible item = new Collectible();
+                        item = in;
+                        if (i > 1) {
+                            item.setName(item.getName() + " (" + copy + ")");
+                        }
+                        DataManager.getInstance().AddOrUpdateItem(item);
                     }
                 }
                 else {

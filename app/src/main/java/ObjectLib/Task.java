@@ -2,6 +2,8 @@ package ObjectLib;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +57,9 @@ public class Task {
     }
 
     public List<Objective> getObjectives() {
+        if(objectives ==null){
+            objectives = new ArrayList<Objective>();
+        }
         return objectives;
     }
     public void setObjectives(List<Objective> objectives) {
